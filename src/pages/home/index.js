@@ -40,7 +40,7 @@ const Home = () => {
 
               <br></br> <br></br>
               <Grid item xs={12} sm={12} md={12} lg={12} xl={12} style={{textAlign:'center'}}>
-                <span style={{ fontSize: 42, color: 'white' }}>Somos especialistas no que fazemos de melhor</span>
+                <span style={{ fontSize: 42, color: 'white' }}> Somos especialistas no que fazemos de melhor</span>
               </Grid>
               <br></br> <br></br>
 
