@@ -276,7 +276,7 @@ export default function Romaneios() {
   useEffect(() => {
 
     procurarRegra();
-    listarMeusDados();
+   // listarMeusDados();
 
 
 
