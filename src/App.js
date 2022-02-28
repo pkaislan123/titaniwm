@@ -7,6 +7,7 @@ import Home from './pages/home';
 import Localizacao from './pages/localizacao';
 import About from './pages/About';
 import Blog from './pages/Blog';
+import Contato from './pages/Contato';
 
 import Login from './pages/Login';
 import ContaAdmin from './pages/painelAdmin/MinhaConta';
@@ -119,7 +120,8 @@ function App() {
       <PublicRoute restricted={false} component={Localizacao} path="/localizacao" exact />
       <PublicRoute restricted={false} component={About} path="/sobre" exact />
       <PublicRoute restricted={false} component={Blog} path="/noticias" exact />
-     
+      <PublicRoute restricted={false} component={Contato} path="/contato" exact />
+
      
       <PublicRoute restricted={true} component={Login} path="/login" exact />
       <ContaRoute path="/minhaconta" exact />
