@@ -117,21 +117,23 @@ export default function ContaArmazem() {
 
     async function listarMeusDados() {
       try {
+
+        var dados = [];
   
         const token = Cookies.get('token');
-  
         const headers = {
           'Authorization': 'Bearer ' + token
         }
   
   
         const id_usuario = Cookies.get('id_usuario');
-        console.log("id na tela de enderecos: " + id_usuario)
+        console.log("id na tela de painel cliente: " + id_usuario)
   
         await api.get("v1/protected/retornardadoscliente/" + id_usuario, {
           headers: headers
         }).then(function (response) {
           setMeusDados(response.data)
+          dados = response.data
   
           console.log(" Meus Dados: " + response);
   
@@ -139,7 +141,7 @@ export default function ContaArmazem() {
         });
   
   
-        var identificacao = meusDados.tipo_cliente === 0 ? meusDados.cpf : meusDados.cnpj;
+        var identificacao = dados.tipo_cliente === 0 ? dados.cpf : dados.cnpj;
         await api.get("v1/protected/retornarenderecos/" + identificacao, {
           headers: headers
         }).then(function (response) {

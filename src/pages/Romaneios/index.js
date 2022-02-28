@@ -154,7 +154,6 @@ export default function Romaneios() {
   const [romaneios, setRomaneios] = useState([]);
   const [regra, setRegra] = useState('');
   const [loading, setLoading] = useState(true);
-  const [meusDados, setMeusDados] = useState([]);
 
 
   const handleCellClick = (param, event) => {
@@ -231,6 +230,8 @@ export default function Romaneios() {
 
     async function listarMeusDados() {
       try {
+
+        var dados = [];
   
         const token = Cookies.get('token');
   
@@ -245,8 +246,7 @@ export default function Romaneios() {
         await api.get("v1/protected/retornardadoscliente/" + id_usuario, {
           headers: headers
         }).then(function (response) {
-          setMeusDados(response.data)
-  
+          dados= response.data
           console.log(" Meus Dados: " + response);
   
   
@@ -255,7 +255,7 @@ export default function Romaneios() {
   
         var url = "v1/protected/romaneios/";
   
-        var identificacao = meusDados.tipo_cliente === 0 ? meusDados.cpf : meusDados.cnpj;
+        var identificacao = dados.tipo_cliente === 0 ? dados.cpf : dados.cnpj;
         await api.get(url + identificacao, {
           headers: headers
         }).then(function (response) {
