@@ -215,53 +215,7 @@ export default function Romaneios() {
   }
 
 
-  async function listarMeusDados() {
-    try {
-
-      const token = Cookies.get('token');
-
-      const headers = {
-        'Authorization': 'Bearer ' + token
-      }
-
-
-      const id_usuario = Cookies.get('id_usuario');
-      console.log("id na tela de romaneios: " + id_usuario)
-
-      await api.get("v1/protected/retornardadoscliente/" + id_usuario, {
-        headers: headers
-      }).then(function (response) {
-        setMeusDados(response.data)
-
-        console.log(" Meus Dados: " + response);
-
-
-
-      });
-
-      var url = "v1/protected/romaneios/";
-
-      var identificacao = meusDados.tipo_cliente === 0 ? meusDados.cpf : meusDados.cnpj;
-      await api.get(url + identificacao, {
-        headers: headers
-      }).then(function (response) {
-        setRomaneios(response.data)
-
-        console.log(" Meus Romaneios: " + response.data);
-        setLoading(false);
-
-      });
-
-
-
-    } catch (_err) {
-      // avisar('Houve um problema com o login, verifique suas credenciais! ' + cpf + " " + senha );
-      console.log("Erro ao listar seus dados: " + _err)
-
-    }
-
-  }
-
+  
   function CustomToolbar() {
     return (
       <GridToolbarContainer>
@@ -275,12 +229,61 @@ export default function Romaneios() {
 
   useEffect(() => {
 
+    async function listarMeusDados() {
+      try {
+  
+        const token = Cookies.get('token');
+  
+        const headers = {
+          'Authorization': 'Bearer ' + token
+        }
+  
+  
+        const id_usuario = Cookies.get('id_usuario');
+        console.log("id na tela de romaneios: " + id_usuario)
+  
+        await api.get("v1/protected/retornardadoscliente/" + id_usuario, {
+          headers: headers
+        }).then(function (response) {
+          setMeusDados(response.data)
+  
+          console.log(" Meus Dados: " + response);
+  
+  
+  
+        });
+  
+        var url = "v1/protected/romaneios/";
+  
+        var identificacao = meusDados.tipo_cliente === 0 ? meusDados.cpf : meusDados.cnpj;
+        await api.get(url + identificacao, {
+          headers: headers
+        }).then(function (response) {
+          setRomaneios(response.data)
+  
+          console.log(" Meus Romaneios: " + response.data);
+          setLoading(false);
+  
+        });
+  
+  
+  
+      } catch (_err) {
+        // avisar('Houve um problema com o login, verifique suas credenciais! ' + cpf + " " + senha );
+        console.log("Erro ao listar seus dados: " + _err)
+  
+      }
+  
+    }
+  
+
+
     procurarRegra();
-   // listarMeusDados();
+    listarMeusDados();
 
 
 
-  }, [loading]);
+  }, []);
 
   const filterModel = {
     items: [

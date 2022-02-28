@@ -110,59 +110,59 @@ export default function ContaArmazem() {
 
 
 
-  async function listarMeusDados() {
-    try {
-
-      const token = Cookies.get('token');
-
-      const headers = {
-        'Authorization': 'Bearer ' + token
-      }
-
-
-      const id_usuario = Cookies.get('id_usuario');
-      console.log("id na tela de enderecos: " + id_usuario)
-
-      await api.get("v1/protected/retornardadoscliente/" + id_usuario, {
-        headers: headers
-      }).then(function (response) {
-        setMeusDados(response.data)
-
-        console.log(" Meus Dados: " + response);
-
-
-      });
-
-
-      var identificacao = meusDados.tipo_cliente === 0 ? meusDados.cpf : meusDados.cnpj;
-      await api.get("v1/protected/retornarenderecos/" + identificacao, {
-        headers: headers
-      }).then(function (response) {
-        setMeusEnderecos(response.data)
-    
-        console.log(" Meus Enderecos: " + response);
-        setLoading(false);
-    
-      });
-
-
-    } catch (_err) {
-      // avisar('Houve um problema com o login, verifique suas credenciais! ' + cpf + " " + senha );
-      console.log("Erro ao listar seus dados: " + _err)
-
-    }
-
-  }
-
+ 
  
 
   useEffect(() => {
 
-
+    async function listarMeusDados() {
+      try {
+  
+        const token = Cookies.get('token');
+  
+        const headers = {
+          'Authorization': 'Bearer ' + token
+        }
+  
+  
+        const id_usuario = Cookies.get('id_usuario');
+        console.log("id na tela de enderecos: " + id_usuario)
+  
+        await api.get("v1/protected/retornardadoscliente/" + id_usuario, {
+          headers: headers
+        }).then(function (response) {
+          setMeusDados(response.data)
+  
+          console.log(" Meus Dados: " + response);
+  
+  
+        });
+  
+  
+        var identificacao = meusDados.tipo_cliente === 0 ? meusDados.cpf : meusDados.cnpj;
+        await api.get("v1/protected/retornarenderecos/" + identificacao, {
+          headers: headers
+        }).then(function (response) {
+          setMeusEnderecos(response.data)
+      
+          console.log(" Meus Enderecos: " + response);
+          setLoading(false);
+      
+        });
+  
+  
+      } catch (_err) {
+        // avisar('Houve um problema com o login, verifique suas credenciais! ' + cpf + " " + senha );
+        console.log("Erro ao listar seus dados: " + _err)
+  
+      }
+  
+    }
+  
     listarMeusDados();
 
 
-  }, [loading]);
+  }, []);
 
 
 
