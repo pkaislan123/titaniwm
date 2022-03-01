@@ -146,7 +146,7 @@ export default function Login() {
                 <div style={{ height: 5, backgroundColor: '#808080' }}>
                 </div>
             </div>
-            <div style={{ paddingTop: 100, paddingBottom: 100 }}>
+            <div style={{ paddingTop: 20, paddingBottom: 250 }}>
                 <Grid container component="main" className={classes.root} justifyContent='center'>
                     <CssBaseline />
                     <Grid item xs={12} sm={8} md={5} component={Paper} elevation={6} square  >
@@ -170,7 +170,7 @@ export default function Login() {
                                 value={username}
                                 onChange={e => setUsername(e.target.value)}
                                 inputProps={{ maxLength: 60, minLength: 15 }}
-                                InputLabelProps={{className: classes.entrada }}
+                                InputLabelProps={{ className: classes.entrada }}
                                 style={{ paddingTop: 5, paddingBottom: 10 }}
                             />
 
@@ -189,9 +189,14 @@ export default function Login() {
                                 onChange={e => setSenha(e.target.value)}
                                 inputProps={{ maxLength: 15, minLength: 8 }}
                                 InputLabelProps={{ className: classes.entrada }}
-                                style={{ paddingTop: 5, paddingBottom: 30 }}
+                                style={{ paddingTop: 5, paddingBottom: 10 }}
 
                             />
+
+                            <a
+                                style={{ fontSize: 18, color: 'black', fontWeight: 'bold' , paddingBottom: 20}}
+                                href="/lgpd">
+                                Lei Geral de Proteção de Dados</a>
 
                             <Button
                                 fullWidth
@@ -203,7 +208,7 @@ export default function Login() {
                             >
                                 Entrar
                             </Button>
-                            <Grid container  style={{paddingTop: 15, paddingBottom: 10}} >
+                            <Grid container style={{ paddingTop: 15, paddingBottom: 10 }} >
                                 <Grid item xs>
                                     <Link href="#" variant="body2">
                                         Esqueceu sua Senha?

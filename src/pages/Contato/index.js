@@ -285,13 +285,20 @@ const Contato = () => {
 
                                     </form>
                                 </Container>
+
                                 <Grid
                                     container
-                                    direction="row"
+                                    direction="column"
                                     justifyContent="center"
                                     alignItems="center"
                                     item xs={12} sm={12} md={12} lg={12} xl={12}
                                 >
+
+                                    <a
+                                        style={{ fontSize: 18, color: 'black', fontWeight: 'bold', marginTop: 20 }}
+                                        href="/lgpd">
+                                        Lei Geral de Proteção de Dados</a>
+
                                     <Button style={{ marginTop: 30 }}
                                         variant="contained"
                                         color="primary"

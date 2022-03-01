@@ -5,6 +5,8 @@ import { BrowserRouter, Switch, Route, Redirect } from 'react-router-dom';
 import 'bootstrap/dist/css/bootstrap.css';
 import Home from './pages/home';
 import Localizacao from './pages/localizacao';
+import LGPD from './pages/LGPD';
+
 import About from './pages/About';
 import Blog from './pages/Blog';
 import Contato from './pages/Contato';
@@ -121,6 +123,7 @@ function App() {
       <PublicRoute restricted={false} component={About} path="/sobre" exact />
       <PublicRoute restricted={false} component={Blog} path="/noticias" exact />
       <PublicRoute restricted={false} component={Contato} path="/contato" exact />
+      <PublicRoute restricted={false} component={LGPD} path="/lgpd" exact />
 
      
       <PublicRoute restricted={true} component={Login} path="/login" exact />
