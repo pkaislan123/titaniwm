@@ -32,7 +32,7 @@ const Contato = () => {
                 <div style={{ height: 5, backgroundColor: '#808080' }}>
                 </div>
 
-                <div style={{ backgroundColor: '#8B008B', color: 'white' }}>
+                <div style={{ backgroundColor: 'rgba(0,0,0,0.5)', color: 'white' }}>
 
                     <Grid
                         container
@@ -81,11 +81,11 @@ const Contato = () => {
                                 </Typography>
 
                                 <Typography component="h1" variant="h5" >
-                                <br></br>  <span style={{ fontSize: 18, color: 'black' }}> Tem alguma dúvida?</span>
+                                  <span style={{ fontSize: 18, color: 'black' }}> Tem alguma dúvida?</span>
                                 </Typography>
 
                                 <Typography component="h1" variant="h5" >
-                                   <br></br> <span style={{ fontSize: 18, color: 'black', fontWeight: 'bold' }}> ldarmazens@gmail.com</span>
+                                 <span style={{ fontSize: 18, color: 'black', fontWeight: 'bold' }}> ldarmazens@gmail.com</span>
                                 </Typography>
 
                                 </Grid>
@@ -114,11 +114,11 @@ const Contato = () => {
                                 </Typography>
 
                                 <Typography component="h1" variant="h5" >
-                                <br></br>  <span style={{ fontSize: 18, color: 'black' }}> Ligue para nós</span>
+                               <span style={{ fontSize: 18, color: 'black' }}> Ligue para nós</span>
                                 </Typography>
 
                                 <Typography component="h1" variant="h5" >
-                                   <br></br> <span style={{ fontSize: 18, color: 'black', fontWeight: 'bold' }}> (38) 9 9941-6698</span>
+                                 <span style={{ fontSize: 18, color: 'black', fontWeight: 'bold' }}> Léticia: (38) 99936-5303</span>
                                 </Typography>
 
                                 </Grid>
@@ -148,12 +148,15 @@ const Contato = () => {
                                 </Typography>
 
                                 <Typography component="h1" variant="h5" >
-                                <br></br>  <span style={{ fontSize: 18, color: 'black' }}> Converse conosco</span>
+                               <span style={{ fontSize: 18, color: 'black' }}> Converse conosco</span>
                                 </Typography>
 
-                                <Typography component="h1" variant="h5" >
-                                   <br></br> <span style={{ fontSize: 18, color: 'black', fontWeight: 'bold' }}> (38) 9 9941-6698</span>
-                                </Typography>
+                                <a 
+                                style={{ fontSize: 18, color: 'black', fontWeight: 'bold' }} 
+                                href="https://api.whatsapp.com/send?1=pt_BR&phone=5538999365303">
+                                   
+                                    Web</a>
+               
 
                                 </Grid>
                                
