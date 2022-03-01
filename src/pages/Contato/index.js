@@ -1,40 +1,20 @@
-import React, {  useState, useEffect } from 'react';
+import React, { useEffect } from 'react';
 import Rodape from '../../components/Rodape';
 import Navegador from '../../components/NavBar';
 import Grid from '@material-ui/core/Grid';
 import Typography from '@material-ui/core/Typography';
 import background from '../../assets/imgs/capa1.png';
-import imgExemplo from '../../assets/imgs/capa2.png';
+import email from '../../assets/imgs/email.png';
+import telefone from '../../assets/imgs/telefone.png';
+import whatsapp from '../../assets/imgs/whatsapp.png';
+
 import './styles.scss';
 
 const Contato = () => {
 
-    const [width, setWidth] = useState(0);
-    const [height, setHeight] = useState(0);
-
-
-    function checkDimenssoes() {
-        var largura = window.innerWidth
-            || document.documentElement.clientWidth
-            || document.body.clientWidth;
-        var altura = window.innerHeight
-            || document.documentElement.clientHeight
-            || document.body.clientHeight;
-        console.log("altura: " + altura);
-        console.log("largura: " + largura);
-
-        setHeight(altura * 0.7);
-        setWidth(largura * 0.7);
-
-    }
-
-    window.addEventListener('resize', function (event) {
-        checkDimenssoes();
-    });
 
     useEffect(() => {
 
-        checkDimenssoes();
 
     }, []);
 
@@ -46,13 +26,13 @@ const Contato = () => {
 
 
             }} >
-               
-               
+
+
                 <Navegador />
                 <div style={{ height: 5, backgroundColor: '#808080' }}>
                 </div>
 
-                <div style={{ backgroundColor: '#8B4513', color: 'white' }}>
+                <div style={{ backgroundColor: '#8B008B', color: 'white' }}>
 
                     <Grid
                         container
@@ -60,29 +40,131 @@ const Contato = () => {
                         justifyContent="center"
                         alignItems="center"
                         item xs={12} sm={12} md={12} lg={12} xl={12}
-                        style={{ paddingTop: 80, paddingBottom: 80 }}
+                        style={{ paddingTop: 40, paddingBottom: 40 }}
                     >
-
-                        <Grid item xs={12} sm={12} md={12} lg={2} xl={2} >
-                        </Grid>
-                        <Grid item xs={12} sm={12} md={12} lg={4} xl={4} style={{ textAlign: "justify" }} >
+                        <Grid item xs={12} sm={12} md={12} lg={12} xl={12} style={{ textAlign: "center" }} >
                             <Typography component="h1" variant="h5" >
-                                <span style={{ fontSize: 44 }}>O Armazém</span><br></br> <br></br>
-
-                                Localizado às margens da MG 188, no km 242, na cidade de Guarda-Mor/MG,
-                                amplo pátio aos utilizadores, contando com restaurante e vestiário.
-                                Estamos a 103 km de Coromandel, a 78 km de Paracatu, atendemos
-                                Produtores Rurais de toda a região do Noroeste de Minas.
-                              
+                                <span style={{ fontSize: 44 }}> Como você prefere falar com a gente?</span><br></br> <br></br>
                             </Typography>
                         </Grid>
-                       
-                        <Grid item xs={12} sm={12} md={12} lg={1} xl={1} >
-                        </Grid>
-                    </Grid>
 
-                   
+                    </Grid>
                 </div>
+
+                <div style={{ backgroundColor: 'white', color: 'black' }}>
+
+                    <Grid
+                        container
+                        direction="row"
+                        justifyContent="center"
+                        alignItems="center"
+                        item xs={12} sm={12} md={12} lg={12} xl={12}
+                        style={{ paddingTop: 40, paddingBottom: 40 }}
+                    >
+
+                        <Grid item xs={12} sm={12} md={12} lg={3} xl={3} style={{ textAlign: "center" }} >
+                            <Grid
+                                container
+                                direction="column"
+                                alignItems="center"
+                                item xs={12} sm={12} md={12} lg={12} xl={12}
+                                style={{ paddingTop: 40, paddingBottom: 40 }}
+                            >
+                                
+                                <Grid item xs={12} sm={12} md={12} lg={12} xl={12} style={{ textAlign: "left" }} >
+                                <img alt="email"
+                                    style={{ weight: 30, height: 30 }}
+                                    src={email}
+                                />
+                                <Typography component="h1" variant="h5" >
+                                    <span style={{ fontSize: 24, color: '#20165b', fontWeight: 'bold' }}> E-mail</span>
+                                </Typography>
+
+                                <Typography component="h1" variant="h5" >
+                                <br></br>  <span style={{ fontSize: 18, color: 'black' }}> Tem alguma dúvida?</span>
+                                </Typography>
+
+                                <Typography component="h1" variant="h5" >
+                                   <br></br> <span style={{ fontSize: 18, color: 'black', fontWeight: 'bold' }}> ldarmazens@gmail.com</span>
+                                </Typography>
+
+                                </Grid>
+                              
+                            </Grid>
+                        </Grid>
+                      
+
+
+                        <Grid item xs={12} sm={12} md={12} lg={3} xl={3} style={{ textAlign: "center" }} >
+                            <Grid
+                                container
+                                direction="column"
+                                alignItems="center"
+                                item xs={12} sm={12} md={12} lg={12} xl={12}
+                                style={{ paddingTop: 40, paddingBottom: 40 }}
+                            >
+                               
+                                <Grid item xs={12} sm={12} md={12} lg={12} xl={12} style={{ textAlign: "left" }} >
+                                <img alt="telefone"
+                                    style={{ weight: 30, height: 30 }}
+                                    src={telefone}
+                                />
+                                <Typography component="h1" variant="h5" >
+                                    <span style={{ fontSize: 24, color: '#20165b', fontWeight: 'bold' }}> Telefone</span>
+                                </Typography>
+
+                                <Typography component="h1" variant="h5" >
+                                <br></br>  <span style={{ fontSize: 18, color: 'black' }}> Ligue para nós</span>
+                                </Typography>
+
+                                <Typography component="h1" variant="h5" >
+                                   <br></br> <span style={{ fontSize: 18, color: 'black', fontWeight: 'bold' }}> (38) 9 9941-6698</span>
+                                </Typography>
+
+                                </Grid>
+                              
+                              
+
+                            </Grid>
+                        </Grid>
+
+
+                        <Grid item xs={12} sm={12} md={12} lg={3} xl={3} style={{ textAlign: "center" }} >
+                            <Grid
+                                container
+                                direction="column"
+                                alignItems="center"
+                                item xs={12} sm={12} md={12} lg={12} xl={12}
+                                style={{ paddingTop: 40, paddingBottom: 40 }}
+                            >
+                                
+                                <Grid item xs={12} sm={12} md={12} lg={12} xl={12} style={{ textAlign: "left" }} >
+                                <img alt="whatsapp"
+                                    style={{ weight: 30, height: 30 }}
+                                    src={whatsapp}
+                                />
+                                <Typography component="h1" variant="h5" >
+                                    <span style={{ fontSize: 24, color: '#20165b', fontWeight: 'bold' }}>Whatsapp</span>
+                                </Typography>
+
+                                <Typography component="h1" variant="h5" >
+                                <br></br>  <span style={{ fontSize: 18, color: 'black' }}> Converse conosco</span>
+                                </Typography>
+
+                                <Typography component="h1" variant="h5" >
+                                   <br></br> <span style={{ fontSize: 18, color: 'black', fontWeight: 'bold' }}> (38) 9 9941-6698</span>
+                                </Typography>
+
+                                </Grid>
+                               
+                              
+                            </Grid>
+                        </Grid>
+
+
+                    </Grid>
+                </div>
+
             </div>
 
             <div >
