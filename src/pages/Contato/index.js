@@ -7,7 +7,7 @@ import background from '../../assets/imgs/capa1.png';
 import img_email from '../../assets/imgs/email.png';
 import img_telefone from '../../assets/imgs/telefone.png';
 import whatsapp from '../../assets/imgs/whatsapp.png';
-import { TextField, Container, FormControlLabel } from '@material-ui/core';
+import { TextField, Container } from '@material-ui/core';
 import Select from "@material-ui/core/Select";
 import MenuItem from '@material-ui/core/MenuItem';
 import InputLabel from '@material-ui/core/InputLabel';
