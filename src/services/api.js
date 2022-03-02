@@ -7,7 +7,10 @@ import axios from 'axios';
 */
 const api = axios.create({
   baseURL: 'http://aislanldarmazens-64531.portmap.io:64531',
+ 
 });
 
+//baseURL: 'http://aislanldarmazens-64531.portmap.io:64531'
  //baseURL: 'http://localhost:8080',
+
 export default api;
