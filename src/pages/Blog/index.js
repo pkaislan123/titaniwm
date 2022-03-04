@@ -6,7 +6,6 @@ import BlogPage1 from '../../components/BlogPage1';
 import './styles.scss';
 import Skeleton from '@material-ui/lab/Skeleton';
 import api from '../../services/api';
-import Pagination from "@material-ui/lab/Pagination";
 
 const Blog = () => {
 
@@ -14,20 +13,7 @@ const Blog = () => {
   const [loading, setLoading] = useState(true);
   const [noticias, setNoticias] = useState([]);
 
-  const [currentNew, setCurrentNew] = useState(null);
-  const [currentIndex, setCurrentIndex] = useState(-1);
-  const [page, setPage] = useState(1);
-  const [count, setCount] = useState(0);
-  const [pageSize, setPageSize] = useState(3);
-  const pageSizes = [3, 6, 9];
-
-  const handlePageChange = (event, value) => {
-    setPage(value);
-  };
-  const handlePageSizeChange = (event) => {
-    setPageSize(event.target.value);
-    setPage(1);
-  };
+  
 
   const NoticiaItem = ({ props }) => {
 
@@ -72,7 +58,6 @@ const Blog = () => {
 
         const response = await api.get('/v1/protected/noticias/listar');
         setNoticias(response.data)
-        setCount(noticias.size());
         setLoading(false);
 
       } catch (_err) {
@@ -105,32 +90,14 @@ const Blog = () => {
       </div>
 
 
-      <Pagination
-              className="my-3"
-              count={count}
-              page={page}
-              siblingCount={1}
-              boundaryCount={1}
-              variant="outlined"
-              shape="rounded"
-              onChange={handlePageChange}
-            />
+     
       <div>
         {loading ?
           <Skeleton animation={"wave"} width={'100%'} style={{ backgroundColor: '#48D1CC' }}>
           </Skeleton>
           :
           <div>
-            <Pagination
-              className="my-3"
-              count={count}
-              page={page}
-              siblingCount={1}
-              boundaryCount={1}
-              variant="outlined"
-              shape="rounded"
-              onChange={handlePageChange}
-            />
+            
             {
               noticias.map((row) => (
                 <NoticiaItem props={row} key={row.id_noticia} />
