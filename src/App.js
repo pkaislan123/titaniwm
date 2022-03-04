@@ -9,6 +9,9 @@ import LGPD from './pages/LGPD';
 
 import About from './pages/About';
 import Blog from './pages/Blog';
+import VizualizarNoticia from './pages/VizualizarNoticia';
+
+
 import Contato from './pages/Contato';
 
 import Login from './pages/Login';
@@ -17,6 +20,10 @@ import ContaCliente from './pages/painelCliente/Minha Conta';
 
 import Contratos from './pages/Contratos/';
 import Romaneios from './pages/Romaneios/';
+import MinhasNoticias from './pages/painelAdmin/MinhasNoticias';
+import CadastroNoticia from './pages/painelAdmin/CadastroNoticia';
+
+
 
 
 import Cookies from 'js-cookie';
@@ -125,6 +132,8 @@ function App() {
       <PublicRoute restricted={false} component={Contato} path="/contato" exact />
       <PublicRoute restricted={false} component={LGPD} path="/lgpd" exact />
 
+      <PublicRoute restricted={false} component={VizualizarNoticia} path="/noticias/:dia/:mes/:ano/:titulo/:idNoticia" exact />
+
      
       <PublicRoute restricted={true} component={Login} path="/login" exact />
       <ContaRoute path="/minhaconta" exact />
@@ -132,6 +141,10 @@ function App() {
 
       <PrivateAdminArmazemAutorizationRoute component={Contratos} path="/contratos/:tipo" exact />     
       <PrivateAdminArmazemAutorizationRoute component={Romaneios} path="/romaneios/" exact />     
+
+      <PrivateAdminArmazemAutorizationRoute component={MinhasNoticias} path="/minhasnoticias/" exact />     
+      <PrivateAdminArmazemAutorizationRoute component={CadastroNoticia} path="/cadastrarnoticia/" exact />     
+
 
       </Switch>
 

@@ -16,6 +16,13 @@ export const mainListItems = (
       </ListItemIcon>
       <ListItemText primary="Meus Dados" />
     </ListItem>
+
+    <ListItem button component="a"  href="/minhasnoticias" >
+      <ListItemIcon>
+      <FontAwesomeIcon icon={faHome} size="2x"/>
+      </ListItemIcon>
+      <ListItemText primary="Notícias" />
+    </ListItem>
   
   </div>
 );

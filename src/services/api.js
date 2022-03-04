@@ -6,7 +6,7 @@ import axios from 'axios';
 ** Simulador IOS:           http://localhost:3333/
 */
 const api = axios.create({
-  baseURL: 'https://ldapi.loclx.io',
+  baseURL: 'https://e24e-2804-bd8-cca5-8200-2094-e0e4-2849-2d66.ngrok.io',
  
 });
 

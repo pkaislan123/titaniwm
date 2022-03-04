@@ -6,28 +6,17 @@ import BlogPage1 from '../../components/BlogPage1';
 import './styles.scss';
 import Skeleton from '@material-ui/lab/Skeleton';
 import api from '../../services/api';
-import Pagination from "@material-ui/lab/Pagination";
+import {  useParams } from "react-router-dom";
 
-const Blog = () => {
+const VizualizarNoticia = () => {
 
 
   const [loading, setLoading] = useState(true);
-  const [noticias, setNoticias] = useState([]);
 
-  const [currentNew, setCurrentNew] = useState(null);
-  const [currentIndex, setCurrentIndex] = useState(-1);
-  const [page, setPage] = useState(1);
-  const [count, setCount] = useState(0);
-  const [pageSize, setPageSize] = useState(3);
-  const pageSizes = [3, 6, 9];
+  const { idNoticia } = useParams();
 
-  const handlePageChange = (event, value) => {
-    setPage(value);
-  };
-  const handlePageSizeChange = (event) => {
-    setPageSize(event.target.value);
-    setPage(1);
-  };
+  const [noticia, setNoticia] = useState();
+
 
   const NoticiaItem = ({ props }) => {
 
@@ -42,7 +31,7 @@ const Blog = () => {
           data={props.data_noticia}
           hora={props.hora_noticia + "h"}
           redator={props.usuario.nome + " " + props.usuario.sobrenome}
-
+          
           img1={props.url_img1}
           video1={props.url_video1}
           texto1={props.texto1}
@@ -67,12 +56,17 @@ const Blog = () => {
 
   useEffect(() => {
 
-    async function listarNoticias() {
+    async function listarNoticia(idNoticia) {
       try {
 
-        const response = await api.get('/v1/protected/noticias/listar');
-        setNoticias(response.data)
-        setCount(noticias.size());
+        var id_noticia = idNoticia;
+        var noticia_local ;
+
+        const response = await api.get('/v1/protected/noticias/listarNoticia/' + id_noticia);
+       
+        noticia_local = response.data;
+        setNoticia(response.data)
+        console.log("noticia: " + noticia_local)
         setLoading(false);
 
       } catch (_err) {
@@ -83,10 +77,10 @@ const Blog = () => {
 
     }
 
-    listarNoticias();
+    listarNoticia(idNoticia);
 
 
-  }, []);
+  }, [idNoticia]);
 
 
   return (
@@ -105,38 +99,14 @@ const Blog = () => {
       </div>
 
 
-      <Pagination
-              className="my-3"
-              count={count}
-              page={page}
-              siblingCount={1}
-              boundaryCount={1}
-              variant="outlined"
-              shape="rounded"
-              onChange={handlePageChange}
-            />
+
       <div>
         {loading ?
           <Skeleton animation={"wave"} width={'100%'} style={{ backgroundColor: '#48D1CC' }}>
           </Skeleton>
           :
           <div>
-            <Pagination
-              className="my-3"
-              count={count}
-              page={page}
-              siblingCount={1}
-              boundaryCount={1}
-              variant="outlined"
-              shape="rounded"
-              onChange={handlePageChange}
-            />
-            {
-              noticias.map((row) => (
-                <NoticiaItem props={row} key={row.id_noticia} />
-
-              ))
-            }
+             <NoticiaItem props={noticia} key={noticia.id_noticia} />
           </div>
 
         }
@@ -151,4 +121,4 @@ const Blog = () => {
   );
 }
 
-export default Blog;
+export default VizualizarNoticia;
