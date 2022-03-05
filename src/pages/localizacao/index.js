@@ -69,14 +69,15 @@ const Localizacao = () => {
                             <Typography component="h1" variant="h5" >
                                 <span style={{ fontSize: 44 }}>O Armazém</span><br></br> <br></br>
 
-                                Localizado às margens da MG 188, no km 242, na cidade de Guarda-Mor/MG,
-                                amplo pátio aos utilizadores, contando com restaurante e vestiário.
+                                Estamos bem localizados às margens da MG 188, no km 242, na cidade de Guarda-Mor/MG,
+                                contamos com amplo pátio aos utilizadores com restaurante e vestiário.
                                 Estamos a 103 km de Coromandel, a 78 km de Paracatu, atendemos
                                 Produtores Rurais de toda a região do Noroeste de Minas.
                                 <br></br>  <br></br>
                                 Desde 2018 a administração da LD Armazém vem investindo na modernização do armazém,
                                 nossas instalações estão prontas a receber você cliente
-                                e você amigo caminhoneiro.
+                                e você amigo caminhoneiro. Para um serviço de excelência, temos recepção
+                                e classificação no pátio do armazém.
                             </Typography>
                         </Grid>
                         <Grid item xs={12} sm={12} md={12} lg={5} xl={5} style={{ paddingLeft: 50 }}>
