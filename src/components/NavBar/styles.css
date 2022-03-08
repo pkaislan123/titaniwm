@@ -35,6 +35,9 @@
   text-decoration: underline; 
   }
 
+  .navbar-nav .dropdown-menu {
+    position: absolute;
+}
 
 .nav-item .dropdown-menu {
   background: rgba(0,0,0,1);  }

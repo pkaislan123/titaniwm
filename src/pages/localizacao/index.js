@@ -1,4 +1,4 @@
-import React, {  useState, useEffect } from 'react';
+import React, { useState, useEffect } from 'react';
 import Rodape from '../../components/Rodape';
 import Navegador from '../../components/NavBar';
 import Grid from '@material-ui/core/Grid';
@@ -39,15 +39,15 @@ const Localizacao = () => {
     }, []);
 
     return (
-        <div className="container-fluid"  >
+        <div >
             <div style={{
                 backgroundImage: `url(${background})`,
                 backgroundSize: "cover",
 
 
             }} >
-               
-               
+
+
                 <Navegador />
                 <div style={{ height: 5, backgroundColor: '#808080' }}>
                 </div>
@@ -60,31 +60,49 @@ const Localizacao = () => {
                         justifyContent="center"
                         alignItems="center"
                         item xs={12} sm={12} md={12} lg={12} xl={12}
-                        style={{ paddingTop: 80, paddingBottom: 80 }}
                     >
 
-                        <Grid item xs={12} sm={12} md={12} lg={2} xl={2} >
+                        <Grid item xs={12} sm={12} md={12} lg={1} xl={1} >
+                            
                         </Grid>
-                        <Grid item xs={12} sm={12} md={12} lg={4} xl={4} style={{ textAlign: "justify" }} >
-                            <Typography component="h1" variant="h5" >
-                                <span style={{ fontSize: 44 }}>O Armazém</span><br></br> <br></br>
+                        <Grid
+                            container
+                            direction="row"
+                            justifyContent="center"
+                            alignItems="center"
+                            item xs={12} sm={12} md={12} lg={10} xl={10}
+                            style={{ paddingTop: 40, paddingBottom: 40 }}
+                            spacing={3}
+                        >
 
-                                Estamos bem localizados às margens da MG 188, no km 242, na cidade de Guarda-Mor/MG,
-                                contamos com amplo pátio aos utilizadores com restaurante e vestiário.
-                                Estamos a 103 km de Coromandel, a 78 km de Paracatu, atendemos
-                                Produtores Rurais de toda a região do Noroeste de Minas.
-                                <br></br>  <br></br>
-                                Desde 2018 a administração da LD Armazém vem investindo na modernização do armazém,
-                                nossas instalações estão prontas a receber você cliente
-                                e você amigo caminhoneiro. Para um serviço de excelência, temos recepção
-                                e classificação no pátio do armazém.
-                            </Typography>
+                            <Grid item xs={12} sm={12} md={12} lg={6} xl={6}
+                             style={{ textAlign: "justify" }}
+                            justifyContent="center">
+                                <Typography component="h1" variant="h5" >
+                                    <span style={{ fontSize: 44 }}>O Armazém</span><br></br> <br></br>
+
+                                    Estamos bem localizados às margens da MG 188, no km 242, na cidade de Guarda-Mor/MG,
+                                    contamos com amplo pátio aos utilizadores com restaurante e vestiário.
+                                    Estamos a 103 km de Coromandel, a 78 km de Paracatu, atendemos
+                                    Produtores Rurais de toda a região do Noroeste de Minas.
+                                    <br></br>  <br></br>
+                                    Desde 2018 a administração da LD Armazém vem investindo na modernização do armazém,
+                                    nossas instalações estão prontas a receber você cliente
+                                    e você amigo caminhoneiro. Para um serviço de excelência, temos recepção
+                                    e classificação no pátio do armazém.
+                                </Typography>
+                            </Grid>
+
+                            <Grid item xs={12} sm={12} md={12} lg={6} xl={6}>
+                                <img alt="Armazém"  style={{ width: '100%'}}
+                                    src={imgExemplo}
+                                />
+                            </Grid>
+
+
+
                         </Grid>
-                        <Grid item xs={12} sm={12} md={12} lg={5} xl={5} style={{ paddingLeft: 50 }}>
-                            <img alt="Armazém"
-                                src={imgExemplo}
-                            />
-                        </Grid>
+
                         <Grid item xs={12} sm={12} md={12} lg={1} xl={1} >
                         </Grid>
                     </Grid>
@@ -95,11 +113,11 @@ const Localizacao = () => {
                             direction="column"
                             justifyContent="center"
                             alignItems="center"
-                             item xs={12} sm={12} md={12} lg={12} xl={12}
+                            item xs={12} sm={12} md={12} lg={12} xl={12}
                             style={{ paddingBottom: 100 }}
                         >
                             <Grid item xs={12} sm={12} md={12} lg={12} xl={12} >
-                                <Typography component="h1" variant="h3" style={{ textAlign: 'center', paddingTop: 150, paddingBottom: 100 }}>
+                                <Typography component="h1" variant="h3" style={{fontWeight: 'bold' , textAlign: 'center', paddingTop: 150, paddingBottom: 100 }}>
                                     Onde Estamos?
                                 </Typography>
                             </Grid>

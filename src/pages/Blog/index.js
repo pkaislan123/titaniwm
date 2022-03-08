@@ -93,49 +93,49 @@ const Blog = () => {
         alignItems="center"
       >
 
-      
 
 
-            <Carousel interval={5000} fade style={{width:'100%'}}>
-              <Carousel.Item>
-                <img style={{height:800}}
-                  className="d-block w-100"
-                  src="https://www.agroprecision.com.br/wp-content/uploads/2021/11/Quer-mais-produtividade-e-rentabilidade-na-soja.jpg"
-                  alt="First slide"
-                />
-                <Carousel.Caption>
-                </Carousel.Caption>
-              </Carousel.Item>
-              <Carousel.Item>
-              <img style={{height:800}}
-                  className="d-block w-100"
-                  src="https://www.bioblog.com.br/wp-content/uploads/2020/12/corn-5134432_1920.jpg"
-                  alt="Milho"
-                />
 
-                <Carousel.Caption>
-                </Carousel.Caption>
-              </Carousel.Item>
-              <Carousel.Item>
-              <img style={{height:800}}
-                  className="d-block w-100"
-                  src="https://blog.syngentadigital.ag/wp-content/uploads/2017/08/sorgo-forrageiras-campo.jpg"
-                  alt="Third slide"
-                />
+        <Carousel interval={5000} fade style={{ width: '100%' }}>
+          <Carousel.Item>
+            <img style={{ height: 800 }}
+              className="d-block w-100"
+              src="https://www.agroprecision.com.br/wp-content/uploads/2021/11/Quer-mais-produtividade-e-rentabilidade-na-soja.jpg"
+              alt="First slide"
+            />
+            <Carousel.Caption>
+            </Carousel.Caption>
+          </Carousel.Item>
+          <Carousel.Item>
+            <img style={{ height: 800 }}
+              className="d-block w-100"
+              src="https://www.bioblog.com.br/wp-content/uploads/2020/12/corn-5134432_1920.jpg"
+              alt="Milho"
+            />
 
-                <Carousel.Caption>
-                </Carousel.Caption>
-              </Carousel.Item>
-            </Carousel>
+            <Carousel.Caption>
+            </Carousel.Caption>
+          </Carousel.Item>
+          <Carousel.Item>
+            <img style={{ height: 800 }}
+              className="d-block w-100"
+              src="https://blog.syngentadigital.ag/wp-content/uploads/2017/08/sorgo-forrageiras-campo.jpg"
+              alt="Third slide"
+            />
 
-            <p style={{ margin: 50}} />
-            <span style={{ width: '100%', fontWeight: 'bold', color: 'black', textAlign: 'center', fontSize: 36 }} > Blog da LD Armazéns</span>
-            
-            <br></br>
-            <span style={{ width: '100%',   color: 'black', textAlign: 'center', fontSize: 16 }} > Informativos da LD Armazém - Notícias do Mundo Agro - Soja - Milho - Sorgo - Fertilizantes</span>
+            <Carousel.Caption>
+            </Carousel.Caption>
+          </Carousel.Item>
+        </Carousel>
 
-            <p style={{ margin: 50 }} />
-         
+        <p style={{ margin: 50 }} />
+        <span style={{ width: '100%', fontWeight: 'bold', color: 'black', textAlign: 'center', fontSize: 36 }} > Blog da LD Armazéns</span>
+
+        <br></br>
+        <span style={{ width: '100%', color: 'black', textAlign: 'center', fontSize: 16 }} > Informativos da LD Armazém - Notícias do Mundo Agro - Soja - Milho - Sorgo - Fertilizantes</span>
+
+        <p style={{ margin: 50 }} />
+
 
       </Grid>
 
@@ -165,6 +165,7 @@ const Blog = () => {
                   noticias.map((noticia) => (
 
                     <Grid
+                      key={noticia.id_noticia}
                       container
                       direction="column"
                       item xs={12} sm={12} md={12} lg={3} xl={3}

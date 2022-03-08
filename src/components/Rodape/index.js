@@ -19,8 +19,10 @@ const Rodape = () => {
                         <Grid container spacing={3}>
                             <Grid item xs={12} sm={4}>
                                 <div className="footer-about-us">
-                                    <h2><span>LD Armazéns Gerais</span></h2>
-                                    <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Perferendis sunt id doloribus vero quam laborum quas alias dolores blanditiis iusto consequatur, modi aliquid eveniet eligendi iure eaque ipsam iste, pariatur omnis sint! Suscipit, debitis, quisquam. Laborum commodi veritatis magni at?</p>
+                                    <h2><span>LD Armazéns</span></h2>
+                                    <p>Aqui na LD Armazéns Atender bem nossos Clientes é nossa prioridade, nosso melhor serviço é
+                tratar nosso cliente com todo respeito e dedicação, quer seja na negociação, quer seja em todo o cuidado
+                das etapas do beneficiamento dos grãos.</p>
                                     <div className="footer-social">
                                         <a href="#/" target="_blank"><i className="fa fa-facebook"></i></a>
                                         <a href="#/" target="_blank"><i className="fa fa-twitter"></i></a>
@@ -70,7 +72,10 @@ const Rodape = () => {
                     <Grid item xs={12} >
                         <div  style={{ textAlign: 'center' }}>
                             <div className="copyright">
-                                <p>&copy; {moment(date).format("yyyy")} LD Armazéns Gerais. Todos os Direitos Reservados Programado <i className="fa fa-heart"></i> por <a href="https://wpexpand.com" target="noopener noreferrer"> titaniwm</a></p>
+                                <p style={{ paddingTop: 20, fontSize: 20 }} >&copy; {moment(date).format("yyyy")} LD Armazéns. Todos os Direitos Reservados Programado <i className="fa fa-heart"></i> por <a href="https://wpexpand.com" target="noopener noreferrer"> titaniwm</a></p>
+                                <p style={{ margin: 40 }} />
+                                <p style={{ margin: 0 , fontSize: 20}} > Encontre nós na Rodovia MG 188 Km 242, Zona Rural de Guarda-Mor/MG CEP: 38570-000 </p>
+
                             </div>
 
                         </div>

@@ -6,7 +6,7 @@ import axios from 'axios';
 ** Simulador IOS:           http://localhost:3333/
 */
 const api = axios.create({
-  baseURL: 'https://titaniwm124-51408.portmap.io:51408',
+  baseURL: 'https://titaniwm124-40544.portmap.io:40544',
  
 });
 

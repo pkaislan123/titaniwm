@@ -1,4 +1,4 @@
-import React, {  useState, useEffect } from 'react';
+import React, { useState, useEffect } from 'react';
 import Navbar from 'react-bootstrap/Navbar';
 import Nav from 'react-bootstrap/Nav';
 import Container from 'react-bootstrap/Container';
@@ -12,32 +12,53 @@ import {
 } from "react-router-dom";
 const Navegador = () => {
 
- 
+
   const [width, setWidth] = useState(0);
 
 
-    function checkDimenssoes() {
-        var largura = window.innerWidth
-            || document.documentElement.clientWidth
-            || document.body.clientWidth;
-      
+  function checkDimenssoes() {
+    var largura = window.innerWidth
+      || document.documentElement.clientWidth
+      || document.body.clientWidth;
 
-        setWidth(largura);
+    console.log(largura)
+    setWidth(largura);
 
-    }
+  }
 
-    window.addEventListener('resize', function (event) {
-        checkDimenssoes();
-    });
+  window.addEventListener('resize', function (event) {
+    checkDimenssoes();
+  });
 
-    useEffect(() => {
+  useEffect(() => {
 
-        checkDimenssoes();
+    checkDimenssoes();
 
-    }, []);
+  }, []);
+
+
+  const LogoExtendida = (props) => {
+    return (
+      <h1 >
+        <span style={{paddingLeft: 50,fontSize: 54, color: 'white' }}>LD Armazéns</span>
+        
+      </h1>
+    )
+  }
+
+  const LogoRecolhida = (props) => {
+    return (
+      <h1>
+        <span style={{ paddingLeft: 20, fontSize: 54, color: 'white' }}>LD</span>
+        <p style={{ margin: 1}} />
+        <span style={{ paddingLeft: 20, fontSize: 54, color: 'white' }}>Armazéns</span>
+
+      </h1>
+    )
+  }
 
   return (
-    <div>
+    <div style={{ backgroundColor: 'rgba(0,0,0,0.8)' }}>
       <div style={{ paddingTop: 40 }} >
         <Link className="a"
 
@@ -46,20 +67,26 @@ const Navegador = () => {
 
           }}
         >
-          <h1>
-            <span style={{ paddingLeft: 50, fontSize: 54, color: 'white' }}>LD Armazéns</span>
-          </h1>
+          
+            {width > 600 ?
+              <LogoExtendida />
+              :
+              <LogoRecolhida />
+
+            }
+          
         </Link>
       </div>
 
 
       <Navbar expand="lg" className={"color-nav"}>
         <Container  >
-          <Navbar.Toggle style={{backgroundColor: width >= 1000 ? "rgba(0,0,0,0.0)" : "rgba(0,0,0,0.3)"}} />
-          <Navbar.Collapse 
-          style={{backgroundColor: width >= 1000 ? "rgba(0,0,0,0.0)" : "black",
-          padding: width >= 1000 ? '' : '5%',
-          }} >
+          <Navbar.Toggle style={{ marginBottom: 20, backgroundColor: 'rgba(255,255,255,0.8)' }} />
+          <Navbar.Collapse
+            style={{
+              backgroundColor: width >= 1000 ? "rgba(0,0,0,0.0)" : "black",
+              padding: width >= 1000 ? '' : '5%',
+            }} >
             <Nav className="ml-auto">
               <Nav.Item >
                 <Nav.Link id="nav-link" href="/" >Início</Nav.Link>
@@ -74,7 +101,7 @@ const Navegador = () => {
               </Nav.Item>
 
 
-              <NavDropdown 
+              <NavDropdown
                 title="Serviços ao Cliente"
                 id="nav-dropdown"
 
