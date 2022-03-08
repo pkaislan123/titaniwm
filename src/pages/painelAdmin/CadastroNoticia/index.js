@@ -105,6 +105,7 @@ export default function CadastroNoticia() {
     /* variaveis de estado de cadastro de endereco*/
     const [titulo, setTitulo] = useState('');
     const [subTitulo, setSubTitulo] = useState('');
+    const [categoria, setCategoria] = useState('');
     const [dataNoticia, setDataNoticia] = useState( moment(new Date()).format("DD/MM/YYYY") );
     const [horaNoticia, setHoraNoticia] = useState(moment(new Date()).format("HH:MM"));
     const [citacao, setCitacao] = useState('');
@@ -146,6 +147,7 @@ export default function CadastroNoticia() {
               url_video3: url_video3,
               citacao: citacao,
               usuario: { id_usuario: id_usuario, },
+              categoria: categoria,
             }
 
             const headers = {
@@ -234,6 +236,23 @@ export default function CadastroNoticia() {
                                         autoComplete="subtitulo"
                                         value={subTitulo}
                                         onChange={e => setSubTitulo(e.target.value)}
+                                        fullWidth
+                                        multiline={true}
+                                        rows={3}
+
+                                    />
+                                </Grid>
+
+                                <Grid item xs={6} >
+                                    <TextField
+                                        variant="standard"
+                                        name="categoria"
+                                        label="Categoria desta Notícia"
+                                        required
+                                        id="categoria"
+                                        autoComplete="categoria"
+                                        value={categoria}
+                                        onChange={e => setCategoria(e.target.value)}
                                         fullWidth
                                         multiline={true}
                                         rows={3}

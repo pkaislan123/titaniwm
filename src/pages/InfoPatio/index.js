@@ -1,68 +1,89 @@
-import React, { Component, useState, useRef, useEffect } from 'react';
-import Carrosel from '../../components/Carrosel';
+import React, { useEffect, useState } from 'react';
 import Rodape from '../../components/Rodape';
 import Navegador from '../../components/NavBar';
-import Cookies from 'js-cookie';
 import background from '../../assets/imgs/capa1.png';
 import Grid from '@material-ui/core/Grid';
-import BlogPage1 from '../../components/BlogPage1';
-import { isMobile } from 'react-device-detect';
+import Paper from '@material-ui/core/Paper';
+import { TextField } from '@material-ui/core';
+import Button from '@material-ui/core/Button';
+import api from '../../services/api';
 
-import {
 
-  Link
-
-} from "react-router-dom";
 import './styles.scss';
 
 const InfoPatio = () => {
 
-  const [width, setWidth] = useState(0);
-  const [height, setHeight] = useState(0);
-
-
-
-  function checkDimenssoes() {
-    var largura = window.innerWidth
-      || document.documentElement.clientWidth
-      || document.body.clientWidth;
-    var altura = window.innerHeight
-      || document.documentElement.clientHeight
-      || document.body.clientHeight;
-
-
-    setHeight(altura * 0.7);
-    setWidth(largura * 0.7);
-
-  }
-
-  window.addEventListener('resize', function (event) {
-    checkDimenssoes();
-  });
+  const [placa, setPlaca] = useState('');
+  const [numVeiculosFrente, setNumVeiculosFrente] = useState(0);
+  const [proximaPlaca, setProximaPlaca] = useState('');
+  const [veiculoAnterior, setVeiculoAnterior] = useState('');
 
   useEffect(() => {
 
-    checkDimenssoes();
-    
+
 
   }, []);
 
-  const [volume, setvolume] = useState(0);
 
-  const [texto, setTexto] = useState(`A Secretaria de Saúde do Amazonas (SES-Am) confirmou, na tarde desta quinta-feira (6), dois casos de infecção por Influenza A (H3N2) e Covid-19 no estado.
+  async function pesquisar() {
+    try {
+      var response = await api.get('/v1/protected/infopatio/posicaoFila/' + placa);
+      console.log("id " + response.data.id)
 
-  De acordo com a SES, o primeiro caso foi diagnosticado em uma mulher, de 25 anos, que apresenta sintomas leves, como tosse. Ela é moradora de Manacapuru, Região Metropolitana de Manaus, e retornou de São Paulo no dia 3.
-  
-  O segundo caso também foi diagnosticado em uma mulher. A paciente, de 24 anos, apresenta sintomas leves. Ela teve amostra coletada no dia 3 de janeiro, quando retornou de São Paulo.
-  
-  A Secretaria de Saúde informou que as duas pacientes estão com o esquema vacinal completo, com as duas doses do imunizante contra a Covid-19.
-  
-  A chamada dupla contaminação é constatada quando os dois testes – para gripe e para Covid – dão positivo. Ela foi apelidada de "flurona" (união dos termos "flu", de influenza, com "rona" de coronavírus) na imprensa internacional, mas o termo não designa um novo tipo de doença, apenas uma forma simplificada de se referir à ocorrência simultânea de contaminações.`);
+      var id = response.data.id;
+
+      if (id != null) {
+        if (parseInt(id, 10) > 0) {
+          console.log("Placa esta na fila");
+
+          try {
+            //placa anterior
+            response = await api.get('/v1/protected/infopatio/veiculoAnterior/' + id);
+            console.log("proximo veiculo: " + response.data.placa)
+            setVeiculoAnterior(response.data.placa);
+          } catch (_err) {
+
+          }
 
 
-  const [texto2, setTexto2] = useState(`Em dois filmes, a franquia cinematográfica "Kingsman" explorou o mundo da espionagem britânica, com pitadas de humor e sequências de ação que conquistaram o público com seus exageros – como a capanga com próteses afiadas nas pernas.
+          try {
+            //proxima Placa
+            response = await api.get('/v1/protected/infopatio/proximoVeiculo/' + id);
+            console.log("proximo veiculo: " + response.data.placa)
+            setProximaPlaca(response.data.placa);
+          } catch (_err) {
 
-  No novo capítulo que estreia nesta quinta-feira (6), "King's Man: A origem", além de trocar de nome por algum motivo, vai até o início do século 20 para explorar um outro tipo de absurdo: o da Primeira Guerra Mundial.`);
+          }
+
+          try {
+            //numVeiculosFrente
+            response = await api.get('/v1/protected/infopatio/numVeiculosFrente/' + id);
+            console.log("numVeiculosFrente: " + response.data)
+            setNumVeiculosFrente(response.data);
+          } catch (_err) {
+
+          }
+
+        } else {
+          console.log("Placa não esta na fila");
+          setProximaPlaca("Placa não esta na fila");
+        }
+      } else {
+        console.log("Placa não esta na fila");
+        setProximaPlaca("Placa não esta na fila");
+
+      }
+    } catch (_err) {
+      console.log("Placa não esta na fila");
+      setProximaPlaca("Placa não esta na fila");
+
+    }
+
+
+  }
+
+
+
 
   return (
     <div >
@@ -72,83 +93,218 @@ const InfoPatio = () => {
 
 
       }} >
-        <div style={{ paddingTop: 40 }} >
-          <Link className="a"
 
-            to={{
-              pathname: "/",
-
-            }}
-          >
-            <h1>
-              <a className="alogo" >
-                <span style={{ fontSize: 54, color: 'white' }}>LD Armazéns</span>
-              </a>
-            </h1>
-          </Link>
-        </div>
         <Navegador />
 
         <div style={{ height: 5, backgroundColor: '#808080' }}>
         </div>
       </div>
-
-
-
       <div>
-        <BlogPage1
-          titulo="Brasil bate recorde de exportação de soja em 2021; milho cai ao menor patamar desde 2012"
-          subtitulo="País vendeu 86,63 milhões de toneladas de soja ao exterior, no ano passado. Recorde anterior havia sido em 2018."
-          data="05/01/2022"
-          hora="10h52"
-          redator="Aislan Silva Costa"
-          texto1={texto}
-        />
+        <Grid
+          container
+          direction="row"
+          item xs={12} sm={12} md={12} lg={12} xl={12}
+          justifyContent="flex-start"
+          alignItems="flex-start"
+          style={{ paddingTop: 30, paddingBottom: 30 }}
+        >
 
-        <BlogPage1
-          titulo="'King's Man: A origem' retrata absurdos 'historicamente corretos' da 1ª Guerra Mundial"
-          subtitulo="'É inacreditável que basicamente uma briga familiar possa custar as vidas de tantos milhões de jovens homens', diz ator Rhys Ifans sobre conflito presente no filme, que estreia esta quinta (6)."
-          data="06/01/2022"
-          hora="06h00"
-          redator="Cesar Soto, g1"
-          imgCapa={"https://s2.glbimg.com/KR7PU8oQIKqm_I4tvt8olg_dyOc=/0x0:2578x1450/924x0/smart/filters:strip_icc()/i.s3.glbimg.com/v1/AUTH_59edd422c0c84a879bd37670ae4f538a/internal_photos/bs/2022/V/i/aWlsbdQAOOqBB0o3D6qw/kings-man-origem-ralph-fiennes-2.jpg"}
-          texto1={`Em dois filmes, a franquia cinematográfica "Kingsman" explorou o mundo da espionagem britânica, com pitadas de humor e sequências de ação que conquistaram o público com seus exageros – como a capanga com próteses afiadas nas pernas.
+          <Grid item xs={12} sm={12} md={12} lg={12} xl={12}>
+            <Grid item xs={12} sm={12} md={12} lg={12} xl={12} container direction='row'
+              justifyContent="center"
+              alignItems="center"
+            >
+              <span style={{ fontWeight: 'bold', textAlign: 'center', fontSize: 28 }} >Informações do Pátio</span>
+              <br></br>
+              <br></br>
+            </Grid>
 
-          No novo capítulo que estreia nesta quinta-feira (6), "King's Man: A origem", além de trocar de nome por algum motivo, vai até o início do século 20 para explorar um outro tipo de absurdo: o da Primeira Guerra Mundial.
-          
-          "Nada é mais louco que a Primeira Guerra Mundial. Os eventos que levaram a ela. É incrível que basicamente uma briga familiar possa custar as vidas de tantos milhões de jovens homens", diz o ator galês Rhys Ifans ("O Espetacular Homem-Aranha") em entrevista ao g1.`}
-          video1={"https://www.youtube.com/embed/no0d18qvw0o"}
-          texto2={`Aos 54 anos, ele se junta ao diretor e roteirista Matthew Vaughn e a um elenco encabeçado por Ralph Fiennes ("O grande Hotel Budapeste") para interpretar uma das figuras vilanescas mais conhecidas da história, o místico russo Grigori Rasputin.`}
+            <span style={{ padding: 30, paddingLeft: '5%', fontSize: 18 }} >Serviços Disponíveis no Pátio:</span>
+            <br></br>
+            <br></br>
 
-          citacao={`"Há tantos elementos no filme que são malucos e loucos, mas na verdade estão corretos historicamente. Por exemplo, havia membros do Serviço Secreto britânico realmente presentes, que tiveram uma participação integral no assassinato de Rasputin. Então, não achei que nada era louco demais."`}
-          texto3={`Se o subtítulo não deixa claro o suficiente, "King's Man" retrata a origem da organização secreta de espionagem no começo do século 20, quando um duque (Fiennes) investe seus recursos e habilidades para impedir que vilões históricos dêem início à Grande Guerra.
+          </Grid>
 
-          Esse contexto provoca um ritmo um pouco menos descontraído que os dois filmes anteriores. Afinal, o conflito resultou em cerca de 20 milhões de mortes entre 1914 e 1918.`}
+          <Grid
+            container
+            direction="row"
+            item xs={12} sm={12} md={12} lg={12} xl={12}>
 
-          imgFim={"https://s2.glbimg.com/CskhHsmqB5tZL_cpKg1PzjRbu_A=/0x0:2578x1080/1008x0/smart/filters:strip_icc()/i.s3.glbimg.com/v1/AUTH_59edd422c0c84a879bd37670ae4f538a/internal_photos/bs/2022/V/3/ItiowTRAqKMC5r8DmmBA/kings-man-origem-rhys-ifans.jpg"}
+            <Grid item xs={12} sm={12} md={12} lg={3} xl={3} >
+            </Grid>
 
-        />
+            <Grid item xs={12} sm={12} md={12} lg={6} xl={6} container direction='row'
+              justifyContent="center"
+              alignItems="center"
+            >
+              <Grid item xs={12} sm={12} md={12} lg={3} xl={3}
+                direction='row'
+                justifyContent="center"
+                alignItems="center"
+                style={{ textAlign: 'center' }}
+              >
+                <img alt="img1" height={100} width={100}
 
-        <BlogPage1
-          titulo="Anvisa aprova registro de insumo da Fiocruz, e Brasil terá vacina 100% nacional contra Covid-19"
-          subtitulo="Aprovação era a etapa final do processo de transferência de tecnologia da vacina da AstraZeneca. A previsão da Fiocruz é de que as primeiras doses do imunizante sejam envasadas ainda em janeiro e entregues ao Ministério da Saúde em fevereiro."
-          data="06/01/2022"
-          hora="06h00"
-          redator="g1"
-          videoCapa={"https://www.youtube.com/embed/wkXWAnkxAt0"}
+                  src={"https://cdn-icons-png.flaticon.com/512/489/489869.png"}
+                />
+                <figcaption> Restaurante</figcaption>
 
-          texto1={`A Agência Nacional de Vigilância Sanitária (Anvisa) aprovou, nesta sexta-feira (7), o registro do insumo farmacêutico ativo (IFA) da vacina da AstraZeneca contra a Covid-19 fabricado pela Fundação Oswaldo Cruz (Fiocruz). Com isso, o Brasil terá um imunizante produzido totalmente em território nacional (veja mais no vídeo acima).
+              </Grid>
+
+              <Grid item xs={12} sm={12} md={12} lg={3} xl={3}
+                direction='row'
+                justifyContent="center"
+                alignItems="center"
+                style={{ textAlign: 'center' }}
+              >
+                <img alt="img2" height={100} width={100}
+
+                  src={"https://dbdzm869oupei.cloudfront.net/img/sticker/preview/1801.png"}
+                />
+                <figcaption> Vestiário</figcaption>
+              </Grid>
 
 
-          Essa etapa era a última do processo de transferência de tecnologia da produção da vacina. Agora, o "ingrediente" da vacina (ou seja, o IFA) será produzido no país, em vez de ser importado de fora. No ano passado, a Fiocruz precisou atrasar a entrega de vários lotes de vacina por falta do IFA.
-          
-          A Fiocruz tem o equivalente a 21 milhões de doses em IFA nacional, em diferentes etapas de produção e controle de qualidade. A previsão é a de que as primeiras doses do imunizante sejam envasadas ainda em janeiro e entregues ao Ministério da Saúde em fevereiro.`}
+              <Grid item xs={12} sm={12} md={12} lg={3} xl={3}
+                direction='row'
+                justifyContent="center"
+                alignItems="center"
+                style={{ textAlign: 'center' }} >
+                <img alt="img3" height={100} width={100}
+
+                  src={"https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcR0-VvIwTyUR_BYsUzcQd0fbAbBmoxl9MA0Sw&usqp=CAU"}
+                />
+                <figcaption>Wifi Livre</figcaption>
+
+              </Grid>
+
+              <Grid item xs={12} sm={12} md={12} lg={3} xl={3}
+                direction='row'
+                justifyContent="center"
+                alignItems="center"
+                style={{ textAlign: 'center' }} >
+                <img alt="img3" height={100} width={100}
+
+                  src={"https://cdn-icons-png.flaticon.com/512/75/75905.png"}
+                />
+                <figcaption>Estacionamento</figcaption>
+
+              </Grid>
+            </Grid>
+            <Grid item xs={12} sm={12} md={12} lg={3} xl={3} >
+            </Grid>
+          </Grid>
+
+        </Grid>
+        <div style={{ paddingInline: 25 }}>
+          <div>
+            <Grid
+              container
+              direction="row"
+              item xs={12} sm={12} md={12} lg={12} xl={12}
+              component={Paper} elevation={6} square
+
+              style={{ marginTop: "0.5%", marginBottom: '3%' }}
+            >
+
+              <Grid
+                container
+                item xs={12} sm={12} md={12} lg={12} xl={12}
+                direction="row" style={{ marginTop: "3%", marginBottom: '3%' }}>
+
+                <Grid item xs={12} sm={12} md={12} lg={1} xl={1} >
+                </Grid>
+
+                <Grid item xs={12} sm={12} md={12} lg={10} xl={10}
+                  container
+                  direction="row"
+
+                >
+
+                  <Grid item xs={12} sm={12} md={12} lg={4} xl={4} >
+                    <Grid item xs={12} sm={12} md={12} lg={12} xl={12} style={{ padding: 10 }}>
+                      <img alt="img1" height={300} width={300}
+
+                        src={"https://cdn.autopapo.com.br/box/uploads/2021/03/16203820/patio-com-caminhoes-estacionados-732x488.jpg"}
+                      />
+                    </Grid>
+
+
+                  </Grid>
+
+                  <Grid item xs={12} sm={12} md={12} lg={4} xl={4}   >
+                    <Grid item xs={12} sm={12} md={12} lg={12} xl={12}   >
+                      <br></br>
+                      <br></br>
+                      <br></br>
+                      <span style={{ fontWeight: 'bold', fontSize: 22, }} > Busca de Posição em Fila</span>
+
+                    </Grid>
+                    <Grid item xs={12} sm={12} md={12} lg={12} xl={12}
+                      container
+                      direction="row"
+
+                      justifyContent="center"
+                      alignItems="center"
+                    >
+                      <TextField
+                        id="placa"
+                        label="Placa"
+                        variant="standard"
+                        margin="dense"
+                        fullWidth
+                        placeholder='Digite sua placa'
+                        value={placa}
+                        onChange={(event) => { setPlaca(event.target.value) }}
+                      />
+
+
+                      <Button
+                        variant="contained"
+                        color="secondary"
+                        onClick={pesquisar}
+                      > Pesquisar
+                      </Button>
+
+                      <Grid item xs={12} sm={12} md={12} lg={12} xl={12}   >
+
+                        <span style={{ fontSize: 22 }} > Placa Anterior: </span>
+                        <span style={{ fontWeight: 'bold', fontSize: 22, }} >{veiculoAnterior}</span>
+                        <br></br>
+
+                        <span style={{ fontSize: 22 }} > Próxima Placa: </span>
+                        <span style={{ fontWeight: 'bold', fontSize: 22, }} >{proximaPlaca}</span>
+                        <br></br>
 
 
 
-        />
 
+
+                        <span style={{ fontSize: 22 }} > Número de Veiculos na Frente: </span>
+                        <span style={{ fontWeight: 'bold', fontSize: 22, }} >{numVeiculosFrente}</span>
+                      </Grid>
+
+                    </Grid>
+
+
+                  </Grid>
+
+
+
+                </Grid>
+
+
+                <Grid item xs={12} sm={12} md={12} lg={1} xl={1}>
+                </Grid>
+
+              </Grid>
+
+            </Grid>
+
+          </div>
+        </div>
       </div>
+
 
       <div >
         <Rodape />

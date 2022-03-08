@@ -50,8 +50,8 @@ const Rodape = () => {
                                 <div className="footer-menu">
                                     <h2 className="footer-wid-title">Acesso Rápido</h2>
                                     <ul>
-                                        <li><a href="#/">Informaçõs do Pátio</a></li>
-                                        <li><a href="#/">Cotações</a></li>
+                                        <li><a href="/patio">Informaçõs do Pátio</a></li>
+                                        <li><a href="/cotacoes">Cotações</a></li>
                                         <li><a href="#/">Status</a></li>
                                     </ul>
                                 </div>

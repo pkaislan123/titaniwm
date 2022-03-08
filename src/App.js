@@ -20,10 +20,13 @@ import ContaCliente from './pages/painelCliente/Minha Conta';
 
 import Contratos from './pages/Contratos/';
 import Romaneios from './pages/Romaneios/';
+
 import MinhasNoticias from './pages/painelAdmin/MinhasNoticias';
 import CadastroNoticia from './pages/painelAdmin/CadastroNoticia';
+import AlterarNoticia from './pages/painelAdmin/AlterarNoticia';
 
-
+import Cotacoes from './pages/Cotacoes';
+import InfoPatio from './pages/InfoPatio';
 
 
 import Cookies from 'js-cookie';
@@ -131,6 +134,8 @@ function App() {
       <PublicRoute restricted={false} component={Blog} path="/noticias" exact />
       <PublicRoute restricted={false} component={Contato} path="/contato" exact />
       <PublicRoute restricted={false} component={LGPD} path="/lgpd" exact />
+      <PublicRoute restricted={false} component={Cotacoes} path="/cotacoes" exact />
+      <PublicRoute restricted={false} component={InfoPatio} path="/patio" exact />
 
       <PublicRoute restricted={false} component={VizualizarNoticia} path="/noticias/:dia/:mes/:ano/:titulo/:idNoticia" exact />
 
@@ -144,6 +149,7 @@ function App() {
 
       <PrivateAdminArmazemAutorizationRoute component={MinhasNoticias} path="/minhasnoticias/" exact />     
       <PrivateAdminArmazemAutorizationRoute component={CadastroNoticia} path="/cadastrarnoticia/" exact />     
+      <PrivateAdminArmazemAutorizationRoute component={AlterarNoticia} path="/alterarnoticia/:idNoticia" exact />     
 
 
       </Switch>

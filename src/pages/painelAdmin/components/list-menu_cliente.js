@@ -5,7 +5,7 @@ import ListItemText from '@material-ui/core/ListItemText';
 import ExitToAppIcon from '@material-ui/icons/ExitToApp';
 import ListSubheader from '@material-ui/core/ListSubheader';
 import Cookies from 'js-cookie';
-import {faHome} from "@fortawesome/free-solid-svg-icons";
+import {faHome, faNewspaper} from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 
 export const mainListItems = (
@@ -19,7 +19,7 @@ export const mainListItems = (
 
     <ListItem button component="a"  href="/minhasnoticias" >
       <ListItemIcon>
-      <FontAwesomeIcon icon={faHome} size="2x"/>
+      <FontAwesomeIcon icon={faNewspaper} size="2x"/>
       </ListItemIcon>
       <ListItemText primary="Notícias" />
     </ListItem>
