@@ -1,26 +1,77 @@
 import React, { useState, useEffect } from 'react';
 import { makeStyles } from '@material-ui/core/styles';
-import Container from '@material-ui/core/Container';
 import Grid from '@material-ui/core/Grid';
 import MenuAdmin from '../components/menu';
 import Cookies from 'js-cookie';
 import api from '../../../services/api';
 import Skeleton from '@material-ui/lab/Skeleton';
-import Typography from '@material-ui/core/Typography';
-import Button from '@material-ui/core/Button';
-import {
-
-    Link
-
-} from "react-router-dom";
-import ButtonGroup from '@material-ui/core/ButtonGroup';
-import Paper from '@material-ui/core/Paper';
+import NavBarAdmin from "../../../components/NavBarAdmin";
+import Rodape from '../../../components/Rodape';
+import { DataGrid, ptBR, GridToolbarContainer, GridLinkOperator, GridToolbarColumnsButton, GridToolbarFilterButton, GridToolbarExport, GridToolbarDensitySelector } from '@material-ui/data-grid';
+import DeleteIcon from '@material-ui/icons/Delete';
+import { Button, Link } from "@material-ui/core";
 
 const drawerWidth = 240;
+
 
 const useStyles = makeStyles((theme) => ({
     root: {
         display: 'flex',
+        '& .cabecalho_transparente': {
+            backgroundColor: 'rgba(0, 0, 0, 0)',
+            color: 'rgba(0, 0, 0, 0)',
+        },
+        '& .cabecalho_azul': {
+            backgroundColor: 'rgba(0, 0, 255, 1)',
+            color: 'white',
+        },
+        '& .cabecalho_verde': {
+            backgroundColor: 'rgba(0, 100, 0, 1)',
+            color: 'white',
+        },
+        '& .cabecalho_verde_claro': {
+            backgroundColor: 'rgba(107,142,35, 1)',
+            color: 'white',
+        },
+        '& .cabecalho_marrom_claro': {
+            backgroundColor: 'rgba(184,134,11, 1)',
+            color: 'white',
+        },
+        '& .cabecalho_verde_cyan': {
+            backgroundColor: 'rgba(0,139,139, 1)',
+            color: 'white',
+        },
+        '& .cabecalho_verde_dark_sea': {
+            backgroundColor: 'rgba(60,179,113, 1)',
+            color: 'white',
+        },
+        '& .cabecalho_marrom_escuro': {
+            backgroundColor: 'rgba(139,69,19, 1)',
+            color: 'white',
+        },
+        '& .cabecalho_marrom_chocolate': {
+            backgroundColor: 'rgba(210,105,30, 1)',
+            color: 'white',
+        },
+        '& .cabecalho_darkslate': {
+            backgroundColor: 'rgba(47,79,79, 1)',
+            color: 'white',
+        },
+        '& .super-app.negative': {
+            backgroundColor: 'rgba(157, 255, 118, 0.49)',
+            color: '#1a3e72',
+            fontWeight: '600',
+        },
+        '& .super-app.positive': {
+            backgroundColor: '#d47483',
+            color: '#1a3e72',
+            fontWeight: '600',
+        },
+        '& .super-app.neutro': {
+            backgroundColor: '#363636',
+            color: 'white',
+            fontWeight: '600',
+        },
     },
     toolbar: {
         paddingRight: 24, // keep right padding when drawer closed
@@ -107,16 +158,31 @@ function novaNoticia() {
 }
 
 export default function MinhasNoticias() {
-    const classes = useStyles();
     const [minhasNoticias, setMinhasNoticias] = useState([]);
 
     const [loading, setLoading] = useState(true);
 
-    async function deletarNoticia(id_noticia) {
 
-        console.log("Funcao deletar noticia chamada, id: " + id_noticia);
+    const classes = useStyles();
+
+
+    const handleCellClick = (param, event) => {
+        event.stopPropagation();
+    };
+
+    const handleRowClick = (param, event) => {
+        event.stopPropagation();
+    };
+
+
+  
+
+    
+    async function deletarNoticia(event, cellValues) {
+
+        console.log("Funcao deletar noticia chamada, id: " + cellValues.row.id_noticia);
         if (window.confirm("Excluir a Notícia Selecionada?")) {
-            var result = await api.delete("v1/protected/noticias/excluirNoticia/" + id_noticia);
+            var result = await api.delete("v1/protected/noticias/excluirNoticia/" + cellValues.row.id_noticia);
             console.log("resultado da exclusao: " + result.status);
             if (result.status === 204) {
 
@@ -127,9 +193,113 @@ export default function MinhasNoticias() {
             }
         }
     }
+    
+   
+    const columnsDataGrid = [
+
+        {
+            headerName: 'ID',
+            field: 'id_noticia',
+            id: 1,
+            headerClassName: 'cabecalho_azul',
+        },
+        {
+            headerName: 'Título',
+            field: 'titulo',
+            id: 2,
+            minWidth: 500,
+            headerClassName: 'cabecalho_azul',
+        },
+        {
+            headerName: 'Data',
+            field: 'data_noticia',
+            minWidth: 150,
+            id: 3,
+            headerClassName: 'cabecalho_azul',
+        },
+        {
+            headerName: 'Hora',
+            field: 'hora_noticia',
+            minWidth: 150,
+            id: 4,
+            headerClassName: 'cabecalho_azul',
+
+        },
+        {
+            field: "vizualizar",
+            headerName: "Vizualizar",
+            headerClassName: 'cabecalho_transparente',
+            sortable: false,
+            id: 5,
+            minWidth: 150,
+            renderCell: (cellValues) => {
+                return <Link  target="_blank" href={"/noticias/" + cellValues.row.data_noticia + "/" + encodeURIComponent(cellValues.row.titulo) + "/" + cellValues.row.id_noticia }>Vizualizar</Link>;
+              }
+        },
+
+        {
+            field: "excluir",
+            headerName: "Excluir",
+            headerClassName: 'cabecalho_transparente',
+            sortable: false,
+            id: 6,
+            minWidth: 150,
+            renderCell: (cellValues) => {
+                return (
+                  <Button
+                  startIcon={<DeleteIcon />}
+                    variant="outlined"
+                    onClick={(event) => {
+                      deletarNoticia(event, cellValues);
+                    }}
+                  >
+                    Excluir
+                  </Button>
+                );
+              }
+        },
+
+        {
+            field: "editar",
+            headerName: "Editar",
+            headerClassName: 'cabecalho_transparente',
+            sortable: false,
+            id: 6,
+            minWidth: 150,
+            renderCell: (cellValues) => {
+                return (
+                    <Button color="primary" 
+                    href={"/alterarnoticia/" + cellValues.row.id_noticia}
+                    target="_blank"
+                    >Editar</Button>
+                );
+              }
+        },
+
+
+    ];
 
 
 
+
+
+    function CustomToolbar() {
+        return (
+            <GridToolbarContainer>
+                <GridToolbarColumnsButton />
+                <GridToolbarFilterButton />
+                <GridToolbarDensitySelector />
+                <GridToolbarExport />
+            </GridToolbarContainer>
+        );
+    }
+
+    const filterModel = {
+        items: [
+
+        ],
+        linkOperator: GridLinkOperator.Or,
+    };
 
 
 
@@ -176,109 +346,64 @@ export default function MinhasNoticias() {
     }, []);
 
 
-    const NoticiaItem = ({ props }) => {
-
-        return (
-
-            <div className="Item-container" style={{ padding: 10 }} >
-
-                <Paper elevation={3}   >
-                    <Grid container spacing={1} style={{ padding: 20 }}>
-                        <Grid item xs={12}
-                        >
-                            <Typography >
-                                Título: {props.titulo}
-                            </Typography>
-
-                            <Typography >
-                                Data: {props.data_noticia}
-                            </Typography>
-
-                            <Typography >
-                                Hora: {props.hora_noticia}
-                            </Typography>
-
-                        </Grid>
-
-                        <Grid item xs={4}>
-                            <ButtonGroup aria-label="outlined primary button group">
-                                <Button color="primary" href={"/noticias/" + props.data_noticia + "/" + encodeURIComponent(props.titulo) + "/" + props.id_noticia }>Vizualizar</Button>
-                                <Button color="primary" href={"/alterarnoticia/" + props.id_noticia}>Atualizar</Button>
-                                <Button color="secondary" onClick={() => deletarNoticia(props.id_noticia)} >Excluir</Button>
-
-                            </ButtonGroup>
-                        </Grid>
-
-                    </Grid>
-                </Paper>
-            </div>
-        );
-    };
 
     return (
         <div>
 
-            <div style={{ backgroundColor: 'black', width: '100%', height: 90 }}>
-                <div style={{ paddingTop: 10 }} >
-                    <Link className="a"
-
-                        to={{
-                            pathname: "/",
-
-                        }}
-                    >
-                        <h1>
-                            <span style={{ fontSize: 44, color: 'white' }}>LD Armazéns</span>
-
-                        </h1>
-                    </Link>
-                </div>
-            </div>
+            <NavBarAdmin />
             <div className={classes.root} style={{ backgroundColor: '#DCDCDC' }}>
-
                 <MenuAdmin titulo={"Minhas Notícias"} />
+
                 <main className={classes.content}>
                     <div className={classes.appBarSpacer} />
 
-                    <Container maxWidth="lg" className={classes.container}>
+                    <div style={{ padding: 10, width: '100%', height: '70%' }}>
                         {loading ?
                             <Skeleton animation={"wave"} width={'100%'} style={{ backgroundColor: '#48D1CC' }}>
                             </Skeleton>
                             :
-                            <div>
 
-                                {
-                                    minhasNoticias.map((row) => (
-                                        <NoticiaItem props={row} key={row.id_noticia} />
+                            <DataGrid localeText={ptBR.props.MuiDataGrid.localeText}
+                                pagination
 
-                                    ))
-                                }
-
-
-
-                                <Grid
-                                    container
-                                    direction="row"
-                                    justifyContent="flex-end"
-                                    alignItems="center"
-                                    item xs={12}
-                                >
-                                    <Button style={{ marginTop: 20 }}
-                                        variant="contained"
-                                        color="primary"
-                                        onClick={novaNoticia}
-                                    >
-                                        Nova Notícia
-                                    </Button>
-                                </Grid>
-
-                            </div>
+                                checkboxSelection
+                                rows={minhasNoticias} columns={columnsDataGrid}
+                                initialState={{ filter: { filterModel } }}
+                                getRowId={(row) => row.id_noticia}
+                                onCellClick={handleCellClick}
+                                onRowClick={handleRowClick}
+                                components={{
+                                    Toolbar: CustomToolbar,
+                                }}
+                            />
 
                         }
-                    </Container>
+                        <Grid
+                            container
+                            direction="row"
+                            justifyContent="flex-end"
+                            alignItems="center"
+                            item xs={12}
+                        >
+                            <Button style={{ marginTop: 20 }}
+                                variant="contained"
+                                color="primary"
+                                onClick={novaNoticia}
+                            >
+                                Nova Notícia
+                            </Button>
+                        </Grid>
+
+                    </div>
 
                 </main>
+            </div>
+            <div >
+                <Rodape />
             </div>
         </div>
     );
 }
+
+
+

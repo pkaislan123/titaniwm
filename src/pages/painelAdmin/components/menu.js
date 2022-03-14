@@ -1,5 +1,4 @@
-
-import React from 'react';
+import React, { useState, useEffect } from 'react';
 import clsx from 'clsx';
 import Drawer from '@material-ui/core/Drawer';
 import List from '@material-ui/core/List';
@@ -100,7 +99,8 @@ const useStyles = makeStyles((theme) => ({
 export default function MenuAdmin(props) {
     const classes = useStyles();
 
-    const [open, setOpen] = React.useState(true);
+    const [open, setOpen] = useState(true);
+
     const handleDrawerOpen = () => {
         setOpen(true);
     };
@@ -109,11 +109,27 @@ export default function MenuAdmin(props) {
         setOpen(false);
     };
 
+    function mudaAltura() {
+        try {
+            var alturaAtual = document.getElementById("navbaradmin").offsetHeight ;
+            console.log("altura do cabecalho " + alturaAtual)
+            return alturaAtual;
+        } catch (_err) {
+
+        }
+    }
+
+
+
+    useEffect(() => {
+
+
+    }, []);
 
     return (
         <>
             <CssBaseline />
-            <AppBar position="absolute" style={{ marginTop: 90 }} className={clsx(classes.appBar, open && classes.appBarShift)}>
+            <AppBar position="absolute" style={{ marginTop: mudaAltura() }} className={clsx(classes.appBar, open && classes.appBarShift)}>
                 <Toolbar className={classes.toolbar}>
                     <IconButton
                         edge="start"
@@ -125,7 +141,7 @@ export default function MenuAdmin(props) {
                         <MenuIcon />
                     </IconButton>
                     <Typography component="h1" variant="h6" color="inherit" noWrap className={classes.title}>
-                       {props.titulo}
+                        {props.titulo}
                     </Typography>
                 </Toolbar>
             </AppBar>

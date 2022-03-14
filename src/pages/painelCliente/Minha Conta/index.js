@@ -8,11 +8,10 @@ import api from '../../../services/api';
 import Skeleton from '@material-ui/lab/Skeleton';
 import Typography from '@material-ui/core/Typography';
 import Paper from '@material-ui/core/Paper';
-import {
+import NavBarAdmin from "../../../components/NavBarAdmin";
+import Rodape from '../../../components/Rodape';
 
-  Link
 
-} from "react-router-dom";
 import './styles.scss';
 
 const drawerWidth = 240;
@@ -172,21 +171,7 @@ export default function ContaArmazem() {
   return (
     <div>
 
-      <div style={{ backgroundColor: 'black', width: '100%', height: 90 }}>
-      <div style={{ paddingTop: 10}} >
-          <Link className="a"
-
-            to={{
-              pathname: "/",
-
-            }}
-          >
-            <h1>
-                <span style={{ fontSize: 44, color: 'white' }}>LD Armazéns</span>
-            </h1>
-          </Link>
-        </div>
-      </div>
+      <NavBarAdmin />
       <div className={classes.root} style={{ backgroundColor: '#DCDCDC' }}>
         <MenuCliente titulo={"Meus Dados"} />
         <main className={classes.content}>
@@ -311,6 +296,9 @@ export default function ContaArmazem() {
           </Container>
 
         </main>
+      </div>
+      <div >
+        <Rodape />
       </div>
     </div>
   );

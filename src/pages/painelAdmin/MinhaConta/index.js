@@ -8,12 +8,9 @@ import api from '../../../services/api';
 import Skeleton from '@material-ui/lab/Skeleton';
 import Typography from '@material-ui/core/Typography';
 import Paper from '@material-ui/core/Paper';
+import NavBarAdmin from "../../../components/NavBarAdmin";
+import Rodape from '../../../components/Rodape';
 
-import {
-
-  Link
-
-} from "react-router-dom";
 
 const drawerWidth = 240;
 
@@ -160,25 +157,8 @@ export default function ContaAdmin() {
 
   return (
     <div>
-
-      <div style={{ backgroundColor: 'black', width: '100%', height: 90 }}>
-      <div style={{ paddingTop: 10}} >
-          <Link className="a"
-
-            to={{
-              pathname: "/",
-
-            }}
-          >
-            <h1>
-                <span style={{ fontSize: 44, color: 'white' }}>LD Armazéns</span>
-            
-            </h1>
-          </Link>
-        </div>
-      </div>
+      <NavBarAdmin />
       <div className={classes.root} style={{ backgroundColor: '#DCDCDC' }}>
-        
         <MenuAdmin titulo={"Meus Dados"} />
         <main className={classes.content}>
           <div className={classes.appBarSpacer} />
@@ -210,12 +190,12 @@ export default function ContaAdmin() {
                       </Typography>
                     </Grid>
 
-                  
+
 
                   </Grid>
                 </Paper>
 
-                <Paper elevation={5}  style={{ marginTop: 5 }}>
+                <Paper elevation={5} style={{ marginTop: 5 }}>
                   <Grid container spacing={1}
                     direction="row"
                     alignItems="center"
@@ -233,12 +213,12 @@ export default function ContaAdmin() {
                       </Typography>
                     </Grid>
 
-                 
+
 
                   </Grid>
                 </Paper>
 
-                
+
 
                 <Typography variant="h6" component="h2" style={{ fontWeight: 'bold', marginTop: 20, marginBottom: 20 }}>
                   Dados da Conta
@@ -262,11 +242,11 @@ export default function ContaAdmin() {
                       </Typography>
                     </Grid>
 
-                    
+
                   </Grid>
                 </Paper>
 
-              
+
 
               </div>
 
@@ -274,6 +254,9 @@ export default function ContaAdmin() {
           </Container>
 
         </main>
+      </div>
+      <div >
+        <Rodape />
       </div>
     </div>
   );

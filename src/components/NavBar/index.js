@@ -10,7 +10,9 @@ import {
   Link
 
 } from "react-router-dom";
-const Navegador = () => {
+
+
+const Navegador = (props) => {
 
 
   const [width, setWidth] = useState(0);
@@ -21,7 +23,6 @@ const Navegador = () => {
       || document.documentElement.clientWidth
       || document.body.clientWidth;
 
-    console.log(largura)
     setWidth(largura);
 
   }
@@ -37,7 +38,7 @@ const Navegador = () => {
   }, []);
 
 
-  const LogoExtendida = (props) => {
+  const LogoExtendida = () => {
     return (
       <h1 >
         <span style={{paddingLeft: 50,fontSize: 54, color: 'white' }}>LD Armazéns</span>
@@ -46,7 +47,7 @@ const Navegador = () => {
     )
   }
 
-  const LogoRecolhida = (props) => {
+  const LogoRecolhida = () => {
     return (
       <h1>
         <span style={{ paddingLeft: 20, fontSize: 54, color: 'white' }}>LD</span>
@@ -89,21 +90,22 @@ const Navegador = () => {
             }} >
             <Nav className="ml-auto">
               <Nav.Item >
-                <Nav.Link id="nav-link" href="/" >Início</Nav.Link>
+                <Nav.Link id="nav-link" style={{ textDecoration: props.inicio}} href="/" >Início</Nav.Link>
               </Nav.Item>
 
               <Nav.Item>
-                <Nav.Link id="nav-link" href="/sobre">  Sobre Nós </Nav.Link>
+                <Nav.Link id="nav-link" style={{ textDecoration: props.sobre}} href="/sobre">  Sobre Nós </Nav.Link>
               </Nav.Item>
 
               <Nav.Item>
-                <Nav.Link id="nav-link" href="/noticias">  Notícias </Nav.Link>
+                <Nav.Link id="nav-link" style={{ textDecoration: props.noticias}} href="/noticias">  Notícias </Nav.Link>
               </Nav.Item>
 
 
               <NavDropdown
                 title="Serviços ao Cliente"
                 id="nav-dropdown"
+                style={{textDecoration: props.servicos}}
 
               >
                 <NavDropdown.Item eventKey="1.0" id="nav-link" href="/minhaconta">Minha Conta
@@ -114,6 +116,9 @@ const Navegador = () => {
 
                 <NavDropdown.Item eventKey="3.0" id="nav-link" href="/cotacoes">Cotações
                 </NavDropdown.Item>
+
+                <NavDropdown.Item eventKey="4.0" id="nav-link" href="/status">Status
+                </NavDropdown.Item>
               </NavDropdown>
 
 
@@ -122,13 +127,13 @@ const Navegador = () => {
 
 
               <Nav.Item>
-                <Nav.Link id="nav-link" href="/localizacao">  Onde Estamos </Nav.Link>
+                <Nav.Link id="nav-link" style={{ textDecoration: props.localizacao}} href="/localizacao">  Onde Estamos </Nav.Link>
               </Nav.Item>
 
 
 
               <Nav.Item>
-                <Nav.Link id="nav-link" href="/contato">Fale Conosco</Nav.Link>
+                <Nav.Link id="nav-link" style={{ textDecoration: props.contato}} href="/contato">Fale Conosco</Nav.Link>
               </Nav.Item>
             </Nav>
 

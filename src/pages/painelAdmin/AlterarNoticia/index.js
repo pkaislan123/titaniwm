@@ -10,11 +10,9 @@ import api from '../../../services/api';
 import { useHistory, useParams } from "react-router-dom";
 import moment from 'moment';
 import Skeleton from '@material-ui/lab/Skeleton';
-import {
+import NavBarAdmin from "../../../components/NavBarAdmin";
+import Rodape from '../../../components/Rodape';
 
-    Link
-
-} from "react-router-dom";
 
 const drawerWidth = 240;
 
@@ -222,28 +220,13 @@ export default function AlterarNoticia() {
     return (
         <div>
 
-            <div style={{ backgroundColor: 'black', width: '100%', height: 90 }}>
-                <div style={{ paddingTop: 10 }} >
-                    <Link className="a"
-
-                        to={{
-                            pathname: "/",
-
-                        }}
-                    >
-                        <h1>
-                            <span style={{ fontSize: 44, color: 'white' }}>LD Armazéns</span>
-
-                        </h1>
-                    </Link>
-                </div>
-            </div>
+            <NavBarAdmin />
             <div className={classes.root} style={{ backgroundColor: '#DCDCDC' }}>
 
-                <MenuAdmin titulo={"Alterar Nova Notícia"} />
+                <MenuAdmin titulo={"Alterar Notícia"} />
 
                 {loading ?
-                    <Skeleton animation={"wave"} width={'100%'}  style={{ backgroundColor: '#48D1CC' }}>
+                    <Skeleton animation={"wave"} width={'100%'} style={{ backgroundColor: '#48D1CC' }}>
                     </Skeleton>
                     :
                     <main className={classes.content}>
@@ -288,21 +271,21 @@ export default function AlterarNoticia() {
                                     </Grid>
 
                                     <Grid item xs={6} >
-                                    <TextField
-                                        variant="standard"
-                                        name="categoria"
-                                        label="Categoria desta Notícia"
-                                        required
-                                        id="categoria"
-                                        autoComplete="categoria"
-                                        value={categoria}
-                                        onChange={e => setCategoria(e.target.value)}
-                                        fullWidth
-                                        multiline={true}
-                                        rows={3}
+                                        <TextField
+                                            variant="standard"
+                                            name="categoria"
+                                            label="Categoria desta Notícia"
+                                            required
+                                            id="categoria"
+                                            autoComplete="categoria"
+                                            value={categoria}
+                                            onChange={e => setCategoria(e.target.value)}
+                                            fullWidth
+                                            multiline={true}
+                                            rows={3}
 
-                                    />
-                                </Grid>
+                                        />
+                                    </Grid>
 
                                     <Grid item xs={6} >
                                         <TextField
@@ -526,6 +509,9 @@ export default function AlterarNoticia() {
                     </main>
                 }
             </div>
+            <div >
+        <Rodape />
+      </div>
         </div>
     );
 

@@ -77,7 +77,7 @@ const Blog = () => {
 
       }} >
 
-        <Navegador />
+        <Navegador noticias={'underline'} />
 
         <div style={{ height: 5, backgroundColor: '#808080' }}>
         </div>
@@ -98,7 +98,7 @@ const Blog = () => {
 
         <Carousel interval={5000} fade style={{ width: '100%' }}>
           <Carousel.Item>
-            <img style={{ height: 800 }}
+            <img 
               className="d-block w-100"
               src="https://www.agroprecision.com.br/wp-content/uploads/2021/11/Quer-mais-produtividade-e-rentabilidade-na-soja.jpg"
               alt="First slide"
@@ -107,7 +107,7 @@ const Blog = () => {
             </Carousel.Caption>
           </Carousel.Item>
           <Carousel.Item>
-            <img style={{ height: 800 }}
+            <img 
               className="d-block w-100"
               src="https://www.bioblog.com.br/wp-content/uploads/2020/12/corn-5134432_1920.jpg"
               alt="Milho"
@@ -117,7 +117,7 @@ const Blog = () => {
             </Carousel.Caption>
           </Carousel.Item>
           <Carousel.Item>
-            <img style={{ height: 800 }}
+            <img 
               className="d-block w-100"
               src="https://blog.syngentadigital.ag/wp-content/uploads/2017/08/sorgo-forrageiras-campo.jpg"
               alt="Third slide"

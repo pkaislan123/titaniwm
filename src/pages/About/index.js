@@ -22,7 +22,7 @@ const About = () => {
             backgroundSize: "cover",
           }} >
          
-          <Navegador />
+          <Navegador  sobre={'underline'}/>
           <div style={{ height: 5, backgroundColor: '#808080' }}>
           </div>
 
@@ -173,13 +173,15 @@ const About = () => {
                 <Grid item xs={12} sm={12} md={12} lg={12} xl={12} style={{textAlign: "center"}} >
                   <img alt="coletor hidraulico"
                     style={{ weight: 300, height: 300, padding: 20 }}
-                    src={'https://comagequipamentos.com/maquinas/wp-content/uploads/sites/4/2020/09/coletor.jpeg'}
+                    src={'https://balancascapital.com.br/wp-content/uploads/2017/02/P-16.jpg'}
                   />
                 </Grid>
 
                 <br></br>  <br></br>
                 Também com investimentos na areá de tecnologia da informação, contamos com ferramentas
-                que facilitam a comunicação do Armazém com seus clientes.
+                que facilitam a comunicação do Armazém com seus clientes, em nosso site o cliente da LD Armazéns
+                pode consultar seus contratos e romaneios. Com o "Serviço de Notificação", o produtor rural
+                recebe em tempo real informações sobre suas cargas no armazém.
               </span>
               <br></br>  <br></br>
               <Grid item xs={12} sm={12} md={12} lg={12} xl={12} style={{textAlign: "center"}} >

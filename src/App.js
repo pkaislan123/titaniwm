@@ -4,6 +4,8 @@ import './styles/global.scss';
 import { BrowserRouter, Switch, Route, Redirect } from 'react-router-dom';
 import 'bootstrap/dist/css/bootstrap.css';
 import Home from './pages/home';
+import Status from './pages/Status';
+
 import Localizacao from './pages/localizacao';
 import LGPD from './pages/LGPD';
 
@@ -136,6 +138,7 @@ function App() {
       <PublicRoute restricted={false} component={LGPD} path="/lgpd" exact />
       <PublicRoute restricted={false} component={Cotacoes} path="/cotacoes" exact />
       <PublicRoute restricted={false} component={InfoPatio} path="/patio" exact />
+      <PublicRoute restricted={false} component={Status} path="/status" exact />
 
       <PublicRoute restricted={false} component={VizualizarNoticia} path="/noticias/:dia/:mes/:ano/:titulo/:idNoticia" exact />
 

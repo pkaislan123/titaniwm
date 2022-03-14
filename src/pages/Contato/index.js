@@ -45,7 +45,7 @@ const Contato = () => {
             }} >
 
 
-                <Navegador />
+                <Navegador contato={"underline"}/>
                 <div style={{ height: 5, backgroundColor: '#808080' }}>
                 </div>
 
@@ -218,8 +218,6 @@ const Contato = () => {
                             <Grid
                                 container
                                 direction="row"
-                                justifyContent="left"
-                                alignItems="left"
                                 item xs={12} sm={12} md={12} lg={12} xl={12}
 
                             >

@@ -1,74 +1,32 @@
 import React, { useState, useEffect } from 'react';
 import { makeStyles } from '@material-ui/core/styles';
+import TextField from '@material-ui/core/TextField';
 
 import Cookies from 'js-cookie';
 import api from '../../services/api';
 import Skeleton from '@material-ui/lab/Skeleton';
-
-import MenuAdmin from '../painelAdmin/components/menu';
+import Grid from '@material-ui/core/Grid';
 import MenuCliente from '../painelCliente/components/menu';
-import { DataGrid, ptBR, GridToolbarContainer, GridLinkOperator, GridToolbarColumnsButton, GridToolbarFilterButton, GridToolbarExport, GridToolbarDensitySelector } from '@material-ui/data-grid';
-import {
+import NavBarAdmin from "../../components/NavBarAdmin";
+import Rodape from '../../components/Rodape';
+import Table from '@material-ui/core/Table';
+import TableBody from '@material-ui/core/TableBody';
+import TableCell from '@material-ui/core/TableCell';
+import TableContainer from '@material-ui/core/TableContainer';
+import TableHead from '@material-ui/core/TableHead';
+import TableRow from '@material-ui/core/TableRow';
+import IconButton from '@material-ui/core/IconButton';
+import Paper from '@material-ui/core/Paper';
+import KeyboardArrowDownIcon from '@material-ui/icons/KeyboardArrowDown'
+import KeyboardArrowUpIcon from '@material-ui/icons/KeyboardArrowUp';
+import Button from '@material-ui/core/Button';
 
-  Link
 
-} from "react-router-dom";
 const drawerWidth = 240;
 
 const useStyles = makeStyles((theme) => ({
   root: {
     display: 'flex',
-    '& .cabecalho_azul': {
-      backgroundColor: 'rgba(0, 0, 255, 1)',
-      color: 'white',
-    },
-    '& .cabecalho_verde': {
-      backgroundColor: 'rgba(0, 100, 0, 1)',
-      color: 'white',
-    },
-    '& .cabecalho_verde_claro': {
-      backgroundColor: 'rgba(107,142,35, 1)',
-      color: 'white',
-    },
-    '& .cabecalho_marrom_claro': {
-      backgroundColor: 'rgba(184,134,11, 1)',
-      color: 'white',
-    },
-    '& .cabecalho_verde_cyan': {
-      backgroundColor: 'rgba(0,139,139, 1)',
-      color: 'white',
-    },
-    '& .cabecalho_verde_dark_sea': {
-      backgroundColor: 'rgba(60,179,113, 1)',
-      color: 'white',
-    },
-    '& .cabecalho_marrom_escuro': {
-      backgroundColor: 'rgba(139,69,19, 1)',
-      color: 'white',
-    },
-    '& .cabecalho_marrom_chocolate': {
-      backgroundColor: 'rgba(210,105,30, 1)',
-      color: 'white',
-    },
-    '& .cabecalho_darkslate': {
-      backgroundColor: 'rgba(47,79,79, 1)',
-      color: 'white',
-    },
-    '& .super-app.negative': {
-      backgroundColor: 'rgba(157, 255, 118, 0.49)',
-      color: '#1a3e72',
-      fontWeight: '600',
-    },
-    '& .super-app.positive': {
-      backgroundColor: '#d47483',
-      color: '#1a3e72',
-      fontWeight: '600',
-    },
-    '& .super-app.neutro': {
-      backgroundColor: '#363636',
-      color: 'white',
-      fontWeight: '600',
-    },
   },
   toolbar: {
     paddingRight: 24, // keep right padding when drawer closed
@@ -148,210 +106,405 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
-
 export default function Romaneios() {
   const classes = useStyles();
-  const [romaneios, setRomaneios] = useState([]);
-  const [regra, setRegra] = useState('');
+  const [romaneiosFiltrados, setRomaneiosFiltrados] = useState([]);
+  const [romaneiosOriginais, setRomaneiosOriginais] = useState([]);
+
+
+
+
+
   const [loading, setLoading] = useState(true);
 
+  const [codigo, setCodigo] = useState('');
+  const [produto, setProduto] = useState('');
+  const [motorista, setMotorista] = useState('');
+  const [placa, setPlaca] = useState('');
 
-  const handleCellClick = (param, event) => {
-    event.stopPropagation();
-  };
+  const [operacao, setOperacao] = useState('');
 
-  const handleRowClick = (param, event) => {
-    event.stopPropagation();
-  };
-
-
-
-  const columnsDataGrid = [
-
-    {
-      headerName: 'ID',
-      field: 'id',
-      id: 1,
-      headerClassName: 'cabecalho_azul',
-    },
-    {
-      headerName: 'Código',
-      field: 'codigo',
-      minWidth: 150,
-      id: 2,
-      headerClassName: 'cabecalho_azul',
-
-    },
-    {
-      headerName: 'Data',
-      field: 'data_romaneio',
-      minWidth: 150,
-      id: 3,
-      headerClassName: 'cabecalho_azul',
-
-    },
-    
-
-  ];
+  const [filtroRemetente, setfiltroRemetente] = useState('');
+  const [filtroDestinatario, setfiltroDestinatario] = useState('');
+  const [safra, setSafra] = useState('');
 
 
- 
 
-  async function procurarRegra() {
-    try {
-      const regra = Cookies.get('regra');
-      setRegra(regra);
+  const [height, setHeight] = useState(0);
 
-      if (regra === "ROLE_ADMIN") {
 
-      } else if (regra === "ROLE_CLIENTE") {
+  function checkDimenssoes() {
 
-      }
+    var altura = window.innerHeight
+      || document.documentElement.clientHeight
+      || document.body.clientHeight;
 
-    } catch (_err) {
 
-    }
+    setHeight(altura * 0.75);
+
   }
+
+  window.addEventListener('resize', function (event) {
+    checkDimenssoes();
+  });
 
 
   
-  function CustomToolbar() {
-    return (
-      <GridToolbarContainer>
-        <GridToolbarColumnsButton />
-        <GridToolbarFilterButton />
-        <GridToolbarDensitySelector />
-        <GridToolbarExport />
-      </GridToolbarContainer>
-    );
-  }
-
   useEffect(() => {
 
     async function listarMeusDados() {
       try {
-
+        setLoading(true);
         var dados = [];
-  
+
         const token = Cookies.get('token');
-  
+
         const headers = {
           'Authorization': 'Bearer ' + token
         }
-  
-  
+
+
         const id_usuario = Cookies.get('id_usuario');
         console.log("id na tela de romaneios: " + id_usuario)
-  
+
         await api.get("v1/protected/retornardadoscliente/" + id_usuario, {
           headers: headers
         }).then(function (response) {
-          dados= response.data
+          dados = response.data
           console.log(" Meus Dados: " + response);
-  
-  
-  
+
+
+
         });
-  
+
         var url = "v1/protected/romaneios/";
-  
+
         var identificacao = dados.tipo_cliente === 0 ? dados.cpf : dados.cnpj;
-        await api.get(url + identificacao, {
+        await api.get(url + identificacao , {
           headers: headers
         }).then(function (response) {
-          setRomaneios(response.data)
-  
+          setRomaneiosFiltrados(response.data)
+          setRomaneiosOriginais(response.data)
           console.log(" Meus Romaneios: " + response.data);
+
+
           setLoading(false);
-  
+
         });
-  
-  
-  
+
+
+
       } catch (_err) {
         // avisar('Houve um problema com o login, verifique suas credenciais! ' + cpf + " " + senha );
         console.log("Erro ao listar seus dados: " + _err)
-  
+
       }
-  
+
     }
-  
 
 
-    procurarRegra();
+    checkDimenssoes();
+
     listarMeusDados();
-
 
 
   }, []);
 
-  const filterModel = {
-    items: [
-     
-    ],
-    linkOperator: GridLinkOperator.Or,
-  };
 
-  const renderMenu = () => {
-    console.log("regra na funcao render na tela de romaneios: " + regra);
+  function Row(props) {
+    const { row } = props;
+    const [open, setOpen] = React.useState(false);
 
-    if (regra === "ROLE_ADMIN") {
-      return <MenuAdmin titulo={"Romaneios"}/>
-    } else if (regra === "ROLE_CLIENTE") {
-      return <MenuCliente titulo={"Romaneios"} />
+
+    function setOpenInfoExtra(open) {
+      setOpen(open);
     }
+
+
+
+
+    return (
+      <React.Fragment>
+        <TableRow sx={{ '& > *': { borderBottom: 'unset' } }}>
+          <TableCell>
+            <IconButton
+              aria-label="expand row"
+              size="small"
+              onClick={() => setOpenInfoExtra(!open)}
+            >
+              {open ? <KeyboardArrowUpIcon /> : <KeyboardArrowDownIcon />}
+            </IconButton>
+          </TableCell>
+
+
+          <TableCell colSpan={1} align="right">{row.id}</TableCell>
+          <TableCell colSpan={1} align="right">{row.codigo}</TableCell>
+          <TableCell colSpan={1} align="right">{row.operacao}</TableCell>
+          <TableCell colSpan={1} align="right">{row.data_romaneio}</TableCell>
+          <TableCell colSpan={1} align="right">{row.safra.produto.nome_produto.toUpperCase()}</TableCell>
+          <TableCell colSpan={1} align="right">{row.safra.ano_plantio}/{row.safra.ano_colheita}</TableCell>
+          <TableCell colSpan={1} align="right">{
+            row.remetente.tipo_cliente === 0 ? row.remetente.nome_empresarial.toUpperCase() : row.remetente.razao_social.toUpperCase()
+          } </TableCell>
+          <TableCell colSpan={1} align="right">{
+            row.destinatario != null ? row.destinatario.tipo_cliente === 0 ? row.destinatario.nome_empresarial.toUpperCase() : row.destinatario.razao_social.toUpperCase() : ""
+          } </TableCell>
+          <TableCell colSpan={1} align="right">{row.nome_motorista}</TableCell>
+          <TableCell colSpan={1} align="right">{row.cpf_motorista}</TableCell>
+          <TableCell colSpan={1} align="right">{row.placa}</TableCell>
+          <TableCell colSpan={1} align="right">{row.peso_bruto}</TableCell>
+          <TableCell colSpan={1} align="right">{row.tara}</TableCell>
+          <TableCell colSpan={1} align="right">{row.peso_liquido}</TableCell>
+          <TableCell colSpan={1} align="right">{row.umidade}</TableCell>
+          <TableCell colSpan={1} align="right">{row.impureza}</TableCell>
+          <TableCell colSpan={1} align="right">{row.ardidos}</TableCell>
+          <TableCell colSpan={1} align="right">{row.avariados}</TableCell>
+
+        </TableRow>
+
+
+      </React.Fragment>
+    );
   }
+
+
+
+  function CollapsibleTable() {
+    return (
+      <TableContainer component={Paper} style={{ height: height }}>
+        <Table aria-label="collapsible table">
+          <TableHead>
+
+            <TableRow  >
+              <TableCell colSpan={1}></TableCell>
+              <TableCell style={{ backgroundColor: 'brown', color: 'white', position: "sticky", top: 0 }} align="center" colSpan={1}>ID</TableCell>
+              <TableCell style={{ backgroundColor: 'brown', color: 'white', position: "sticky", top: 0 }} colSpan={1}>Código</TableCell>
+              <TableCell style={{ backgroundColor: 'brown', color: 'white', position: "sticky", top: 0 }} colSpan={1}>Operação</TableCell>
+              <TableCell style={{ backgroundColor: 'brown', color: 'white', position: "sticky", top: 0 }} colSpan={1}>Data Romaneio</TableCell>
+              <TableCell style={{ backgroundColor: 'brown', color: 'white', position: "sticky", top: 0 }} colSpan={1}>produto</TableCell>
+              <TableCell style={{ backgroundColor: 'brown', color: 'white', position: "sticky", top: 0 }} colSpan={1}>Safra</TableCell>
+              <TableCell style={{ backgroundColor: 'brown', color: 'white', position: "sticky", top: 0 }} colSpan={1}>Remetente</TableCell>
+              <TableCell style={{ backgroundColor: 'brown', color: 'white', position: "sticky", top: 0 }} colSpan={1}>Destinátario</TableCell>
+              <TableCell style={{ backgroundColor: 'brown', color: 'white', position: "sticky", top: 0 }} colSpan={1}>Motorista</TableCell>
+              <TableCell style={{ backgroundColor: 'brown', color: 'white', position: "sticky", top: 0 }} colSpan={1}>CPF</TableCell>
+              <TableCell style={{ backgroundColor: 'brown', color: 'white', position: "sticky", top: 0 }} colSpan={1}>Placa</TableCell>
+              <TableCell style={{ backgroundColor: 'brown', color: 'white', position: "sticky", top: 0 }} colSpan={1}>Peso Bruto</TableCell>
+              <TableCell style={{ backgroundColor: 'brown', color: 'white', position: "sticky", top: 0 }} colSpan={1}>Peso Tara</TableCell>
+              <TableCell style={{ backgroundColor: 'brown', color: 'white', position: "sticky", top: 0 }} colSpan={1}>Peso Líquido</TableCell>
+              <TableCell style={{ backgroundColor: 'brown', color: 'white', position: "sticky", top: 0 }} colSpan={1}>Umidade</TableCell>
+              <TableCell style={{ backgroundColor: 'brown', color: 'white', position: "sticky", top: 0 }} colSpan={1}>Impureza</TableCell>
+              <TableCell style={{ backgroundColor: 'brown', color: 'white', position: "sticky", top: 0 }} colSpan={1}>Ardidos</TableCell>
+              <TableCell style={{ backgroundColor: 'brown', color: 'white', position: "sticky", top: 0 }} colSpan={1}>Avariados</TableCell>
+
+            </TableRow>
+          </TableHead>
+          <TableBody>
+            {romaneiosFiltrados.map((romaneio) => (
+              <Row key={romaneio.id} row={romaneio} />
+            ))}
+          </TableBody>
+
+        </Table>
+      </TableContainer>
+    );
+  }
+
+  function filtrar() {
+
+
+    let arraybkp = romaneiosOriginais;
+
+    let novaLista = arraybkp.map((romaneio) => {
+      var remetente = romaneio.remetente.tipo_cliente === 0 ? romaneio.remetente.nome_empresarial : romaneio.remetente.razao_social
+
+      romaneio['nome_remetente'] = remetente.toUpperCase()
+
+      var destinatario = romaneio.destinatario !== null ? romaneio.destinatario.tipo_cliente === 0 ? romaneio.destinatario.nome_empresarial : romaneio.destinatario.razao_social : ""
+
+      romaneio['nome_destinatario'] = destinatario.toUpperCase()
+
+      var produto = romaneio.safra.produto.nome_produto.toUpperCase();
+
+      romaneio['nome_produto'] = produto;
+
+      var desc_safra = romaneio.safra.ano_plantio + "/" + romaneio.safra.ano_colheita
+      romaneio['desc_safra'] = desc_safra
+
+      return romaneio;
+
+    })
+
+    let novaListaFiltrada = novaLista.filter(
+      item =>
+        (filtroRemetente !== "" && filtroRemetente !== null) ? item.nome_remetente.includes(filtroRemetente.toUpperCase()) : 2 &&
+          (filtroDestinatario !== "" && filtroDestinatario !== null) ? item.nome_destinatario.includes(filtroDestinatario.toUpperCase()) : 2 &&
+            (produto !== "" && produto !== null) ? item.nome_produto.includes(produto.toUpperCase()) : 2 &&
+              (safra !== "" && safra !== null) ? item.desc_safra.includes(safra) : 2 &&
+                (motorista !== "" && safra !== motorista) ? item.nome_motorista.includes(motorista.toUpperCase()) : 2 &&
+                  (placa !== "" && placa !== null) ? item.placa.includes(placa.toUpperCase()) : 2 &&
+                    (operacao !== "" && operacao !== null) ? item.operacao.includes(operacao.toUpperCase()) : 2
+
+    )
+
+
+    setRomaneiosFiltrados(novaListaFiltrada);
+
+
+
+  }
+
 
   return (
     <div>
 
-      <div style={{ backgroundColor: 'black', width: '100%', height: 90 }}>
-        <div style={{ paddingTop: 10 }} >
-          <Link className="a"
-
-            to={{
-              pathname: "/",
-
-            }}
-          >
-            <h1>
-              <span style={{ fontSize: 44, color: 'white' }}>LD Armazéns</span>
-            </h1>
-          </Link>
-        </div>
-      </div>
+      <NavBarAdmin />
       <div className={classes.root} style={{ backgroundColor: '#DCDCDC' }}>
-        {
-          renderMenu()
-        }
+        <MenuCliente titulo={"Romaneios"} />
         <main className={classes.content}>
           <div className={classes.appBarSpacer} />
 
+          <div style={{ backgroundColor: 'white' }}>
+            <Grid
+              container
+              direction="row"
+              item xs={12} sm={12} md={12} lg={12} xl={12}
+              justifyContent="center"
+              alignItems="center"
+
+            >
+
+              <Grid item xs={1} style={{ padding: 10 }}>
+                <TextField
+                  variant="standard"
+                  name="codigo"
+                  label="Código"
+                  id="codigo"
+                  value={codigo}
+                  onChange={e => setCodigo(e.target.value)}
+                  fullWidth
+                />
+              </Grid>
+
+              <Grid item xs={2} style={{ padding: 10 }}>
+                <TextField
+                  variant="standard"
+                  name="operacao"
+                  label="Operação"
+                  id="operacao"
+                  value={operacao}
+                  onChange={e => setOperacao(e.target.value)}
+                  fullWidth
+                />
+              </Grid>
+
+              <Grid item xs={2} style={{ padding: 10 }}>
+                <TextField
+                  variant="standard"
+                  name="remetente"
+                  label="Remetente"
+                  id="remetente"
+                  value={filtroRemetente}
+                  onChange={e => setfiltroRemetente(e.target.value.toUpperCase())}
+                  fullWidth
+                />
+              </Grid>
+
+              <Grid item xs={2} style={{ padding: 10 }}>
+                <TextField
+                  variant="standard"
+                  name="destinatario"
+                  label="Destinatario"
+                  id="destinatario"
+                  value={filtroDestinatario}
+                  onChange={e => setfiltroDestinatario(e.target.value.toUpperCase())}
+                  fullWidth
+                />
+              </Grid>
+
+
+
+              <Grid item xs={1} style={{ padding: 10 }} >
+                <TextField
+                  variant="standard"
+                  name="produto"
+                  label="Produto"
+                  id="produto"
+                  value={produto}
+                  onChange={e => setProduto(e.target.value.toUpperCase())}
+                  fullWidth
+                />
+              </Grid>
+
+              <Grid item xs={1} style={{ padding: 10 }}>
+                <TextField
+                  variant="standard"
+                  name="safra"
+                  label="Safra"
+                  id="safra"
+                  value={safra}
+                  onChange={e => setSafra(e.target.value)}
+                  fullWidth
+                />
+              </Grid>
+
+              <Grid item xs={2} style={{ padding: 10 }}>
+                <TextField
+                  variant="standard"
+                  name="motorista"
+                  label="Motorista"
+                  id="motorista"
+                  value={motorista}
+                  onChange={e => setMotorista(e.target.value)}
+                  fullWidth
+                />
+              </Grid>
+
+              <Grid item xs={1} style={{ padding: 10 }}>
+                <TextField
+                  variant="standard"
+                  name="placa"
+                  label="Placa"
+                  id="placa"
+                  value={placa}
+                  onChange={e => setPlaca(e.target.value)}
+                  fullWidth
+                />
+              </Grid>
+
+
+
+
+              <Grid item xs={1} >
+
+                <Button
+                  variant="contained"
+                  color="primary"
+                  onClick={filtrar}
+                > filtrar  </Button>
+
+              </Grid>
+
+
+            </Grid>
+
+          </div>
           <div style={{ padding: 10, width: '100%', height: '70%' }}>
             {loading ?
               <Skeleton animation={"wave"} width={'100%'} style={{ backgroundColor: '#48D1CC' }}>
               </Skeleton>
               :
-
-              <DataGrid localeText={ptBR.props.MuiDataGrid.localeText}
-                pagination
-                checkboxSelection
-                rows={romaneios} columns={columnsDataGrid}
-                initialState={{ filter: { filterModel } }}
-                rowP
-                onCellClick={handleCellClick}
-                onRowClick={handleRowClick}
-                components={{
-                  Toolbar: CustomToolbar,
-                }}
-              />
+                <CollapsibleTable></CollapsibleTable>
 
             }
           </div>
 
         </main>
+      </div >
+
+      <div >
+        <Rodape />
       </div>
-    </div>
+    </div >
   );
 }
 

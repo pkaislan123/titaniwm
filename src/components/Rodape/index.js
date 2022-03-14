@@ -23,13 +23,7 @@ const Rodape = () => {
                                     <p>Aqui na LD Armazéns Atender bem nossos Clientes é nossa prioridade, nosso melhor serviço é
                 tratar nosso cliente com todo respeito e dedicação, quer seja na negociação, quer seja em todo o cuidado
                 das etapas do beneficiamento dos grãos.</p>
-                                    <div className="footer-social">
-                                        <a href="#/" target="_blank"><i className="fa fa-facebook"></i></a>
-                                        <a href="#/" target="_blank"><i className="fa fa-twitter"></i></a>
-                                        <a href="#/" target="_blank"><i className="fa fa-youtube"></i></a>
-                                        <a href="#/" target="_blank"><i className="fa fa-linkedin"></i></a>
-                                        <a href="#/" target="_blank"><i className="fa fa-pinterest"></i></a>
-                                    </div>
+                                   
                                 </div>
                             </Grid>
 
@@ -54,7 +48,7 @@ const Rodape = () => {
                                     <ul>
                                         <li><a href="/patio">Informaçõs do Pátio</a></li>
                                         <li><a href="/cotacoes">Cotações</a></li>
-                                        <li><a href="#/">Status</a></li>
+                                        <li><a href="/status">Status</a></li>
                                     </ul>
                                 </div>
                             </Grid>

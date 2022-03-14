@@ -9,11 +9,8 @@ import Cookies from 'js-cookie';
 import api from '../../../services/api';
 import { useHistory } from "react-router-dom";
 import moment from 'moment';
-import {
+import NavBarAdmin from "../../../components/NavBarAdmin";
 
-    Link
-
-} from "react-router-dom";
 
 const drawerWidth = 240;
 
@@ -183,22 +180,7 @@ export default function CadastroNoticia() {
     return (
         <div>
 
-            <div style={{ backgroundColor: 'black', width: '100%', height: 90 }}>
-                <div style={{ paddingTop: 10 }} >
-                    <Link className="a"
-
-                        to={{
-                            pathname: "/",
-
-                        }}
-                    >
-                        <h1>
-                            <span style={{ fontSize: 44, color: 'white' }}>LD Armazéns</span>
-
-                        </h1>
-                    </Link>
-                </div>
-            </div>
+            <NavBarAdmin />
             <div className={classes.root} style={{ backgroundColor: '#DCDCDC' }}>
 
                 <MenuAdmin titulo={"Cadastrar Nova Notícia"} />

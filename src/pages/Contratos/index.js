@@ -17,12 +17,11 @@ import MenuAdmin from '../painelAdmin/components/menu';
 import MenuCliente from '../painelCliente/components/menu';
 import KeyboardArrowDownIcon from '@material-ui/icons/KeyboardArrowDown'
 import KeyboardArrowUpIcon from '@material-ui/icons/KeyboardArrowUp';
-import {  useParams } from "react-router-dom";
-import {
+import { useParams } from "react-router-dom";
+import Button from '@material-ui/core/Button';
+import NavBarAdmin from "../../components/NavBarAdmin";
+import Rodape from '../../components/Rodape';
 
-  Link
-
-} from "react-router-dom";
 const drawerWidth = 240;
 
 const useStyles = makeStyles((theme) => ({
@@ -109,10 +108,14 @@ const useStyles = makeStyles((theme) => ({
 
 
 export default function Contratos() {
+
+  const { tipo } = useParams();
   const classes = useStyles();
   const [loading, setLoading] = useState(true);
-  const [quantidade, setQuantidade] = useState(0);
-  const { tipo } = useParams();
+  const [quantidade, setQuantidade] = useState(0.0);
+  const [valor_total, setValorTotal] = useState(0.0);
+  const [quantidade_ctrs, setQuantidadeCtrs] = useState(0);
+
 
   const [codigo, setCodigo] = useState('');
   const [produto, setProduto] = useState('');
@@ -124,110 +127,135 @@ export default function Contratos() {
   const [contratosFiltrados, setContratosFiltrados] = useState([]);
   const [contratosRefatorados, setContratosRefatorados] = useState([]);
 
-  function somarQuantidades() {
-    let soma = 0;
-    for(let i in contratosFiltrados){
-      
-      let quantidade_local = contratosFiltrados[i].medida === "Sacos" ? parseFloat(contratosFiltrados[i].quantidade) : parseFloat(contratosFiltrados[i].quantidade) * 60
-      soma += quantidade_local;
-      
-    }
-    setQuantidade( soma);
-    
+  const [height, setHeight] = useState(0);
+
+
+  function checkDimenssoes() {
+   
+    var altura = window.innerHeight
+      || document.documentElement.clientHeight
+      || document.body.clientHeight;
+
+
+    setHeight(altura * 0.75);
+
   }
 
- 
+  window.addEventListener('resize', function (event) {
+    checkDimenssoes();
+  });
+
+
+  async function listarMeusDados(tipo) {
+    try {
+
+      var dados = [];
+
+      const token = Cookies.get('token');
+      const headers = {
+        'Authorization': 'Bearer ' + token
+      }
+      const id_usuario = Cookies.get('id_usuario');
+      console.log("id na tela de contratos: " + id_usuario)
+
+      await api.get("v1/protected/retornardadoscliente/" + id_usuario, {
+        headers: headers
+      }).then(function (response) {
+        console.log(" Meus Dados: " + response);
+        dados = response.data;
+      });
+
+      console.log("tipo na funcao de busca: " + tipo)
+
+      var url = tipo === '0' ? "v1/protected/contratos/listar" : tipo === '1' ? "v1/protected/contratos/listarContratosComprador/" : "v1/protected/contratos/listarContratosVendedor/"
+
+      var identificacao = dados.tipo_cliente === 0 ? dados.cpf : dados.cnpj;
+      await api.get(url + identificacao, {
+        headers: headers
+      }).then(function (response) {
+        setContratosFiltrados(response.data)
+        setContratosRefatorados(response.data)
+
+        let novaListaFiltrada = response.data;
+
+        let soma = 0;
+        let valor = 0;
+        let contador = 0;
+        for (let i in novaListaFiltrada) {
+
+          let quantidade_local = novaListaFiltrada[i].medida === "Sacos" ? parseFloat(novaListaFiltrada[i].quantidade) : parseFloat(novaListaFiltrada[i].quantidade) * 60
+          let valor_a_pagar = parseFloat(novaListaFiltrada[i].valor_a_pagar);
+
+          soma += quantidade_local;
+          valor += valor_a_pagar;
+          contador++;
+
+        }
+        setQuantidade(soma);
+        setValorTotal(valor);
+        setQuantidadeCtrs(contador);
+
+        console.log(" Meus Contratos: " + response);
+        setLoading(false);
+
+      });
+
+    } catch (_err) {
+      // avisar('Houve um problema com o login, verifique suas credenciais! ' + cpf + " " + senha );
+      console.log("Erro ao listar seus dados: " + _err)
+
+    }
+
+  }
+
 
   useEffect(() => {
 
-    
-    async function listarMeusDados(tipo) {
-      try {
-  
-        var dados = [];
 
-        const token = Cookies.get('token');
-        const headers = {
-          'Authorization': 'Bearer ' + token
-        }
-        const id_usuario = Cookies.get('id_usuario');
-        console.log("id na tela de contratos: " + id_usuario)
-  
-        await api.get("v1/protected/retornardadoscliente/" + id_usuario, {
-          headers: headers
-        }).then(function (response) {
-            console.log(" Meus Dados: " + response);
-           dados = response.data;
-        });
-  
-        var url = tipo === 0 ? "v1/protected/contratos/listar" : tipo === 1 ? "v1/protected/contratos/listarContratosComprador/" : "v1/protected/contratos/listarContratosVendedor/"
-  
-        var identificacao = dados.tipo_cliente === 0 ? dados.cpf : dados.cnpj;
-        await api.get(url + identificacao, {
-          headers: headers
-        }).then(function (response) {
-          setContratosFiltrados(response.data)
-          setContratosRefatorados(response.data)
-        
-          let soma = 0;
-          for(let i in response.data){
-            
-            let quantidade_local = response.data[i].medida === "Sacos" ? parseFloat(response.data[i].quantidade) : parseFloat(response.data[i].quantidade) * 60
-            soma += quantidade_local;
-            
-          }
-          setQuantidade( soma);
 
-          console.log(" Meus Contratos: " + response);
-          setLoading(false);
-  
-        });
-  
-      } catch (_err) {
-        // avisar('Houve um problema com o login, verifique suas credenciais! ' + cpf + " " + senha );
-        console.log("Erro ao listar seus dados: " + _err)
-  
-      }
-  
-    }
+    checkDimenssoes();
 
-    
-    listarMeusDados();
+
+    listarMeusDados(tipo);
 
 
 
-  }, []);
+  }, [tipo]);
 
 
 
   function currencyFormat(num) {
-    return 'R$ ' + parseFloat(num).toFixed(2).replace(/(\d)(?=(\d{3})+(?!\d))/g, '$1,')
+    return 'R$ ' + parseFloat(num).toFixed(2).replace(/(\d)(?=(\d{3})+(?!\d))/g, '$1.')
   }
 
 
 
   function CollapsibleTable() {
     return (
-      <TableContainer component={Paper}>
+      <TableContainer component={Paper} style={{ height: height }}>
         <Table aria-label="collapsible table">
-          <TableHead >
+          <TableHead>
 
-            <TableRow >
+            <TableRow  >
               <TableCell colSpan={1}></TableCell>
-              <TableCell style={{ backgroundColor: 'brown', color: 'white' }} align="center" colSpan={1}>ID</TableCell>
-              <TableCell style={{ backgroundColor: 'brown', color: 'white' }} colSpan={1}>Código</TableCell>
-              <TableCell style={{ backgroundColor: 'brown', color: 'white' }} colSpan={1}>Data Contrato</TableCell>
-              <TableCell style={{ backgroundColor: 'brown', color: 'white' }} colSpan={1}>Compradores</TableCell>
-              <TableCell style={{ backgroundColor: 'brown', color: 'white' }} colSpan={1}>Vendedores</TableCell>
-              <TableCell style={{ backgroundColor: 'brown', color: 'white' }} colSpan={1}>Status</TableCell>
-              <TableCell style={{ backgroundColor: 'brown', color: 'white' }} colSpan={1}>Data Entrega</TableCell>
-              <TableCell style={{ backgroundColor: 'brown', color: 'white' }} colSpan={1}>Quantidade</TableCell>
-              <TableCell style={{ backgroundColor: 'brown', color: 'white' }} colSpan={1}>Medida</TableCell>
-              <TableCell style={{ backgroundColor: 'brown', color: 'white' }} colSpan={1}>Produto</TableCell>
-              <TableCell style={{ backgroundColor: 'brown', color: 'white' }} colSpan={1}>Transgenia</TableCell>
-              <TableCell style={{ backgroundColor: 'brown', color: 'white' }} colSpan={1}>Safra</TableCell>
-              <TableCell style={{ Width: 200, backgroundColor: 'brown', color: 'white' }} colSpan={1}>Valor Unidade</TableCell>
-              <TableCell style={{ Width: 50, backgroundColor: 'brown', color: 'white' }} colSpan={1}>Valor Total</TableCell>
+              <TableCell style={{ backgroundColor: 'brown', color: 'white', position: "sticky", top: 0 }} align="center" colSpan={1}>ID</TableCell>
+              <TableCell style={{ backgroundColor: 'brown', color: 'white', position: "sticky", top: 0 }} colSpan={1}>Código</TableCell>
+              <TableCell style={{ backgroundColor: 'brown', color: 'white', position: "sticky", top: 0 }} colSpan={1}>Data Contrato</TableCell>
+              <TableCell style={{ backgroundColor: 'brown', color: 'white', position: "sticky", top: 0 }} colSpan={1}>Compradores</TableCell>
+              <TableCell style={{ backgroundColor: 'brown', color: 'white', position: "sticky", top: 0 }} colSpan={1}>Vendedores</TableCell>
+              <TableCell style={{ backgroundColor: 'brown', color: 'white', position: "sticky", top: 0 }} colSpan={1}>Status</TableCell>
+              <TableCell style={{ backgroundColor: 'brown', color: 'white', position: "sticky", top: 0 }} colSpan={1}>Data Entrega</TableCell>
+              <TableCell style={{ backgroundColor: 'brown', color: 'white', position: "sticky", top: 0 }} colSpan={1}>Quantidade</TableCell>
+              <TableCell style={{ backgroundColor: 'brown', color: 'white', position: "sticky", top: 0 }} colSpan={1}>Medida</TableCell>
+              <TableCell style={{ backgroundColor: 'brown', color: 'white', position: "sticky", top: 0 }} colSpan={1}>Produto</TableCell>
+              <TableCell style={{ backgroundColor: 'brown', color: 'white', position: "sticky", top: 0 }} colSpan={1}>Transgenia</TableCell>
+              <TableCell style={{ backgroundColor: 'brown', color: 'white', position: "sticky", top: 0 }} colSpan={1}>Safra</TableCell>
+              <TableCell style={{ Width: 200, backgroundColor: 'brown', color: 'white', position: "sticky", top: 0 }} colSpan={1}>Valor Unidade</TableCell>
+              <TableCell style={{ Width: 50, backgroundColor: 'brown', color: 'white', position: "sticky", top: 0 }} colSpan={1}>Valor Total</TableCell>
+
+              <TableCell style={{ Width: 50, backgroundColor: 'brown', color: 'white', position: "sticky", top: 0 }} colSpan={1}>Data Entrega</TableCell>
+
+              <TableCell style={{ Width: 50, backgroundColor: 'brown', color: 'white', position: "sticky", top: 0 }} colSpan={1}>Data Pagamento</TableCell>
 
             </TableRow>
           </TableHead>
@@ -236,9 +264,17 @@ export default function Contratos() {
               <Row key={contrato.id} row={contrato} />
             ))}
             <TableRow>
-              <TableCell colSpan={7}></TableCell>
-              <TableCell style={{ fontSize: 18, backgroundColor: 'green', color: 'white' }} colSpan={1}>Quantidade Total:</TableCell>
-              <TableCell style={{ fontSize: 20, backgroundColor: 'green', color: 'white' }} colSpan={2} align="right"> {quantidade} sacos </TableCell>
+              <TableCell style={{ fontSize: 14, backgroundColor: 'green', color: 'white' , position: "sticky", bottom: 0}} colSpan={1}>Num CTRS:</TableCell>
+              <TableCell style={{ fontSize: 16, backgroundColor: 'green', color: 'white', position: "sticky", bottom: 0 }} colSpan={1} align="right"> {quantidade_ctrs} </TableCell>
+
+              <TableCell style={{ fontSize: 14, backgroundColor: 'black',color: 'white', position: "sticky", bottom: 0}} colSpan={5}> </TableCell>
+              <TableCell style={{ fontSize: 14, backgroundColor: 'green', color: 'white', position: "sticky", bottom: 0 }} colSpan={1}>Quantidade Total:</TableCell>
+              <TableCell style={{ fontSize: 18, backgroundColor: 'green', color: 'white', position: "sticky", bottom: 0 }} colSpan={2} align="right"> {quantidade} sacos </TableCell>
+              <TableCell style={{ fontSize: 14, backgroundColor: 'black',color: 'white', position: "sticky", bottom: 0}} colSpan={3}> </TableCell>
+
+              <TableCell style={{ fontSize: 14, backgroundColor: 'green', color: 'white' , position: "sticky", bottom: 0}} colSpan={1}>Valor Total:</TableCell>
+              <TableCell style={{ fontSize: 18, backgroundColor: 'green', color: 'white' , position: "sticky", bottom: 0}} colSpan={3} align="right"> {currencyFormat(valor_total)} </TableCell>
+
             </TableRow>
           </TableBody>
         </Table>
@@ -353,6 +389,8 @@ export default function Contratos() {
           <TableCell colSpan={1} align="right">{currencyFormat(row.valor_produto)}</TableCell>
 
           <TableCell colSpan={1} align="right">{currencyFormat(row.valor_a_pagar)}</TableCell>
+          <TableCell colSpan={1} align="right">{row.data_entrega}</TableCell>
+          <TableCell colSpan={1} align="right">{row.data_pagamento}</TableCell>
 
 
         </TableRow>
@@ -361,51 +399,20 @@ export default function Contratos() {
     );
   }
 
-  function filtrarCodigo(params) {
-    setCodigo(params)
-    filtrar();
-  }
-
-  function filtrarProduto(params) {
-    setProduto(params)
-    filtrar();
-  }
-
-  function filtrarTransgenia(params) {
-    setTransgenia(params)
-    filtrar();
-  }
-
-  function filtrarSafra(params) {
-    setSafra(params)
-    filtrar();
-  }
-
-
-  function filtrarCompradores(params) {
-    setFiltroCompradores(params)
-    filtrar();
-  }
-
-
-  function filtrarVendedores(params) {
-    setFiltroVendedores(params)
-    filtrar();
-    
-  }
-
-
-
-
 
   function filtrar() {
 
-     let novaLista = contratosRefatorados.map((contrato) => {
+
+    let arraybkp = contratosRefatorados;
+
+    let novaLista = arraybkp.map((contrato) => {
       var nome_compradores = contrato.compradores.map((comprador) =>
         comprador.tipo_cliente === 0 ? comprador.nome_empresarial : comprador.razao_social
           + ";"
       ).toString().toUpperCase();
+
       contrato['nome_compradores'] = nome_compradores
+
       var nome_vendedores = contrato.vendedores.map((vendedor) =>
         vendedor.tipo_cliente === 0 ? vendedor.nome_empresarial : vendedor.razao_social
           + ";"
@@ -416,32 +423,54 @@ export default function Contratos() {
       return contrato;
 
     })
-    setContratosFiltrados(novaLista.filter(
+
+
+
+
+    let novaListaFiltrada = novaLista.filter(
       item =>
-        item.codigo.includes(codigo)  &&
-         item.nome_compradores.includes(filtroCompradores.toUpperCase())  &&
-        item.nome_vendedores.includes(filtroVendedores.toUpperCase()) &&
-        item.safra.produto.nome_produto.toUpperCase().includes(produto.toUpperCase()) &&
-        item.safra.produto.transgenia.toUpperCase().includes(transgenia.toUpperCase()) &&
-        item.desc_safra.includes(safra)
-    ))
+        (codigo !== "" && codigo !== null) ? item.codigo.includes(codigo) : 2 &&
+          (filtroCompradores !== "" && filtroCompradores !== null) ? item.nome_compradores.includes(filtroCompradores.toUpperCase()) : 2 &&
+            (filtroVendedores !== "" && filtroVendedores !== null) ? item.nome_vendedores.includes(filtroVendedores.toUpperCase()) : 2 &&
+              (produto !== "" && produto !== null) ? item.safra.produto.nome_produto.toUpperCase().includes(produto.toUpperCase()) : 2 &&
+                (transgenia !== "" && transgenia !== null) ? item.safra.produto.transgenia.toUpperCase().includes(transgenia.toUpperCase()) : 2 &&
+                  (safra !== "" && safra !== null) ? item.desc_safra.includes(safra) : 2
+    )
 
-    somarQuantidades();
 
+    setContratosFiltrados(novaListaFiltrada);
+
+    let soma = 0;
+    let valor = 0;
+    let contador = 0;
+    for (let i in novaListaFiltrada) {
+
+      let quantidade_local = novaListaFiltrada[i].medida === "Sacos" ? parseFloat(novaListaFiltrada[i].quantidade) : parseFloat(novaListaFiltrada[i].quantidade) * 60
+      let valor_a_pagar = parseFloat(novaListaFiltrada[i].valor_a_pagar);
+
+      soma += quantidade_local;
+      valor += valor_a_pagar;
+      contador++;
+
+    }
+    setQuantidade(soma);
+    setValorTotal(valor);
+    setQuantidadeCtrs(contador);
 
   }
 
-  
+
 
   const renderMenu = () => {
 
     const regra = Cookies.get('regra');
     console.log("regra na funcao render na tela de contratos: " + regra);
+    console.log("tipo " + tipo);
 
     if (regra === "ROLE_ADMIN") {
-      return <MenuAdmin titulo={tipo === 0 ? "Contratos" : tipo === 1 ? "Contratos Como Comprador" : "Contratos Como Vendedor"}/>
+      return <MenuAdmin titulo={tipo === '0' ? "Contratos" : tipo === '1' ? "Contratos Como Comprador" : "Contratos Como Vendedor"} />
     } else if (regra === "ROLE_CLIENTE") {
-      return <MenuCliente titulo={tipo === 0 ? "Contratos" : tipo === 1 ? "Contratos Como Comprador" : "Contratos Como Vendedor"} />
+      return <MenuCliente titulo={tipo === '0' ? "Contratos" : tipo === '1' ? "Contratos Como Comprador" : "Contratos Como Vendedor"} />
     }
   }
 
@@ -450,126 +479,142 @@ export default function Contratos() {
   return (
     <div>
 
-      <div style={{ backgroundColor: 'black', width: '100%', height: 90 }}>
-        <div style={{ paddingTop: 10 }} >
-          <Link className="a"
-
-            to={{
-              pathname: "/",
-
-            }}
-          >
-            <h1>
-              <span style={{ fontSize: 44, color: 'white' }}>LD Armazéns</span>
-            </h1>
-          </Link>
-        </div>
-      </div>
+     <NavBarAdmin />
       <div className={classes.root} style={{ backgroundColor: '#DCDCDC' }}>
-       {renderMenu()}
+        {renderMenu()}
         <main className={classes.content}>
           <div className={classes.appBarSpacer} />
 
           <div style={{ padding: 10 }}>
-            {loading ?
-              <Skeleton animation={"wave"} width={'100%'} style={{ backgroundColor: '#48D1CC' }}>
-              </Skeleton>
-              :
-              <div >
-                <div style={{ backgroundColor: 'white' }}>
-                  <Grid
-                    container
-                    direction="row"
-                    item xs={12} sm={12} md={12} lg={12} xl={12}
-                    justifyContent="center"
-                    alignItems="center"
 
-                  >
+            <div >
+              <div style={{ backgroundColor: 'white' }}>
+                <Grid
+                  container
+                  direction="row"
+                  item xs={12} sm={12} md={12} lg={12} xl={12}
+                  justifyContent="center"
+                  alignItems="center"
 
-                    <Grid item xs={2} style={{ padding: 20 }}>
-                      <TextField
-                        variant="standard"
-                        name="codigo"
-                        label="Código"
-                        id="codigo"
-                        value={codigo}
-                        onChange={e => filtrarCodigo(e.target.value)}
-                        fullWidth
-                      />
-                    </Grid>
+                >
 
-                    <Grid item xs={2} style={{ padding: 20 }}>
-                      <TextField
-                        variant="standard"
-                        name="compradores"
-                        label="Compradores"
-                        id="compradores"
-                        value={filtroCompradores}
-                        onChange={e => filtrarCompradores(e.target.value)}
-                        fullWidth
-                      />
-                    </Grid>
-
-                    <Grid item xs={2} style={{ padding: 20 }}>
-                      <TextField
-                        variant="standard"
-                        name="vendedores"
-                        label="Vendedores"
-                        id="vendedores"
-                        value={filtroVendedores}
-                        onChange={e => filtrarVendedores(e.target.value)}
-                        fullWidth
-                      />
-                    </Grid>
-
-
-
-                    <Grid item xs={2} style={{ padding: 20 }} >
-                      <TextField
-                        variant="standard"
-                        name="produto"
-                        label="Produto"
-                        id="produto"
-                        value={produto}
-                        onChange={e => filtrarProduto(e.target.value)}
-                        fullWidth
-                      />
-                    </Grid>
-
-                    <Grid item xs={2} style={{ padding: 20 }}>
-                      <TextField
-                        variant="standard"
-                        name="transgenia"
-                        label="Transgenia"
-                        id="transgenia"
-                        value={transgenia}
-                        onChange={e => filtrarTransgenia(e.target.value)}
-                        fullWidth
-                      />
-                    </Grid>
-
-                    <Grid item xs={2} style={{ padding: 20 }}>
-                      <TextField
-                        variant="standard"
-                        name="safra"
-                        label="Safra"
-                        id="safra"
-                        value={safra}
-                        onChange={e => filtrarSafra(e.target.value)}
-                        fullWidth
-                      />
-                    </Grid>
+                  <Grid item xs={2} style={{ padding: 10 }}>
+                    <TextField
+                      variant="standard"
+                      name="codigo"
+                      label="Código"
+                      id="codigo"
+                      value={codigo}
+                      onChange={e => setCodigo(e.target.value)}
+                      fullWidth
+                    />
                   </Grid>
 
-                </div>
-                <CollapsibleTable></CollapsibleTable>
+                  <Grid item xs={2} style={{ padding: 10 }}>
+                    <TextField
+                      variant="standard"
+                      name="compradores"
+                      label="Compradores"
+                      id="compradores"
+                      value={filtroCompradores}
+                      onChange={e => setFiltroCompradores(e.target.value.toUpperCase())}
+                      fullWidth
+                    />
+                  </Grid>
+
+                  <Grid item xs={2} style={{ padding: 10 }}>
+                    <TextField
+                      variant="standard"
+                      name="vendedores"
+                      label="Vendedores"
+                      id="vendedores"
+                      value={filtroVendedores}
+                      onChange={e => setFiltroVendedores(e.target.value.toUpperCase())}
+                      fullWidth
+                    />
+                  </Grid>
+
+
+
+                  <Grid item xs={2} style={{ padding: 10 }} >
+                    <TextField
+                      variant="standard"
+                      name="produto"
+                      label="Produto"
+                      id="produto"
+                      value={produto}
+                      onChange={e => setProduto(e.target.value.toUpperCase())}
+                      fullWidth
+                    />
+                  </Grid>
+
+                  <Grid item xs={2} style={{ padding: 10 }}>
+                    <TextField
+                      variant="standard"
+                      name="transgenia"
+                      label="Transgenia"
+                      id="transgenia"
+                      value={transgenia}
+                      onChange={e => setTransgenia(e.target.value.toUpperCase())}
+                      fullWidth
+                    />
+                  </Grid>
+
+                  <Grid item xs={1} style={{ padding: 10 }}>
+                    <TextField
+                      variant="standard"
+                      name="safra"
+                      label="Safra"
+                      id="safra"
+                      value={safra}
+                      onChange={e => setSafra(e.target.value)}
+                      fullWidth
+                    />
+                  </Grid>
+
+                  <Grid item xs={1} >
+
+                    <Button
+                      variant="contained"
+                      color="primary"
+                      onClick={filtrar}
+                    > filtrar  </Button>
+
+                  </Grid>
+
+
+                </Grid>
 
               </div>
+              {loading ?
+                <Skeleton animation={"wave"} width={'100%'} style={{ backgroundColor: '#48D1CC' }}>
+                </Skeleton>
+                :
+                <div>
+                  <CollapsibleTable></CollapsibleTable>
+                  <div style={{ backgroundColor: 'white' }}>
+                    <Grid
+                      container
+                      direction="row"
+                      item xs={12} sm={12} md={12} lg={12} xl={12}
+                      justifyContent="center"
+                      alignItems="center"
 
-            }
+                    >
+                    </Grid>
+
+
+                  </div>
+                </div>
+              }
+
+
+            </div>
           </div>
-
         </main>
+      </div>
+      <div >
+        <Rodape />
       </div>
     </div>
   );

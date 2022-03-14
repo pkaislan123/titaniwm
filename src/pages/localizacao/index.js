@@ -48,7 +48,7 @@ const Localizacao = () => {
             }} >
 
 
-                <Navegador />
+                <Navegador localizacao={"underline"} />
                 <div style={{ height: 5, backgroundColor: '#808080' }}>
                 </div>
 
