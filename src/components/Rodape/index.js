@@ -11,12 +11,21 @@ const Rodape = () => {
 
     return (
         <div>
-            <div className="footer-top-area">
-                <div className="zigzag-bottom"></div>
+            <div className="footer-top-area" style={{paddingBottom: 0}}>
+              
+                <a href="https://api.whatsapp.com/send?phone=5138999416698&text=olá" class="whatsapp-button"
+                    style={{ height: 40, width: 135, position: 'fixed', right: '15px', bottom: '100px', backgroundColor: 'green', borderRadius: '20px' }}
+
+                >
+                    <p style={{ fontSize: 14, lineHeight: '40px', color: 'white', paddingLeft: 10 }}>  Fale Conosco
+                        <img src="https://i.ibb.co/VgSspjY/whatsapp-button.png" alt="botão whatsapp" width={35}
+                            style={{ paddingLeft: 5 }} />
+
+                    </p>
+
+                </a>
                 <div className="container">
                     <div className="row">
-
-
                         <Grid container spacing={3}>
                             <Grid item xs={12} sm={12} md={12} lg={3} xl={3}>
                                 <div className="footer-about-us">
@@ -77,19 +86,23 @@ const Rodape = () => {
 
                     </div>
                 </div>
+                <p style={{textAlign:'center', fontSize: 22, paddingTop: 30, fontWeight:'bold'}}> Contate-nos: (38) 9 9941-6698</p>
+
             </div>
 
             <div className="footer-bottom-area">
                 <div className="container">
                     <Grid item xs={12} >
+                        
                         <div style={{ textAlign: 'center' }}>
-                            <p style={{ paddingTop: 20, fontSize: 20 }} >  &copy; titaniwm {moment(date).format("yyyy")} <br></br>  Todos os Direitos Reservados</p>
+                            <p style={{ paddingTop: 30, fontSize: 20 }} >  &copy; titaniwm {moment(date).format("yyyy")} <br></br>  Todos os Direitos Reservados</p>
                         </div>
                     </Grid>
-
+                    
                 </div>
+               
             </div>
-
+           
         </div>
 
     )
