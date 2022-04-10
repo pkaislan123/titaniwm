@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useState, useEffect } from 'react';
 import './styles.scss';
 import moment from 'moment';
 import Grid from '@material-ui/core/Grid';
@@ -7,6 +7,28 @@ import logo from '../../assets/imgs/thanos_cartum.jpg';
 const Rodape = () => {
 
     const date = new Date();
+    const [width, setWidth] = useState(0);
+
+    function checkDimenssoes() {
+        var largura = window.innerWidth
+            || document.documentElement.clientWidth
+            || document.body.clientWidth;
+     
+        console.log("largura: " + largura);
+
+        setWidth(largura);
+
+    }
+
+    window.addEventListener('resize', function (event) {
+        checkDimenssoes();
+    });
+
+    useEffect(() => {
+
+        checkDimenssoes();
+
+    }, []);
 
 
     return (
@@ -14,7 +36,7 @@ const Rodape = () => {
             <div className="footer-top-area" style={{paddingBottom: 0}}>
               
                 <a href="https://api.whatsapp.com/send?phone=5138999416698&text=olá" class="whatsapp-button"
-                    style={{ height: 40, width: 135, position: 'fixed', right: '15px', bottom: '100px', backgroundColor: 'green', borderRadius: '20px' }}
+                    style={{ height: 40, width: 135, position: 'fixed', right: '15px', bottom: width < 768 ? '10px' : '100px', backgroundColor: 'green', borderRadius: '20px' }}
 
                 >
                     <p style={{ fontSize: 14, lineHeight: '40px', color: 'white', paddingLeft: 10 }}>  Fale Conosco
