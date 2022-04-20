@@ -220,7 +220,7 @@ const GestaoDeContratos = () => {
 
                                         >
                                             <span style={{ fontWeight: 'bold', fontSize: 55, color: 'DarkOrange' }}>
-                                                Recursos Humanos
+                                               e-Contract RH
                                             </span>
                                         </Grid>
 
@@ -341,7 +341,7 @@ const GestaoDeContratos = () => {
 
                                         >
                                             <span style={{ fontWeight: 'bold', fontSize: 55, color: 'DarkOrange' }}>
-                                                Finanças
+                                                e-Contract Finanças
                                             </span>
                                         </Grid>
 
