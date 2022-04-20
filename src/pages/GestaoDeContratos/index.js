@@ -13,6 +13,8 @@ import usando_programa from '../../assets/imgs/usando_programa.jpeg';
 import capa_tela_rh from '../../assets/imgs/capa_tela_rh.png';
 import capa_financas from '../../assets/imgs/capa_financas.png';
 import capa_rh from '../../assets/imgs/capa_rh.png';
+import capa_rh_smartphone from '../../assets/imgs/capa_rh_smartphone.png';
+import capa_rh_relogio from '../../assets/imgs/capa_rh_relogio.png';
 
 
 import './styles.scss';
@@ -66,7 +68,7 @@ const GestaoDeContratos = () => {
                         <div style={{
                             backgroundImage: `url(${silo})`,
                             backgroundSize: "cover",
-                            height: 600,
+                            height: '80%',
                         }}  >
                             <Navegador travado={false} />
 
@@ -187,7 +189,7 @@ const GestaoDeContratos = () => {
                         <div style={{
                             backgroundImage: `url(${capa_tela_rh})`,
                             backgroundSize: "cover",
-                            height: 600,
+                            height: "80%"
                         }}  >
                             <Navegador travado={false} />
 
@@ -220,14 +222,14 @@ const GestaoDeContratos = () => {
 
                                         >
                                             <span style={{ fontWeight: 'bold', fontSize: 55, color: 'DarkOrange' }}>
-                                               e-Contract RH
+                                                e-Contract RH
                                             </span>
                                         </Grid>
 
                                         <Grid item xs={12} sm={12} md={12} lg={12} xl={12}
                                         >
                                             <span style={{ fontSize: 28, color: 'LightGoldenrodYellow' }}>
-                                                Contar com o sistema de recursos humanos certo é fundamental para o sucesso de qualquer negócio.
+                                                Contar com o sistema de recursos humanos certo é fundamental para o sucesso de qualquer negócio!
                                             </span>
                                             <br></br>                                    <br></br>
 
@@ -283,13 +285,27 @@ const GestaoDeContratos = () => {
                                         style={{ paddingTop: 10, paddingBottom: 10 }}
                                     >
 
-                                        <img alt="img1"
 
-                                            src={capa_rh}
-                                        />
+                                        <Carousel interval={10000} fade >
+                                            <Carousel.Item>
+                                                <img alt="img1"
 
+                                                    src={capa_rh}
+                                                />
+                                            </Carousel.Item>
+                                            <Carousel.Item>
+                                                <img alt="img1"
 
+                                                    src={capa_rh_smartphone}
+                                                />
+                                            </Carousel.Item>
+                                            <Carousel.Item>
+                                                <img alt="img1"
 
+                                                    src={capa_rh_relogio}
+                                                />
+                                            </Carousel.Item>
+                                        </Carousel>
                                     </Grid>
 
                                     <Grid item xs={12} sm={12} md={12} lg={1} xl={1}
@@ -308,7 +324,7 @@ const GestaoDeContratos = () => {
                         <div style={{
                             backgroundImage: `url(${capa_tela_rh})`,
                             backgroundSize: "cover",
-                            height: 600,
+                            height: '80%',
                         }}  >
                             <Navegador travado={false} />
 
@@ -348,7 +364,7 @@ const GestaoDeContratos = () => {
                                         <Grid item xs={12} sm={12} md={12} lg={12} xl={12}
                                         >
                                             <span style={{ fontSize: 28, color: 'LightGoldenrodYellow' }}>
-                                                Finanças é o ponto crucial em qualquer negócio, faça a gestão real com nossas ferramentas
+                                                Finanças é um ponto crucial em qualquer negócio, faça a gestão real com nossas ferramentas!
                                             </span>
                                             <br></br>                                    <br></br>
 

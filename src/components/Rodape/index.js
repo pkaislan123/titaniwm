@@ -2,7 +2,7 @@ import React, { useState, useEffect } from 'react';
 import './styles.scss';
 import moment from 'moment';
 import Grid from '@material-ui/core/Grid';
-import logo from '../../assets/imgs/thanos_cartum.jpg';
+import logo from '../../assets/imgs/logo.png';
 
 const Rodape = () => {
 
@@ -70,9 +70,7 @@ const Rodape = () => {
                                 <div className="footer-menu">
                                     <h2 className="footer-wid-title">Sofwares </h2>
                                     <ul>
-                                        <li><a href="/minhaconta">Gestão de Contratos</a></li>
-                                        <li><a href="/sobre">Gestão de Finanças</a></li>
-                                        <li><a href="/localizacao">Gestão de RH</a></li>
+                                        <li><a href="/gestaodecontratos">E-Contract</a></li>
                                         <li><a href="/localizacao">Ainda não encontrei o que procuro</a></li>
                                         <li><a href="/noticias">Blog, Notícias e Tutoriais</a></li>
                                         <li><a href="/contato">Fale Conosoco</a></li>
