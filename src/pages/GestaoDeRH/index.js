@@ -2,14 +2,14 @@ import React, { useState, useEffect } from 'react';
 import Rodape from '../../components/Rodape';
 import Navegador from '../../components/NavBar';
 import Grid from '@material-ui/core/Grid';
-import capa from '../../assets/imgs/capa_tela_contratos.png';
-import silo from '../../assets/imgs/silo_graos.png';
+import capa from '../../assets/imgs/capa_programa_rh.png';
 import ciclo_de_vida_contrato from '../../assets/imgs/ciclo_de_vida_contrato.png';
 import controles from '../../assets/imgs/controles.png';
 import tickets_e_nfs from '../../assets/imgs/tickets_e_nfs.png';
 import envios from '../../assets/imgs/envios.png';
 import www from '../../assets/imgs/www.png';
 import usando_programa from '../../assets/imgs/usando_programa.jpeg';
+import capa_tela_rh from '../../assets/imgs/capa_tela_rh.png';
 
 import './styles.scss';
 
@@ -17,7 +17,7 @@ import Carousel from 'react-bootstrap/Carousel';
 
 
 
-const GestaoDeContratos = () => {
+const GestaoDeRH = () => {
 
 
     const [index, setIndex] = useState(0);
@@ -34,7 +34,7 @@ const GestaoDeContratos = () => {
         var largura = window.innerWidth
             || document.documentElement.clientWidth
             || document.body.clientWidth;
-      
+
         console.log("largura: " + largura);
 
         setWidth(largura);
@@ -55,7 +55,7 @@ const GestaoDeContratos = () => {
         <div>
             <div >
                 <div style={{
-                    backgroundImage: `url(${silo})`,
+                    backgroundImage: `url(${capa_tela_rh})`,
                     backgroundSize: "cover",
                     height: '90%'
 
@@ -67,8 +67,8 @@ const GestaoDeContratos = () => {
                             container
                             direction="row"
                             item xs={12} sm={12} md={12} lg={12} xl={12}
-                            justifyContent="center"
-                            alignItems="center"
+                            justifyContent="flex-start"
+                            alignItems="flex-start"
                             style={{ paddingTop: 50, paddingBottom: 65, textAlign: width < 768 ? 'center' : null }}
                         >
 
@@ -82,45 +82,68 @@ const GestaoDeContratos = () => {
                                 item xs={12} sm={12} md={12} lg={5} xl={5}
                                 justifyContent="flex-start"
                                 alignItems="flex-start"
-                                style={{ paddingTop: 10, paddingBottom: 10 }}
+                                style={{ paddingBottom: 10 }}
                             >
 
                                 <Grid item xs={12} sm={12} md={12} lg={12} xl={12}
-                                    style={{ paddingBottom: 50 }}
+                                    style={{ paddingBottom: 10 }}
 
                                 >
-                                    <span style={{ fontWeight: 'bold', fontSize: 55, color: 'Azure' }}>
-                                        e-Contract
+                                    <span style={{ fontWeight: 'bold', fontSize: 55, color: 'DarkOrange' }}>
+                                        e-RH
                                     </span>
                                 </Grid>
 
                                 <Grid item xs={12} sm={12} md={12} lg={12} xl={12}
                                 >
                                     <span style={{ fontSize: 28, color: 'LightGoldenrodYellow' }}>
-                                        Software especializado em Gestão de Contratos para seu negócio!
+                                        Contar com o sistema de recursos humanos certo é fundamental para o sucesso de qualquer negócio.
                                     </span>
+                                    <br></br>                                    <br></br>
+
+                                    <Grid item xs={12} sm={12} md={12} lg={12} xl={12}
+                                        container
+                                        direction="row"
+                                    >
+                                        <p style={{ borderRadius: '50%', backgroundColor: 'DarkOrange', width: '10px', height: '10px', margin: 10 }}></p>
+                                        <p>
+                                            Gestão de Jornada de Trabalho e Pontos
+                                        </p>
+                                    </Grid>
+                                    <Grid item xs={12} sm={12} md={12} lg={12} xl={12}
+                                        container
+                                        direction="row"
+                                    >
+                                        <p style={{ borderRadius: '50%', backgroundColor: 'DarkOrange', width: '10px', height: '10px', margin: 10 }}></p>
+                                        <p>
+                                            Cálculo Salarial e Relatoria
+                                        </p>
+                                    </Grid>
+                                    <Grid item xs={12} sm={12} md={12} lg={12} xl={12}
+                                        container
+                                        direction="row"
+                                    >
+                                        <p style={{ borderRadius: '50%', backgroundColor: 'DarkOrange', width: '10px', height: '10px', margin: 10 }}></p>
+                                        <p>
+                                            Relógio de Ponto Integrado
+                                        </p>
+                                    </Grid>
+                                    <Grid item xs={12} sm={12} md={12} lg={12} xl={12}
+                                        container
+                                        direction="row"
+                                    >
+                                        <p style={{ borderRadius: '50%', backgroundColor: 'DarkOrange', width: '10px', height: '10px', margin: 10 }}></p>
+                                        <p>
+                                            App Mobile Exclusivo para seu negócio
+                                        </p>
+                                    </Grid>
+
                                 </Grid>
 
 
 
                             </Grid>
-                            <Grid
-                                container
-                                direction="row"
-                                item xs={12} sm={12} md={12} lg={5} xl={5}
-                                justifyContent="flex-start"
-                                alignItems="flex-start"
-                                style={{ paddingTop: 10, paddingBottom: 10 }}
-                            >
-
-                                <img alt="img1"
-
-                                    src={capa}
-                                />
-
-
-
-                            </Grid>
+                           
 
                             <Grid item xs={12} sm={12} md={12} lg={1} xl={1}
                             >
@@ -171,8 +194,7 @@ const GestaoDeContratos = () => {
                         <Grid item xs={12} sm={12} md={12} lg={12} xl={12}
                             style={{ paddingTop: 20 }}
                         >
-                            <p>O <span style={{ fontWeight: 'bold' }}>e-Contract</span> é um <span style={{ fontWeight: 'bold' }}> software gestor</span> voltado ao segmento do agronegócio, pode ser usado tanto por produtores agricolas
-                                que desejam uma melhor gestão de seus contratos, bem como para armazéns de grãos e corretoras que negociam grandes volumes de commodities.</p>
+                            <p>Conte com nossa ferramenta de gestão de RH para alcançar esse sucesso!</p>
 
                         </Grid>
 
@@ -193,7 +215,7 @@ const GestaoDeContratos = () => {
                     item xs={12} sm={12} md={12} lg={12} xl={12}
                     justifyContent="center"
                     alignItems="center"
-                    style={{ paddingTop: 50}}
+                    style={{ paddingTop: 50 }}
                 >
 
                     <Grid item xs={12} sm={12} md={12} lg={12} xl={12}
@@ -219,18 +241,18 @@ const GestaoDeContratos = () => {
                         item xs={12} sm={12} md={12} lg={10} xl={10}
                         justifyContent="center"
                         alignItems="center"
-                       
+
                     >
 
 
-                        <Carousel 
-                        style={{  width: width < 768 ? '100%' : '70%',  paddingBottom: 40, color: 'black' }}
+                        <Carousel
+                            style={{ width: width < 768 ? '100%' : '70%', paddingBottom: 40, color: 'black' }}
                             indicators={true}
                             activeIndex={index} onSelect={handleSelect}
                             index={index}
                         >
                             <Carousel.Item
-                            interval={10000}>
+                                interval={10000}>
                                 <img
                                     className="d-block w-100"
                                     src={ciclo_de_vida_contrato}
@@ -424,4 +446,4 @@ const GestaoDeContratos = () => {
     );
 }
 
-export default GestaoDeContratos;
+export default GestaoDeRH;

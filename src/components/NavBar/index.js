@@ -73,14 +73,9 @@ const Navegador = (props) => {
                       <h2 >
                         <span style={{padding:10, fontSize: 22, fontFamily: 'Verdana', color: 'black', textAlign:'center' }}>Gestão</span>
                       </h2>
-                      <NavDropdown.Item eventKey="1.0" id="nav-link-dropdown" href="/gestaodecontratos">Contratos
+                      <NavDropdown.Item eventKey="1.0" id="nav-link-dropdown" href="/gestaodecontratos">E-Contract
                       </NavDropdown.Item>
 
-                      <NavDropdown.Item eventKey="2.0" id="nav-link-dropdown" href="/patio">Finanças
-                      </NavDropdown.Item>
-
-                      <NavDropdown.Item eventKey="3.0" id="nav-link-dropdown" href="/cotacoes">RH
-                      </NavDropdown.Item>
 
 
                     </NavDropdown>

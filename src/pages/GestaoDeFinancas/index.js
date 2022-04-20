@@ -17,7 +17,7 @@ import Carousel from 'react-bootstrap/Carousel';
 
 
 
-const GestaoDeContratos = () => {
+const GestaoDeFinancas = () => {
 
 
     const [index, setIndex] = useState(0);
@@ -97,7 +97,7 @@ const GestaoDeContratos = () => {
                                 <Grid item xs={12} sm={12} md={12} lg={12} xl={12}
                                 >
                                     <span style={{ fontSize: 28, color: 'LightGoldenrodYellow' }}>
-                                        Software especializado em Gestão de Contratos para seu negócio!
+                                        Software especializado em Gestão de Contratos de Commodities para seu negócio!
                                     </span>
                                 </Grid>
 
@@ -424,4 +424,4 @@ const GestaoDeContratos = () => {
     );
 }
 
-export default GestaoDeContratos;
+export default GestaoDeFinancas;

@@ -5,6 +5,8 @@ import { BrowserRouter, Switch, Route, Redirect } from 'react-router-dom';
 import 'bootstrap/dist/css/bootstrap.css';
 import Home from './pages/home';
 import GestaoDeContratos from './pages/GestaoDeContratos';
+import GestaoDeFinancas from './pages/GestaoDeFinancas';
+import GestaoDeRH from './pages/GestaoDeRH';
 
 import Cookies from 'js-cookie';
 import api from './services/api';
@@ -66,6 +68,8 @@ function App() {
       <Switch>
       <PublicRoute restricted={false} component={Home} path="/" exact />
       <PublicRoute restricted={false} component={GestaoDeContratos} path="/gestaodecontratos" exact />
+      <PublicRoute restricted={false} component={GestaoDeFinancas} path="/gestaodefinancas" exact />
+      <PublicRoute restricted={false} component={GestaoDeRH} path="/gestaoderh" exact />
 
 
       </Switch>
