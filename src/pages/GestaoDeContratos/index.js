@@ -10,11 +10,13 @@ import tickets_e_nfs from '../../assets/imgs/tickets_e_nfs.png';
 import envios from '../../assets/imgs/envios.png';
 import www from '../../assets/imgs/www.png';
 import usando_programa from '../../assets/imgs/usando_programa.jpeg';
+import capa_tela_rh from '../../assets/imgs/capa_tela_rh.png';
+import capa_financas from '../../assets/imgs/capa_financas.png';
+import capa_rh from '../../assets/imgs/capa_rh.png';
+
 
 import './styles.scss';
-
-import Carousel from 'react-bootstrap/Carousel';
-
+import Carousel from 'react-bootstrap/Carousel'
 
 
 const GestaoDeContratos = () => {
@@ -34,7 +36,7 @@ const GestaoDeContratos = () => {
         var largura = window.innerWidth
             || document.documentElement.clientWidth
             || document.body.clientWidth;
-      
+
         console.log("largura: " + largura);
 
         setWidth(largura);
@@ -54,137 +56,375 @@ const GestaoDeContratos = () => {
     return (
         <div>
             <div >
-                <div style={{
-                    backgroundImage: `url(${silo})`,
-                    backgroundSize: "cover",
-                    height: '90%'
 
-                }} >
+                <Carousel interval={10000} fade >
 
-                    <Navegador travado={false} />
-                    <div style={{ backgroundColor: 'rgba(3,0,15,0.6)', color: 'white' }}>
-                        <Grid
-                            container
-                            direction="row"
-                            item xs={12} sm={12} md={12} lg={12} xl={12}
-                            justifyContent="center"
-                            alignItems="center"
-                            style={{ paddingTop: 50, paddingBottom: 65, textAlign: width < 768 ? 'center' : null }}
-                        >
 
-                            <Grid item xs={12} sm={12} md={12} lg={1} xl={1}
-                            >
-                            </Grid>
 
-                            <Grid
-                                container
-                                direction="row"
-                                item xs={12} sm={12} md={12} lg={5} xl={5}
-                                justifyContent="flex-start"
-                                alignItems="flex-start"
-                                style={{ paddingTop: 10, paddingBottom: 10 }}
-                            >
+                    <Carousel.Item
+                    >
+                        <div style={{
+                            backgroundImage: `url(${silo})`,
+                            backgroundSize: "cover",
+                            height: 600,
+                        }}  >
+                            <Navegador travado={false} />
 
-                                <Grid item xs={12} sm={12} md={12} lg={12} xl={12}
-                                    style={{ paddingBottom: 50 }}
 
+                            <div style={{ backgroundColor: 'rgba(3,0,15,0.6)', color: 'white' }}>
+                                <Grid
+                                    container
+                                    direction="row"
+                                    item xs={12} sm={12} md={12} lg={12} xl={12}
+                                    justifyContent="flex-start"
+                                    alignItems="flex-start"
+                                    style={{ paddingTop: 50, paddingBottom: 65, textAlign: width < 768 ? 'center' : null }}
                                 >
-                                    <span style={{ fontWeight: 'bold', fontSize: 55, color: 'Azure' }}>
-                                        e-Contract
-                                    </span>
+
+                                    <Grid item xs={12} sm={12} md={12} lg={1} xl={1}
+                                    >
+                                    </Grid>
+
+                                    <Grid
+                                        container
+                                        direction="row"
+                                        item xs={12} sm={12} md={12} lg={5} xl={5}
+                                        justifyContent="flex-start"
+                                        alignItems="flex-start"
+                                        style={{ paddingBottom: 10 }}
+                                    >
+
+                                        <Grid item xs={12} sm={12} md={12} lg={12} xl={12}
+                                            style={{ paddingBottom: 10 }}
+
+                                        >
+                                            <span style={{ fontWeight: 'bold', fontSize: 55, color: 'DarkOrange' }}>
+                                                e-Contract
+                                            </span>
+                                        </Grid>
+
+                                        <Grid item xs={12} sm={12} md={12} lg={12} xl={12}
+                                        >
+                                            <span style={{ fontSize: 28, color: 'LightGoldenrodYellow' }}>
+                                                Software especializado em Gestão de Contratos para seu negócio!
+                                            </span>
+                                            <br></br>                                    <br></br>
+
+                                            <Grid item xs={12} sm={12} md={12} lg={12} xl={12}
+                                                container
+                                                direction="row"
+                                            >
+                                                <p style={{ borderRadius: '50%', backgroundColor: 'DarkOrange', width: '10px', height: '10px', margin: 10 }}></p>
+                                                <p>
+                                                    Gestão do Ciclo de Vida do Contrato
+                                                </p>
+                                            </Grid>
+                                            <Grid item xs={12} sm={12} md={12} lg={12} xl={12}
+                                                container
+                                                direction="row"
+                                            >
+                                                <p style={{ borderRadius: '50%', backgroundColor: 'DarkOrange', width: '10px', height: '10px', margin: 10 }}></p>
+                                                <p>
+                                                    Integração com Gerenciadores de Balança
+                                                </p>
+                                            </Grid>
+                                            <Grid item xs={12} sm={12} md={12} lg={12} xl={12}
+                                                container
+                                                direction="row"
+                                            >
+                                                <p style={{ borderRadius: '50%', backgroundColor: 'DarkOrange', width: '10px', height: '10px', margin: 10 }}></p>
+                                                <p>
+                                                    Auditoria de Notas Fiscais e Romaneios
+                                                </p>
+                                            </Grid>
+                                            <Grid item xs={12} sm={12} md={12} lg={12} xl={12}
+                                                container
+                                                direction="row"
+                                            >
+                                                <p style={{ borderRadius: '50%', backgroundColor: 'DarkOrange', width: '10px', height: '10px', margin: 10 }}></p>
+                                                <p>
+                                                    Relatoria Completa
+                                                </p>
+                                            </Grid>
+
+                                        </Grid>
+
+
+
+                                    </Grid>
+
+                                    <Grid
+                                        container
+                                        direction="row"
+                                        item xs={12} sm={12} md={12} lg={5} xl={5}
+                                        justifyContent="flex-start"
+                                        alignItems="flex-start"
+                                        style={{ paddingTop: 10, paddingBottom: 10 }}
+                                    >
+
+                                        <img alt="img1"
+
+                                            src={capa}
+                                        />
+
+
+
+                                    </Grid>
+
+                                    <Grid item xs={12} sm={12} md={12} lg={1} xl={1}
+                                    >
+                                    </Grid>
+
                                 </Grid>
 
-                                <Grid item xs={12} sm={12} md={12} lg={12} xl={12}
+                            </div>
+                        </div>
+
+                    </Carousel.Item>
+
+                    <Carousel.Item
+                    >
+                        <div style={{
+                            backgroundImage: `url(${capa_tela_rh})`,
+                            backgroundSize: "cover",
+                            height: 600,
+                        }}  >
+                            <Navegador travado={false} />
+
+
+                            <div style={{ backgroundColor: 'rgba(3,0,15,0.6)', color: 'white' }}>
+                                <Grid
+                                    container
+                                    direction="row"
+                                    item xs={12} sm={12} md={12} lg={12} xl={12}
+                                    justifyContent="flex-start"
+                                    alignItems="flex-start"
+                                    style={{ paddingTop: 50, paddingBottom: 65, textAlign: width < 768 ? 'center' : null }}
                                 >
-                                    <span style={{ fontSize: 28, color: 'LightGoldenrodYellow' }}>
-                                        Software especializado em Gestão de Contratos para seu negócio!
-                                    </span>
+
+                                    <Grid item xs={12} sm={12} md={12} lg={1} xl={1}
+                                    >
+                                    </Grid>
+
+                                    <Grid
+                                        container
+                                        direction="row"
+                                        item xs={12} sm={12} md={12} lg={5} xl={5}
+                                        justifyContent="flex-start"
+                                        alignItems="flex-start"
+                                        style={{ paddingBottom: 10 }}
+                                    >
+
+                                        <Grid item xs={12} sm={12} md={12} lg={12} xl={12}
+                                            style={{ paddingBottom: 10 }}
+
+                                        >
+                                            <span style={{ fontWeight: 'bold', fontSize: 55, color: 'DarkOrange' }}>
+                                                Recursos Humanos
+                                            </span>
+                                        </Grid>
+
+                                        <Grid item xs={12} sm={12} md={12} lg={12} xl={12}
+                                        >
+                                            <span style={{ fontSize: 28, color: 'LightGoldenrodYellow' }}>
+                                                Contar com o sistema de recursos humanos certo é fundamental para o sucesso de qualquer negócio.
+                                            </span>
+                                            <br></br>                                    <br></br>
+
+                                            <Grid item xs={12} sm={12} md={12} lg={12} xl={12}
+                                                container
+                                                direction="row"
+                                            >
+                                                <p style={{ borderRadius: '50%', backgroundColor: 'DarkOrange', width: '10px', height: '10px', margin: 10 }}></p>
+                                                <p>
+                                                    Gestão de Jornada de Trabalho e Pontos
+                                                </p>
+                                            </Grid>
+                                            <Grid item xs={12} sm={12} md={12} lg={12} xl={12}
+                                                container
+                                                direction="row"
+                                            >
+                                                <p style={{ borderRadius: '50%', backgroundColor: 'DarkOrange', width: '10px', height: '10px', margin: 10 }}></p>
+                                                <p>
+                                                    Cálculo Salarial e Relatoria
+                                                </p>
+                                            </Grid>
+                                            <Grid item xs={12} sm={12} md={12} lg={12} xl={12}
+                                                container
+                                                direction="row"
+                                            >
+                                                <p style={{ borderRadius: '50%', backgroundColor: 'DarkOrange', width: '10px', height: '10px', margin: 10 }}></p>
+                                                <p>
+                                                    Relógio de Ponto Integrado
+                                                </p>
+                                            </Grid>
+                                            <Grid item xs={12} sm={12} md={12} lg={12} xl={12}
+                                                container
+                                                direction="row"
+                                            >
+                                                <p style={{ borderRadius: '50%', backgroundColor: 'DarkOrange', width: '10px', height: '10px', margin: 10 }}></p>
+                                                <p>
+                                                    App Mobile Exclusivo para seu negócio
+                                                </p>
+                                            </Grid>
+
+                                        </Grid>
+
+
+
+                                    </Grid>
+
+                                    <Grid
+                                        container
+                                        direction="row"
+                                        item xs={12} sm={12} md={12} lg={5} xl={5}
+                                        justifyContent="flex-start"
+                                        alignItems="flex-start"
+                                        style={{ paddingTop: 10, paddingBottom: 10 }}
+                                    >
+
+                                        <img alt="img1"
+
+                                            src={capa_rh}
+                                        />
+
+
+
+                                    </Grid>
+
+                                    <Grid item xs={12} sm={12} md={12} lg={1} xl={1}
+                                    >
+                                    </Grid>
+
                                 </Grid>
 
+                            </div>
+                        </div>
 
+                    </Carousel.Item>
 
-                            </Grid>
-                            <Grid
-                                container
-                                direction="row"
-                                item xs={12} sm={12} md={12} lg={5} xl={5}
-                                justifyContent="flex-start"
-                                alignItems="flex-start"
-                                style={{ paddingTop: 10, paddingBottom: 10 }}
-                            >
-
-                                <img alt="img1"
-
-                                    src={capa}
-                                />
-
-
-
-                            </Grid>
-
-                            <Grid item xs={12} sm={12} md={12} lg={1} xl={1}
-                            >
-                            </Grid>
-
-                        </Grid>
-
-                    </div>
-                </div>
-
-            </div>
-            <div style={{ padding: 10 }}>
-                <Grid
-                    container
-                    direction="row"
-                    item xs={12} sm={12} md={12} lg={12} xl={12}
-                    justifyContent="center"
-                    alignItems="center"
-                    style={{ paddingBottom: 10 }}
-                >
-
-                    <Grid item xs={12} sm={12} md={12} lg={1} xl={1}
+                    <Carousel.Item
                     >
-                    </Grid>
-
-                    <Grid
-                        container
-                        direction="row"
-                        item xs={12} sm={12} md={12} lg={5} xl={5}
-                        justifyContent="flex-start"
-                        alignItems="flex-start"
-                        style={{ paddingTop: 40, paddingBottom: 10 }}
-                    >
-
-                        <Grid item xs={12} sm={12} md={12} lg={12} xl={12}
-                            style={{ paddingBottom: 5 }}
-
-                        >
-                            <div style={{ backgroundColor: 'green', width: '66%', height: 5, marginBottom: 20 }}> </div>
-                            <span style={{ fontWeight: 'bold', fontSize: 33, paddingTop: 20 }}>
-                                Flexível, Modular e Expansível
-                            </span>
-
-                        </Grid>
+                        <div style={{
+                            backgroundImage: `url(${capa_tela_rh})`,
+                            backgroundSize: "cover",
+                            height: 600,
+                        }}  >
+                            <Navegador travado={false} />
 
 
+                            <div style={{ backgroundColor: 'rgba(3,0,15,0.6)', color: 'white' }}>
+                                <Grid
+                                    container
+                                    direction="row"
+                                    item xs={12} sm={12} md={12} lg={12} xl={12}
+                                    justifyContent="flex-start"
+                                    alignItems="flex-start"
+                                    style={{ paddingTop: 50, paddingBottom: 65, textAlign: width < 768 ? 'center' : null }}
+                                >
 
-                        <Grid item xs={12} sm={12} md={12} lg={12} xl={12}
-                            style={{ paddingTop: 20 }}
-                        >
-                            <p>O <span style={{ fontWeight: 'bold' }}>e-Contract</span> é um <span style={{ fontWeight: 'bold' }}> software gestor</span> voltado ao segmento do agronegócio, pode ser usado tanto por produtores agricolas
-                                que desejam uma melhor gestão de seus contratos, bem como para armazéns de grãos e corretoras que negociam grandes volumes de commodities.</p>
+                                    <Grid item xs={12} sm={12} md={12} lg={1} xl={1}
+                                    >
+                                    </Grid>
 
-                        </Grid>
+                                    <Grid
+                                        container
+                                        direction="row"
+                                        item xs={12} sm={12} md={12} lg={5} xl={5}
+                                        justifyContent="flex-start"
+                                        alignItems="flex-start"
+                                        style={{ paddingBottom: 10 }}
+                                    >
 
-                    </Grid>
+                                        <Grid item xs={12} sm={12} md={12} lg={12} xl={12}
+                                            style={{ paddingBottom: 10 }}
+
+                                        >
+                                            <span style={{ fontWeight: 'bold', fontSize: 55, color: 'DarkOrange' }}>
+                                                Finanças
+                                            </span>
+                                        </Grid>
+
+                                        <Grid item xs={12} sm={12} md={12} lg={12} xl={12}
+                                        >
+                                            <span style={{ fontSize: 28, color: 'LightGoldenrodYellow' }}>
+                                                Finanças é o ponto crucial em qualquer negócio, faça a gestão real com nossas ferramentas
+                                            </span>
+                                            <br></br>                                    <br></br>
+
+                                            <Grid item xs={12} sm={12} md={12} lg={12} xl={12}
+                                                container
+                                                direction="row"
+                                            >
+                                                <p style={{ borderRadius: '50%', backgroundColor: 'DarkOrange', width: '10px', height: '10px', margin: 10 }}></p>
+                                                <p>
+                                                    Gestão de Despesas, Receitas, Transferencias e Emprestimos
+                                                </p>
+                                            </Grid>
+                                            <Grid item xs={12} sm={12} md={12} lg={12} xl={12}
+                                                container
+                                                direction="row"
+                                            >
+                                                <p style={{ borderRadius: '50%', backgroundColor: 'DarkOrange', width: '10px', height: '10px', margin: 10 }}></p>
+                                                <p>
+                                                    Saldo de Caixa Bancário, Conciliação Bancária
+                                                </p>
+                                            </Grid>
+                                            <Grid item xs={12} sm={12} md={12} lg={12} xl={12}
+                                                container
+                                                direction="row"
+                                            >
+                                                <p style={{ borderRadius: '50%', backgroundColor: 'DarkOrange', width: '10px', height: '10px', margin: 10 }}></p>
+                                                <p>
+                                                    Relatoria Completa
+                                                </p>
+                                            </Grid>
+                                            <Grid item xs={12} sm={12} md={12} lg={12} xl={12}
+                                                container
+                                                direction="row"
+                                            >
+                                                <p style={{ borderRadius: '50%', backgroundColor: 'DarkOrange', width: '10px', height: '10px', margin: 10 }}></p>
+                                                <p>
+                                                    App Mobile Exclusivo para seu negócio
+                                                </p>
+                                            </Grid>
+
+                                        </Grid>
 
 
-                    <Grid item xs={12} sm={12} md={12} lg={1} xl={1}
-                    >
-                    </Grid>
 
-                </Grid>
+                                    </Grid>
 
+                                    <Grid
+                                        container
+                                        direction="row"
+                                        item xs={12} sm={12} md={12} lg={5} xl={5}
+                                        justifyContent="flex-start"
+                                        alignItems="flex-start"
+                                        style={{ paddingTop: 10, paddingBottom: 10 }}
+                                    >
+
+                                        <img alt="img1"
+
+                                            src={capa_financas}
+                                        />
+
+
+
+                                    </Grid>
+
+                                    <Grid item xs={12} sm={12} md={12} lg={1} xl={1}
+                                    >
+                                    </Grid>
+
+                                </Grid>
+
+                            </div>
+                        </div>
+
+                    </Carousel.Item>
+
+                </Carousel>
             </div>
             <div style={{ backgroundColor: "Azure", padding: 10 }}>
                 <Grid
@@ -193,7 +433,7 @@ const GestaoDeContratos = () => {
                     item xs={12} sm={12} md={12} lg={12} xl={12}
                     justifyContent="center"
                     alignItems="center"
-                    style={{ paddingTop: 50}}
+                    style={{ paddingTop: 50 }}
                 >
 
                     <Grid item xs={12} sm={12} md={12} lg={12} xl={12}
@@ -219,18 +459,18 @@ const GestaoDeContratos = () => {
                         item xs={12} sm={12} md={12} lg={10} xl={10}
                         justifyContent="center"
                         alignItems="center"
-                       
+
                     >
 
 
-                        <Carousel 
-                        style={{  width: width < 768 ? '100%' : '70%',  paddingBottom: 40, color: 'black' }}
+                        <Carousel
+                            style={{ width: width < 768 ? '100%' : '70%', paddingBottom: 40, color: 'black' }}
                             indicators={true}
                             activeIndex={index} onSelect={handleSelect}
                             index={index}
                         >
                             <Carousel.Item
-                            interval={10000}>
+                                interval={10000}>
                                 <img
                                     className="d-block w-100"
                                     src={ciclo_de_vida_contrato}
