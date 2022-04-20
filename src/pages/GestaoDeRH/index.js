@@ -2,7 +2,6 @@ import React, { useState, useEffect } from 'react';
 import Rodape from '../../components/Rodape';
 import Navegador from '../../components/NavBar';
 import Grid from '@material-ui/core/Grid';
-import capa from '../../assets/imgs/capa_programa_rh.png';
 import ciclo_de_vida_contrato from '../../assets/imgs/ciclo_de_vida_contrato.png';
 import controles from '../../assets/imgs/controles.png';
 import tickets_e_nfs from '../../assets/imgs/tickets_e_nfs.png';
