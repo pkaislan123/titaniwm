@@ -340,7 +340,7 @@ const GestaoDeContratos = () => {
                                             style={{ paddingBottom: 10 }}
 
                                         >
-                                            <span style={{ fontWeight: 'bold', fontSize: 55, color: 'DarkOrange' }}>
+                                            <span style={{ fontWeight: 'bold', fontSize: 53, color: 'DarkOrange' }}>
                                                 e-Contract Finanças
                                             </span>
                                         </Grid>
