@@ -5,8 +5,10 @@ import { BrowserRouter, Switch, Route, Redirect } from 'react-router-dom';
 import 'bootstrap/dist/css/bootstrap.css';
 import Home from './pages/home';
 import GestaoDeContratos from './pages/GestaoDeContratos';
-import GestaoDeFinancas from './pages/GestaoDeFinancas';
-import GestaoDeRH from './pages/GestaoDeRH';
+import Verifyforzoho from './pages/zohoverify';
+import Blog from './pages/Blog';
+import VizualizarNoticia from './pages/VizualizarNoticia';
+
 
 import Cookies from 'js-cookie';
 import api from './services/api';
@@ -68,8 +70,12 @@ function App() {
       <Switch>
       <PublicRoute restricted={false} component={Home} path="/" exact />
       <PublicRoute restricted={false} component={GestaoDeContratos} path="/gestaodecontratos" exact />
-      <PublicRoute restricted={false} component={GestaoDeFinancas} path="/gestaodefinancas" exact />
-      <PublicRoute restricted={false} component={GestaoDeRH} path="/gestaoderh" exact />
+
+      <PublicRoute restricted={false} component={Blog} path="/noticias/:categoria" exact />
+      <PublicRoute restricted={false} component={Blog} path="/noticias/" exact />
+      <PublicRoute restricted={false} component={VizualizarNoticia} path="/noticias/:dia/:mes/:ano/:titulo/:idNoticia" exact />
+      
+      <PublicRoute restricted={false} component={Verifyforzoho} path="/zohoverify/verifyforzoho.html" exact />
 
 
       </Switch>

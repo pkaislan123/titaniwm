@@ -13,6 +13,15 @@
     background: rgba(0,0,0,0.0);
   }
 
+  
+#nav-dropdown-black{
+  color: black;
+  font-size: 22px;
+  font-style: normal;
+  font-weight: bold;
+  background: rgba(0,0,0,0.0);
+}
+
 
 
 .nav-dropdown:hover{
@@ -24,6 +33,14 @@
     font-size: 22px;
     color: white;
 }
+
+#nav-link-black{
+  font-size: 22px;
+  color: black;
+  font-weight: bold;
+
+}
+
 
 #nav-link-dropdown{
   font-size: 22px;

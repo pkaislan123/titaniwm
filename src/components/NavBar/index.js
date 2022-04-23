@@ -36,7 +36,7 @@ const Navegador = (props) => {
 
 
   return (
-    <div style={{backgroundColor: 'rgba(3,0,15,0.6)', position: props.travado ? 'sticky' : null, top: props.travado ? 0 : null}}>
+    <div style={{ backgroundColor: props.corFundo === 'white' ? 'white' : 'rgba(3,0,15,0.6)', position: props.travado ? 'sticky' : null, top: props.travado ? 0 : null }}>
       <div style={{ paddingTop: 20 }}>
         <Grid
           container
@@ -48,7 +48,7 @@ const Navegador = (props) => {
 
           >
             <h1 >
-              <span style={{ paddingLeft: 50, fontSize: 42, fontFamily: 'Verdana', color: 'white', fontWeight: 600 }}>titaniwm</span>
+              <span style={{ paddingLeft: 50, fontSize: 42, fontFamily: 'Verdana', color: props.corTexto, fontWeight: 600 }}>titaniwm</span>
             </h1>
           </Grid>
           <Grid item xs={12} sm={12} md={12} lg={10} xl={10}
@@ -66,12 +66,12 @@ const Navegador = (props) => {
 
                     <NavDropdown
                       title="Produtos"
-                      id="nav-dropdown"
-                      style={{ textDecoration: props.servicos }}
+                      id={props.corTexto === 'black' ? "nav-dropdown-black" : "nav-dropdown"}
+                      style={{ textDecoration: props.servicos}}
                     >
 
                       <h2 >
-                        <span style={{padding:10, fontSize: 22, fontFamily: 'Verdana', color: 'black', textAlign:'center' }}>Gestão</span>
+                        <span style={{ padding: 10, fontSize: 22, fontFamily: 'Verdana', color: 'black', textAlign: 'center' }}>Gestão</span>
                       </h2>
                       <NavDropdown.Item eventKey="1.0" id="nav-link-dropdown" href="/gestaodecontratos">E-Contract
                       </NavDropdown.Item>
@@ -82,12 +82,12 @@ const Navegador = (props) => {
 
                     <NavDropdown
                       title="Criação"
-                      id="nav-dropdown"
+                      id={props.corTexto === 'black' ? "nav-dropdown-black" : "nav-dropdown"}
                       style={{ textDecoration: props.servicos }}
                     >
 
                       <h2 >
-                        <span style={{padding:10, fontSize: 22, fontFamily: 'Verdana', color: 'black', textAlign:'center' }}>Design e Inovação</span>
+                        <span style={{ padding: 10, fontSize: 22, fontFamily: 'Verdana', color: 'black', textAlign: 'center' }}>Design e Inovação</span>
                       </h2>
                       <NavDropdown.Item eventKey="1.0" id="nav-link-dropdown" href="/minhaconta">WebSites
                       </NavDropdown.Item>
@@ -102,11 +102,15 @@ const Navegador = (props) => {
                     </NavDropdown>
 
                     <Nav.Item>
-                      <Nav.Link id="nav-link" style={{ textDecoration: props.sobre }} href="/sobre">  a titaniwm</Nav.Link>
+                      <Nav.Link
+                        id={props.corTexto === 'black' ? "nav-link-black" : "nav-link"}
+                        style={{ textDecoration: props.sobre }} href="/sobre">  a titaniwm</Nav.Link>
                     </Nav.Item>
 
                     <Nav.Item>
-                      <Nav.Link id="nav-link" style={{ textDecoration: props.noticias }} href="/noticias">  BLog </Nav.Link>
+                      <Nav.Link
+                        id={props.corTexto === 'black' ? "nav-link-black" : "nav-link"}
+                        style={{ textDecoration: props.noticias }} href="/noticias">  BLog </Nav.Link>
                     </Nav.Item>
 
 
@@ -114,7 +118,9 @@ const Navegador = (props) => {
 
 
                     <Nav.Item>
-                      <Nav.Link id="nav-link" style={{ textDecoration: props.contato }} href="/contato">Fale Conosco</Nav.Link>
+                      <Nav.Link
+                        id={props.corTexto === 'black' ? "nav-link-black" : "nav-link"}
+                        style={{ textDecoration: props.contato }} href="/contato">Fale Conosco</Nav.Link>
                     </Nav.Item>
                   </Nav>
 
