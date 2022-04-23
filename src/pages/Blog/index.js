@@ -1,7 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import Rodape from '../../components/Rodape';
 import Navegador from '../../components/NavBar';
-import background from '../../assets/imgs/capa1.png';
 import Skeleton from '@material-ui/lab/Skeleton';
 import api from '../../services/api';
 import Grid from '@material-ui/core/Grid';
