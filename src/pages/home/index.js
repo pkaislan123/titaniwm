@@ -23,7 +23,7 @@ const Home = () => {
 
       }} >
 
-        <Navegador travado={true} />
+        <Navegador travado={true} corTexto={'white'} />
 
 
       </div>

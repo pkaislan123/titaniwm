@@ -48,7 +48,7 @@ const Navegador = (props) => {
 
           >
             <h1 >
-              <span style={{ paddingLeft: 50, fontSize: 42, fontFamily: 'Verdana', color: props.corTexto, fontWeight: 600 }}>titaniwm</span>
+              <a href={"/"} style={{ paddingLeft: 50, fontSize: 42, fontFamily: 'Verdana', color: props.corTexto, fontWeight: 600 }}>titaniwm</a>
             </h1>
           </Grid>
           <Grid item xs={12} sm={12} md={12} lg={10} xl={10}

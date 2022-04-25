@@ -15,7 +15,8 @@ import capa_financas from '../../assets/imgs/capa_financas.png';
 import capa_rh from '../../assets/imgs/capa_rh.png';
 import capa_rh_smartphone from '../../assets/imgs/capa_rh_smartphone.png';
 import capa_rh_relogio from '../../assets/imgs/capa_rh_relogio.png';
-
+import recursos from '../../assets/imgs/recursos.png';
+import beneficios from '../../assets/imgs/beneficios.png';
 
 import './styles.scss';
 import Carousel from 'react-bootstrap/Carousel'
@@ -211,7 +212,7 @@ const GestaoDeContratos = () => {
                             backgroundSize: "cover",
                             height: "80%"
                         }}  >
-                            <Navegador travado={false} corTexto={'white'}/>
+                            <Navegador travado={false} corTexto={'white'} />
 
 
                             <div style={{ backgroundColor: 'rgba(3,0,15,0.6)', color: 'white' }}>
@@ -347,7 +348,7 @@ const GestaoDeContratos = () => {
                             backgroundSize: "cover",
                             height: '80%',
                         }}  >
-                            <Navegador travado={false} corTexto={'white'}/>
+                            <Navegador travado={false} corTexto={'white'} />
 
 
                             <div style={{ backgroundColor: 'rgba(3,0,15,0.6)', color: 'white' }}>
@@ -519,6 +520,27 @@ const GestaoDeContratos = () => {
                 </Grid>
 
             </div>
+            <div>
+                <Grid
+                    container
+                    direction="row"
+                    item xs={12} sm={12} md={12} lg={12} xl={12}
+                    justifyContent="center"
+                    alignItems="center"
+                    style={{ paddingTop: 10, paddingBottom: 10 }}
+                >
+
+                    <img alt="recursos"
+
+                        src={recursos}
+                    />
+
+
+
+                </Grid>
+            </div>
+
+
             <div style={{ backgroundColor: "Azure", padding: 10 }}>
                 <Grid
                     container
@@ -664,6 +686,26 @@ const GestaoDeContratos = () => {
                 </Grid>
 
 
+            </div>
+
+            <div>
+                <Grid
+                    container
+                    direction="row"
+                    item xs={12} sm={12} md={12} lg={12} xl={12}
+                    justifyContent="center"
+                    alignItems="center"
+                    style={{ paddingTop: 10, paddingBottom: 10 }}
+                >
+
+                    <img alt="beneficios"
+
+                        src={beneficios}
+                    />
+
+
+
+                </Grid>
             </div>
 
             <div style={{ backgroundColor: "Azure", padding: 10 }}>
