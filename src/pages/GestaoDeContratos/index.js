@@ -89,7 +89,7 @@ const GestaoDeContratos = () => {
                             backgroundSize: "cover",
                             height: '80%',
                         }}  >
-                            <Navegador travado={false} corTexto={'white'} />
+                            <Navegador corFundo={'rgba(3,0,15,0.6)'} travado={false} corTexto={'white'} />
 
 
                             <div style={{ backgroundColor: 'rgba(3,0,15,0.6)', color: 'white' }}>
@@ -212,7 +212,7 @@ const GestaoDeContratos = () => {
                             backgroundSize: "cover",
                             height: "80%"
                         }}  >
-                            <Navegador travado={false} corTexto={'white'} />
+                            <Navegador corFundo={'rgba(3,0,15,0.6)'}  travado={false} corTexto={'white'} />
 
 
                             <div style={{ backgroundColor: 'rgba(3,0,15,0.6)', color: 'white' }}>
@@ -348,7 +348,7 @@ const GestaoDeContratos = () => {
                             backgroundSize: "cover",
                             height: '80%',
                         }}  >
-                            <Navegador travado={false} corTexto={'white'} />
+                            <Navegador corFundo={'rgba(3,0,15,0.6)'}  travado={false} corTexto={'white'} />
 
 
                             <div style={{ backgroundColor: 'rgba(3,0,15,0.6)', color: 'white' }}>

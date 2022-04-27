@@ -36,22 +36,22 @@ const Navegador = (props) => {
 
 
   return (
-    <div style={{ backgroundColor: props.corFundo === 'white' ? 'white' : 'rgba(3,0,15,0.6)', position: props.travado ? 'sticky' : null, top: props.travado ? 0 : null }}>
+    <div style={{ backgroundColor: props.corFundo  , position: props.travado ? 'sticky' : null, top: props.travado ? 0 : null }}>
       <div style={{ paddingTop: 20 }}>
         <Grid
           container
           direction={'row'}
         >
           <Grid item xs={12} sm={12} md={12} lg={2} xl={2}
-            justifyContent="center"
             style={{ textAlign: "center" }}
 
           >
             <h1 >
-              <a href={"/"} style={{ paddingLeft: 50, fontSize: 42, fontFamily: 'Verdana', color: props.corTexto, fontWeight: 600 }}>titaniwm</a>
+              <a href={"/"} style={{ paddingLeft: 50, fontSize: 55, fontFamily: 'Verdana', color: props.corTexto, fontWeight: 600 }}>titaniwm</a>
             </h1>
           </Grid>
           <Grid item xs={12} sm={12} md={12} lg={10} xl={10}
+            style={{paddingTop:15}}
           >
             <Navbar expand="lg" className={"color-nav"}>
               <Container  >
@@ -81,7 +81,7 @@ const Navegador = (props) => {
                     </NavDropdown>
 
                     <NavDropdown
-                      title="Criação"
+                      title="Desenvolvimento"
                       id={props.corTexto === 'black' ? "nav-dropdown-black" : "nav-dropdown"}
                       style={{ textDecoration: props.servicos }}
                     >

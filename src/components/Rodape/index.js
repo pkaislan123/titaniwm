@@ -35,7 +35,7 @@ const Rodape = () => {
         <div>
             <div  style={{paddingBottom: 30, paddingTop: 30, backgroundColor:'black'}}>
               
-                <a href="https://api.whatsapp.com/send?phone=5138999416698&text=olá" class="whatsapp-button"
+                <a href="https://api.whatsapp.com/send?phone=5138999416698&text=olá" 
                     style={{ height: 40, width: 135, position: 'fixed', right: '15px', bottom: width < 768 ? '10px' : '100px', backgroundColor: 'green', borderRadius: '20px' }}
 
                 >
@@ -70,10 +70,10 @@ const Rodape = () => {
                                 <div className="footer-menu">
                                     <h2 className="footer-wid-title" style={{fontWeight:'bold', color:'Cyan'}}>Softwares</h2>
                                     <ul>
-                                        <li><a id={"arodape"} href="/gestaodecontratos">E-Contract</a></li>
+                                        <li><a id={"arodape"} href="/gestaodecontratos">e-Contract</a></li>
                                         <li><a id={"arodape"}  href="/localizacao">Ainda não encontrei o que procuro</a></li>
                                         <li><a id={"arodape"}  href="/noticias">Blog, Notícias e Tutoriais</a></li>
-                                        <li><a id={"arodape"}  href="/contato">Fale Conosoco</a></li>
+                                        <li><a id={"arodape"}  href="/contato">Fale Conosco</a></li>
                                     </ul>
                                 </div>
                             </Grid>

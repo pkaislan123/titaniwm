@@ -140,7 +140,7 @@ const VizualizarNoticia = () => {
 
       }} >
 
-        <Navegador />
+<Navegador noticias={'underline'} corTexto={'black'} corFundo={'white'} />
 
         <div style={{ height: 5, backgroundColor: '#808080' }}>
         </div>

@@ -5,7 +5,13 @@ import { BrowserRouter, Switch, Route, Redirect } from 'react-router-dom';
 import 'bootstrap/dist/css/bootstrap.css';
 import Home from './pages/home';
 import GestaoDeContratos from './pages/GestaoDeContratos';
+
+import Contato from './pages/Contato';
+
+
 import Verifyforzoho from './pages/zohoverify';
+
+
 import Blog from './pages/Blog';
 import VizualizarNoticia from './pages/VizualizarNoticia';
 
@@ -75,6 +81,9 @@ function App() {
       <PublicRoute restricted={false} component={Blog} path="/noticias/" exact />
       <PublicRoute restricted={false} component={VizualizarNoticia} path="/noticias/:dia/:mes/:ano/:titulo/:idNoticia" exact />
       
+      <PublicRoute restricted={false} component={Contato} path="/contato/" exact />
+
+
       <PublicRoute restricted={false} component={Verifyforzoho} path="/zohoverify/verifyforzoho.html" exact />
 
 
