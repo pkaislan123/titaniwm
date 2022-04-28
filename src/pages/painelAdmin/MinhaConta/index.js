@@ -10,7 +10,8 @@ import Typography from '@material-ui/core/Typography';
 import Paper from '@material-ui/core/Paper';
 import NavBarAdmin from "../../../components/NavBarAdmin";
 import Rodape from '../../../components/Rodape';
-
+import Button from '@material-ui/core/Button';
+import TextField from '@material-ui/core/TextField';
 
 const drawerWidth = 240;
 
@@ -101,7 +102,6 @@ const useStyles = makeStyles((theme) => ({
 export default function ContaAdmin() {
   const classes = useStyles();
   const [meusDados, setMeusDados] = useState([]);
-
   const [loading, setLoading] = useState(true);
 
 
@@ -122,6 +122,7 @@ export default function ContaAdmin() {
       await api.get("v1/protected/retornardadosusuario/" + id_usuario, {
         headers: headers
       }).then(function (response) {
+
         setMeusDados(response.data)
 
         console.log(" Meus Dados: " + response);
@@ -152,6 +153,41 @@ export default function ContaAdmin() {
 
   }, []);
 
+
+  async function modificar() {
+    try {
+
+      const id_usuario = Cookies.get('id_usuario');
+
+
+      console.log("fazer alteraçoes chamado");
+      console.log("id usuario: " + id_usuario);
+      const cadastro_usuario = {
+        url_img_perfil: meusDados.url_img_perfil,
+        sobre: meusDados.sobre,
+      }
+
+      const headers = {
+        'Authorization': 'Bearer ' + Cookies.get("token")
+      }
+
+      const response = await api.put('/v1/protected/user/alterar/' + id_usuario, cadastro_usuario,
+        { headers: headers });
+
+      const cadastro_salvo = response.data;
+      if (cadastro_salvo) {
+        alert("Alterações salvas com sucesso!");
+        window.location.reload(false);
+
+      } else {
+        alert("Erro de Conexão, tente novamente mais tarde");
+      }
+    } catch (_err) {
+      console.log("erro ao cadastrar: " + _err);
+      alert("Erro de Conexão, tente novamente mais tarde");
+
+    }
+  }
 
 
 
@@ -246,7 +282,93 @@ export default function ContaAdmin() {
                   </Grid>
                 </Paper>
 
+                <Paper elevation={5} style={{ marginTop: 8 }}>
+                  <Grid container spacing={1}
+                    direction="row"
+                    alignItems="center"
+                    item xs={12}
+                  >
+                    <Grid item xs={2}>
+                      <Typography style={{ textAlign: 'right' }}>
+                        Foto do Perfil:
+                      </Typography>
+                    </Grid>
 
+                    <Grid item xs={8}>
+                      <Grid item xs={12} style={{ padding: 10, paddingTop: 2 }}>
+                        <TextField
+                          id="url_img_perfil"
+                          variant="standard"
+                          name="url_img_perfil"
+                          fullWidth
+                          label="Url Foto do Perfil"
+                          value={meusDados.url_img_perfil}
+                          onChange={e => setMeusDados(prevState => ({ ...prevState, 'url_img_perfil': e.target.value }))}
+                        />
+                      </Grid>
+                    </Grid>
+
+
+
+                    <Grid item xs={2}>
+
+                    </Grid>
+                    <Grid item xs={2}>
+
+                    </Grid>
+
+                    <Grid item xs={8}>
+                      <img alt="foto_perfil" style={{ height: 200, width: 200, borderRadius: '100%' }}
+                        src={meusDados.url_img_perfil}
+                      />
+                    </Grid>
+
+
+                  </Grid>
+                </Paper>
+
+                <Paper elevation={5} style={{ marginTop: 8 }}>
+                  <Grid container spacing={1}
+                    direction="row"
+                    alignItems="center"
+                    item xs={12}
+                  >
+                    <Grid item xs={2}>
+                      <Typography style={{ textAlign: 'right' }}>
+                        Sobre:
+                      </Typography>
+                    </Grid>
+
+                    <Grid item xs={8}>
+                      <TextField
+                        id="sobre"
+                        variant="standard"
+                        name="sobre"
+                        fullWidth
+                        label="Sobre"
+                        multiline
+                        rows={3}
+                        value={meusDados.sobre}
+                        onChange={e => setMeusDados(prevState => ({ ...prevState, 'sobre': e.target.value }))}
+                      />
+                    </Grid>
+
+                    <Grid item xs={2}>
+
+                    </Grid>
+
+                    <Grid item xs={2} style={{ padding: 30 }}>
+
+                      <Button
+                        variant="contained"
+                        color="primary"
+                        onClick={modificar}
+                      > Salvar  </Button>
+
+                    </Grid>
+
+                  </Grid>
+                </Paper>
 
               </div>
 

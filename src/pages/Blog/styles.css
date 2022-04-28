@@ -18,5 +18,25 @@ a {
 
 
 
+ 
+  .carousel-control-prev-icon,
+.carousel-control-next-icon {
+  height: 50px;
+  width: 50px;
+  background-size: 100%, 100%;
+  background-image: none;
+  color: green;
+}
 
+.carousel-control-next-icon:after
+{
+  content: '>';
+  font-size: 50px;
+  color: red;
+}
 
+.carousel-control-prev-icon:after {
+  content: '<';
+  font-size: 50px;
+  color: red;
+}

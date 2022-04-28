@@ -122,6 +122,13 @@ const Navegador = (props) => {
                         id={props.corTexto === 'black' ? "nav-link-black" : "nav-link"}
                         style={{ textDecoration: props.contato }} href="/contato">Fale Conosco</Nav.Link>
                     </Nav.Item>
+
+                    <Nav.Item style={{backgroundColor:'black', borderRadius:'5px'}}>
+                      <Nav.Link
+                        id={props.corTexto === 'black' ? "nav-link-black" : "nav-link"}
+                        style={{ color:'white'}} href="/minhaconta">Área do Cliente</Nav.Link>
+                    </Nav.Item>
+
                   </Nav>
 
                 </Navbar.Collapse>

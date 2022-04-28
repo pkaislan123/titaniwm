@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React from 'react';
 import './styles.css';
 import Grid from '@material-ui/core/Grid';
 
@@ -10,48 +10,9 @@ import {
 const NavBarAdmin = () => {
 
 
-    const [width, setWidth] = useState(0);
 
 
-    function checkDimenssoes() {
-        var largura = window.innerWidth
-            || document.documentElement.clientWidth
-            || document.body.clientWidth;
-
-        setWidth(largura);
-
-    }
-
-    window.addEventListener('resize', function (event) {
-        checkDimenssoes();
-    });
-
-    useEffect(() => {
-
-        checkDimenssoes();
-
-    }, []);
-
-
-    const LogoExtendida = (props) => {
-        return (
-            <h1 >
-                <span style={{ paddingLeft: 50, fontSize: 54, color: 'white' }}>LD Armazéns</span>
-
-            </h1>
-        )
-    }
-
-    const LogoRecolhida = (props) => {
-        return (
-            <h1>
-                <span style={{ paddingLeft: 20, fontSize: 54, color: 'white' }}>LD</span>
-                <p style={{ margin: 1 }} />
-                <span style={{ paddingLeft: 20, fontSize: 54, color: 'white' }}>Armazéns</span>
-
-            </h1>
-        )
-    }
+  
 
     return (
         <div id='navbaradmin' style={{ backgroundColor: 'black' }}>
@@ -72,18 +33,16 @@ const NavBarAdmin = () => {
                             }}
                         >
 
-                            {width > 0 ?
-                                <LogoExtendida />
-                                :
-                                <LogoRecolhida />
+                            <h1 >
+                                <span style={{ paddingLeft: 50, fontSize: 54, color: 'white' }}>titaniwm</span>
 
-                            }
+                            </h1>
 
                         </Link>
                     </div>
                 </Grid>
 
-                
+
 
 
             </Grid>

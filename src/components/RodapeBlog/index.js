@@ -76,8 +76,8 @@ const RodapeBlog = () => {
                                 <span style={{ fontSize: 22, fontWeight: 'bold' }}> Sobre o Blog:</span>
                             </p>
                             <p style={{ marginLeft: 30, marginRight: 30 }}>
-                                <span style={{ fontSize: 22 }}> No Blog da LD Armazéns mantenha se informado com as principais noticias do mundo agro.
-                                    Saiba tudo o que aconteça nos bastidores do nosso armazém.</span>
+                                <p style={{ fontSize: 22 }}> No Blog da <span  style={{ fontSize: 26, fontWeight: 'bold' }}> titaniwm</span>, mantenha se informado com as principais notícias do mundo da tecnologia.
+                                    Saiba também tudo o que aconteça nos bastidores da nossa softhouse.</p>
                             </p>
                         </Grid>
                     </Grid>

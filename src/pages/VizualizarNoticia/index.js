@@ -140,7 +140,7 @@ const VizualizarNoticia = () => {
 
       }} >
 
-<Navegador noticias={'underline'} corTexto={'black'} corFundo={'white'} />
+        <Navegador noticias={'underline'} corTexto={'black'} corFundo={'white'} />
 
         <div style={{ height: 5, backgroundColor: '#808080' }}>
         </div>
@@ -260,52 +260,86 @@ const VizualizarNoticia = () => {
                   direction="column"
                   justifyContent="center"
                   alignItems="center"
-                  
                 >
+
                   <Grid item xs={12} sm={12} md={12} lg={12} xl={12}
-                  style={{ borderRadius:'10px', backgroundColor:'#D3D3D3' }}
+                    style={{ borderRadius: '10px', backgroundColor: 'FloralWhite' }}
                   >
-                    <p  style={{ marginLeft: 30, marginRight: 30, paddingTop: 30 }}>
-                      <span style={{fontSize: 22, fontWeight: 'bold' }}> Sobre o Blog:</span>
+                    <p style={{ marginLeft: 30, marginRight: 30, paddingTop: 30 }}>
+                      <span style={{ fontSize: 20 }}> Sobre o Autor:</span>
+                      <span style={{ fontSize: 18, fontWeight: 'bold' }}> {noticia.usuario.nome + " " + noticia.usuario.sobrenome}</span>
+
+                    </p>
+                    <Grid item xs={12} container
+                      justifyContent="center"
+                      alignItems="center"
+                      style={{ marginBottom: 20 }}
+
+                    >
+
+                      <Grid item xs={6} container
+                        justifyContent="center"
+                        alignItems="center" >
+                        <img alt="foto_perfil" style={{ height: 200, width: 200, borderRadius: '100%' }}
+                          src={noticia.usuario.url_img_perfil}
+                        />
+                      </Grid>
+                      <Grid item xs={6}
+                        container
+                        justifyContent="center"
+                        alignItems="center">
+                        <p style={{ fontSize: 18, textAlign: 'justify' }}>
+                          {noticia.usuario.sobre}
+                        </p>
+                      </Grid>
+                    </Grid>
+
+
+                  </Grid>
+
+                  <Grid item xs={12} sm={12} md={12} lg={12} xl={12}
+                    style={{ marginTop: 10, borderRadius: '10px', backgroundColor: '#D3D3D3' }}
+                  >
+                    <p style={{ marginLeft: 30, marginRight: 30, paddingTop: 30 }}>
+                      <span style={{ fontSize: 22, fontWeight: 'bold' }}> Sobre o Blog:</span>
                     </p>
                     <p style={{ marginLeft: 30, marginRight: 30 }}>
-                      <span style={{ fontSize: 22 }}> No Blog da LD Armazéns mantenha se informado com as principais noticias do mundo agro.
-                        Saiba tudo o que aconteça nos bastidores do nosso armazém.</span>
+                      <span style={{ fontSize: 22 }}>No Blog da titaniwm, mantenha se informado com as principais notícias do mundo da tecnologia. Saiba tudo o que aconteça nos bastidores da nossa softhouse!</span>
                     </p>
                   </Grid>
-                  
-                <Grid item xs={12} sm={12} md={12} lg={12} xl={12}
+
+                  <Grid item xs={12} sm={12} md={12} lg={12} xl={12}
                     container
                     justifyContent="flex-start"
                     alignItems="flex-start"
-                    style={{ marginTop: 5,  borderRadius:'10px', backgroundColor:'#E0FFFF'}}
-                >
-                    <Grid item xs={12} sm={12} md={12} lg={12} xl={12} 
+                    style={{ marginTop: 5, borderRadius: '10px', backgroundColor: '#E0FFFF' }}
+                  >
+                    <Grid item xs={12} sm={12} md={12} lg={12} xl={12}
                       container
                       justifyContent="flex-start"
                       alignItems="flex-start"
-                    style={{ paddingBottom: 20, paddingTop: 10}}
+                      style={{ paddingBottom: 20, paddingTop: 10 }}
                     >
-                        <span style={{ margin: 10, fontSize: 22, fontWeight: 'bold' }}> Categorias: </span>
-                        <br></br>
+                      <span style={{ margin: 10, fontSize: 22, fontWeight: 'bold' }}> Categorias: </span>
+                      <br></br>
                     </Grid>
                     {
-                        categorias.map((categoria) => (
-                            <Grid item xs={12} sm={12} md={12} lg={12} xl={12}
-                                direction="column"
-                                container
-                                justifyContent="flex-start"
-                                alignItems="flex-start"
-                                 style={{ marginLeft: 20}}
-                            >
-                                    <a style={{fontSize: 22, fontWeight: 'bold' }} href={"/noticias/" + categoria.nome_categoria}> {categoria.nome_categoria} </a>
-                            </Grid>
+                      categorias.map((categoria) => (
+                        <Grid item xs={12} sm={12} md={12} lg={12} xl={12}
+                          direction="column"
+                          container
+                          justifyContent="flex-start"
+                          alignItems="flex-start"
+                          style={{ marginLeft: 20 }}
+                        >
+                          <a style={{ fontSize: 22, fontWeight: 'bold' }} href={"/noticias/" + categoria.nome_categoria}> {categoria.nome_categoria} </a>
+                        </Grid>
 
-                        ))
+                      ))
 
                     }
 
-                </Grid>
+                  </Grid>
                 </Grid>
 
                 <Grid item xs={12} sm={12} md={12} lg={1} xl={1}></Grid>

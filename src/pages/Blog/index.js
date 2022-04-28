@@ -123,7 +123,7 @@ const Blog = () => {
 
         <Navegador noticias={'underline'} corTexto={'black'} corFundo={'white'} />
 
-        <div style={{ height: 5, backgroundColor: '#808080' }}>
+        <div style={{ height: 1, backgroundColor: 'Wheat' }}>
         </div>
       </div>
 
@@ -220,7 +220,8 @@ const Blog = () => {
 
         </Grid>
       </div>
-
+      <div style={{ height: 1, backgroundColor: 'Wheat' }}>
+        </div>
       <div>
         {loading ?
           <Skeleton animation={"wave"} width={'100%'} style={{ backgroundColor: '#48D1CC' }}>
@@ -251,13 +252,13 @@ const Blog = () => {
                       key={noticia.id_noticia}
                       container
                       direction="column"
-                      item xs={12} sm={6} md={4} lg={3} xl={3}
+                      item xs={12} sm={6} md={4} lg={4} xl={4}
                       justifyContent="flex-start"
                       alignItems="flex-start"
                       style={{ padding: 10 }}
                     >
 
-                      <img alt="img1" style={{ width: '100%', height: 200, borderRadius: '10px' }}
+                      <img alt="img1" style={{ width: '100%', height: 300, borderRadius: '10px' }}
 
                         src={noticia.url_capa}
                       />
